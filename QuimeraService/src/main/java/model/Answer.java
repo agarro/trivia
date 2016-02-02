@@ -56,15 +56,15 @@ public class Answer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Answer)) return false;
-        Answer answer1 = (Answer) o;
-        return Objects.equals(participant, answer1.participant) &&
-                Objects.equals(bar, answer1.bar) &&
-                Objects.equals(question, answer1.question) &&
-                Objects.equals(answer, answer1.answer);
+        Answer answer = (Answer) o;
+        return Objects.equals(participant, answer.participant) &&
+                Objects.equals(bar, answer.bar) &&
+                Objects.equals(question, answer.question);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(participant, bar, question, answer);
+        return Objects.hash(participant, bar, question);
     }
+
 }

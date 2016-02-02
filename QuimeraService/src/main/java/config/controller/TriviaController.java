@@ -25,7 +25,7 @@ public class TriviaController {
     private static int numberOfQuestion;
     private static Set<Participant> participantSet = new HashSet<>();
     private static Map<String, Bar> barList = new HashMap<>();
-    private static Set<Answer> answerSet = new TreeSet<>();
+    private static Set<Answer> answerSet = new HashSet<>();
 
     @PostConstruct
     public void init() {
@@ -37,7 +37,7 @@ public class TriviaController {
     @RequestMapping(value = "getQuestion", method = RequestMethod.GET)
     public
     @ResponseBody
-    Question getQuestion(@RequestParam(value = "id", required = false) String idParticipant) {
+    Question getQuestion() {
 
         return activeQuestion;
     }
@@ -50,8 +50,52 @@ public class TriviaController {
                         @RequestParam(value = "idQuestion", required = true) String idQuestion,
                         @RequestParam(value = "answer", required = true) String answer) {
 
-
+        Answer answer1 = new Answer();
+        answer1.setAnswer(answer);
+        answer1.setBar(barList.get(idBar));
+        Participant participant = new Participant(idParticipant);
+        participantSet.add(participant);
+        answer1.setParticipant(participant);
+        answer1.setQuestion(findQuestion(idQuestion));
+        if (!answerSet.contains(answer1) && idQuestion.equals(activeQuestion.getIdQuestion())) {
+            answerSet.add(answer1);
+        }
         return activeQuestion;
+    }
+
+    @RequestMapping(value = "getPoints", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Point> getPoints() {
+
+        HashMap<String, Point> points = new HashMap<>();
+
+        for (Answer answer : answerSet) {
+            String idParticipant = answer.getParticipant().getIdParticipant();
+            Point point;
+            if (points.containsKey(idParticipant)) {
+                point = points.get(idParticipant);
+            } else {
+                point = new Point();
+                point.setParticipant(answer.getParticipant());
+            }
+            point.setPoints(point.getPoints() + (answer.isCorrectAnswer() ? 5 : 0));
+            points.put(idParticipant, point);
+        }
+
+        return new ArrayList<>(points.values());
+    }
+
+    private Question findQuestion(String idQuestion) {
+
+        for (Question questionAux :
+                questionsList) {
+            if (questionAux.getIdQuestion().equals(idQuestion)) {
+                return questionAux;
+            }
+        }
+        return null;
+
     }
 
 
