@@ -1,4 +1,4 @@
-package model;
+package com.quimera.services.model;
 
 /**
  * Created by Manu on 1/2/16.

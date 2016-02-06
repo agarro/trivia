@@ -1,6 +1,6 @@
-package Util;
+package com.quimera.services.Util;
 
-import model.Question;
+import com.quimera.services.model.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 public class DataGenerator {
 
 
-    public static List<Question> questions() {
+    public static List<Question> questionsExample() {
 
         List<Question> questionSet = new ArrayList<>();
 
@@ -85,6 +85,15 @@ public class DataGenerator {
         question7.addOption("450");
         question7.setCorrectAnswer("300");
 
+        Question question15 = new Question();
+        question15.setIdQuestion("15");
+        question15.setQuestion("¿En qué ciudad nació Domingo Faustino Sarmiento?");
+        question15.addOption("Buenos Aires");
+        question15.addOption("La Plata");
+        question15.addOption("Medellín");
+        question15.addOption("San Juan");
+        question15.addOption("Formosa");
+        question15.setCorrectAnswer("San Juan");
 
         questionSet.add(question1);
         questionSet.add(question2);
@@ -93,10 +102,13 @@ public class DataGenerator {
         questionSet.add(question5);
         questionSet.add(question6);
         questionSet.add(question7);
-
+        questionSet.add(question15);
         return questionSet;
 
     }
+
+
+
 
 
 }

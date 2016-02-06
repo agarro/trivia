@@ -1,6 +1,4 @@
-package config;
-
-/**
+package com.quimera.services; /**
  * Created by Manu on 31/1/16.
  */
 

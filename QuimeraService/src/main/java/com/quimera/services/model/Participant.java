@@ -1,4 +1,6 @@
-package model;
+package com.quimera.services.model;
+
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 
@@ -7,6 +9,7 @@ import java.util.Objects;
  */
 public class Participant {
 
+    @Id
     private String idParticipant;
     private String name;
     private String lastName;
@@ -52,5 +55,14 @@ public class Participant {
     @Override
     public int hashCode() {
         return Objects.hash(idParticipant, name, lastName);
+    }
+
+    @Override
+    public String toString() {
+        return "Participant{" +
+                "idParticipant='" + idParticipant + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

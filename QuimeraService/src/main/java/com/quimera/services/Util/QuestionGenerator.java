@@ -1,7 +1,7 @@
-package Util;
+package com.quimera.services.Util;
 
-import config.controller.TriviaController;
-import model.Question;
+import com.quimera.services.controller.TriviaController;
+import com.quimera.services.model.Question;
 
 import java.util.concurrent.TimeUnit;
 
