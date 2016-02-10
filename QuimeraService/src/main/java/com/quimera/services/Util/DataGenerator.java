@@ -1,5 +1,7 @@
-package com.quimera.services.Util;
+package com.quimera.services.util;
 
+import com.quimera.services.model.Bar;
+import com.quimera.services.model.User;
 import com.quimera.services.model.Question;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.List;
 public class DataGenerator {
 
 
-    public static List<Question> questionsExample() {
+    public static List<Question> questionsExamples() {
 
         List<Question> questionSet = new ArrayList<>();
 
@@ -107,8 +109,79 @@ public class DataGenerator {
 
     }
 
+    public static List<Bar> barsExamples() {
+        List<Bar> barList = new ArrayList<>();
+
+        Bar bar1 = new Bar();
+        bar1.setAddress("Cordoba");
+        bar1.setIdBar("1");
+        bar1.setName("Johnny B Good");
 
 
+        Bar bar2 = new Bar();
+        bar2.setAddress("Cordoba");
+        bar2.setIdBar("2");
+        bar2.setName("Il Gato Tratorias");
 
+
+        Bar bar3 = new Bar();
+        bar3.setAddress("Cordoba");
+        bar3.setIdBar("3");
+        bar3.setName("María María");
+
+
+        Bar bar4 = new Bar();
+        bar4.setAddress("Cordoba");
+        bar4.setIdBar("4");
+        bar4.setName("La Colmena");
+
+        barList.add(bar1);
+        barList.add(bar2);
+        barList.add(bar3);
+        barList.add(bar4);
+
+        return barList;
+    }
+
+    public static List<User> usersExamples() {
+
+        List<User> userList = new ArrayList<>();
+
+        User user1 = new User();
+        user1.setIdUser("1");
+        user1.setEmail("juan@yahoo.com");
+        user1.setName("Juan");
+        user1.setLastName("Riquelme");
+        user1.setPassword("juanri".toCharArray());
+
+        User user2 = new User();
+        user2.setIdUser("2");
+        user2.setEmail("oscar@gmail.com");
+        user2.setName("Oscar");
+        user2.setLastName("Caceres");
+        user2.setPassword("caceosca".toCharArray());
+
+        User user3 = new User();
+        user3.setIdUser("3");
+        user3.setEmail("pedro@hotmail.com");
+        user3.setName("Pedro");
+        user3.setLastName("Bogado");
+        user3.setPassword("bopedro".toCharArray());
+
+        User user4 = new User();
+        user4.setIdUser("4");
+        user4.setEmail("alejandro@outlook.com");
+        user4.setName("Alejandro");
+        user4.setLastName("Garro");
+        user4.setPassword("gale".toCharArray());
+
+
+        userList.add(user1);
+        userList.add(user2);
+        userList.add(user3);
+        userList.add(user4);
+
+        return userList;
+    }
 
 }

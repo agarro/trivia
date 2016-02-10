@@ -1,12 +1,13 @@
 package com.quimera.services.controller;
 
-import com.quimera.services.Util.DataGenerator;
-import com.quimera.services.Util.QuestionGenerator;
+import com.quimera.services.repositories.UserRepository;
+import com.quimera.services.util.DataGenerator;
+import com.quimera.services.util.QuestionGenerator;
 import com.quimera.services.model.*;
 import com.quimera.services.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -22,64 +23,69 @@ public class TriviaController {
     private static List<Question> questionsList;
     public static Trivia trivia;
     public static Question activeQuestion;
-    private static Set<Participant> participantSet = new HashSet<>();
-    private static Map<String, BarController> barList = new HashMap<>();
     private static Set<Answer> answerSet = new HashSet<>();
 
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostConstruct
     public void init() {
-        questionRepository.save(DataGenerator.questionsExample());
         trivia = generateTrivia();
         new Thread(new QuestionGenerator()).start();
 
     }
 
-    @RequestMapping(value = "getQuestion", method = RequestMethod.GET)
+    @RequestMapping("getQuestion")
     public Question getQuestion() {
 
         return activeQuestion;
     }
 
-    @RequestMapping(value = "pushAnswer", method = RequestMethod.GET)
-    public Question pushAnswer(Answer answer){
+    @RequestMapping("pushAnswer")
+    public Answer pushAnswer(@RequestBody Answer answer) {
 
-        participantSet.add(answer.getParticipant());
-        if (!answerSet.contains(answer) && answer.getQuestion().getIdQuestion().equals(activeQuestion.getIdQuestion())) {
+        User user = userRepository.findOne(answer.getQuestion().getIdQuestion()); //User validation
+        if (user!= null && !answerSet.contains(answer) && answer.getQuestion().getIdQuestion().equals(activeQuestion.getIdQuestion())) {
             answerSet.add(answer);
         }
-        return activeQuestion;
+        return answer;
     }
 
-    @RequestMapping(value = "getPoints", method = RequestMethod.GET)
-    public List<Point> getPoints() {
+    @RequestMapping("getScore")
+    public List<Score> getScore(@RequestBody Bar bar) {
 
-        HashMap<String, Point> points = new HashMap<>();
+        HashMap<String, Score> scoreHashMap = new HashMap<>();
 
         for (Answer answer : answerSet) {
-            String idParticipant = answer.getParticipant().getIdParticipant();
-            Point point;
-            if (points.containsKey(idParticipant)) {
-                point = points.get(idParticipant);
-            } else {
-                point = new Point();
-                point.setParticipant(answer.getParticipant());
+            if (answer.getBar().equals(bar)) {
+                String idParticipant = answer.getUser().getIdUser();
+                Score score;
+                if (scoreHashMap.containsKey(idParticipant)) {
+                    score = scoreHashMap.get(idParticipant);
+                } else {
+                    score = new Score();
+                    score.setUser(answer.getUser());
+                }
+                score.setScore(score.getScore() + (answer.isCorrectAnswer() ? Constant.POINTS_CORRECT_ANSWER : Constant.POINTS_WRONG_ANSWER));
+                scoreHashMap.put(idParticipant, score);
             }
-            point.setPoints(point.getPoints() + (answer.isCorrectAnswer() ? 5 : 0));
-            points.put(idParticipant, point);
         }
+        List<Score> scoresList = new ArrayList<>(scoreHashMap.values());
+        Collections.sort(scoresList);
 
-        return new ArrayList<>(points.values());
+        return scoresList;
     }
 
     private Trivia generateTrivia() {
+
         Trivia trivia = new Trivia();
 
         questionsList = questionRepository.findAll();
         Collections.shuffle(questionsList);
-        trivia.getQuestionList().addAll(questionsList.subList(0, 5));
+        trivia.getQuestionList().addAll(questionsList.subList(0, Constant.QUANTITY_OF_QUESTIONS));
 
         return trivia;
 

@@ -1,6 +1,7 @@
-package com.quimera.services.Util;
+package com.quimera.services.util;
 
 import com.quimera.services.controller.TriviaController;
+import com.quimera.services.model.Constant;
 import com.quimera.services.model.Question;
 
 import java.util.concurrent.TimeUnit;
@@ -15,7 +16,7 @@ public class QuestionGenerator implements Runnable {
 
             TriviaController.activeQuestion = question;
             try {
-                TimeUnit.SECONDS.sleep(10);
+                TimeUnit.SECONDS.sleep(Constant.TIME_TO_RESPONSE_EACH_QUESTION);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

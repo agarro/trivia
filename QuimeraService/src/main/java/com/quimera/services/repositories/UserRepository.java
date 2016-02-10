@@ -4,8 +4,8 @@ import com.quimera.services.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * Created by Manu on 6/2/16.
+ * Created by Manu on 9/2/16.
  */
-public interface ParticipantRepository extends MongoRepository<User, String> {
+public interface UserRepository extends MongoRepository<User, String> {
 
 }

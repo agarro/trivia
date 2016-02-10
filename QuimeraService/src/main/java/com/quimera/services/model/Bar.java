@@ -1,10 +1,13 @@
 package com.quimera.services.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
 /**
  * Created by Manu on 31/1/16.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Bar {
 
     private String idBar;
@@ -48,5 +51,14 @@ public class Bar {
     @Override
     public int hashCode() {
         return Objects.hash(idBar, name, address);
+    }
+
+    @Override
+    public String toString() {
+        return "Bar{" +
+                "idBar='" + idBar + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

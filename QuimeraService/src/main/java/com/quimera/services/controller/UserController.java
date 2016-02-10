@@ -1,8 +1,8 @@
 package com.quimera.services.controller;
 
+import com.quimera.services.model.User;
+import com.quimera.services.repositories.ParticipantRepository;
 import com.quimera.services.util.DataGenerator;
-import com.quimera.services.model.Bar;
-import com.quimera.services.repositories.BarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,35 +15,36 @@ import java.util.List;
  * Created by Manu on 6/2/16.
  */
 @RestController
-@RequestMapping("/bar")
-public class BarController {
+@RequestMapping("/participant")
+public class UserController {
 
     @PostConstruct
     public void init(){
-        barRepository.save(DataGenerator.barsExamples());
+        participantRepository.save(DataGenerator.usersExamples());
     }
 
     @Autowired
-    private BarRepository barRepository;
+    private ParticipantRepository participantRepository;
 
     @RequestMapping("/insertOrUpdate")
-    public void insert(@RequestBody Bar bar) {
-        barRepository.save(bar);
+    public void insert(@RequestBody User user) {
+        participantRepository.save(user);
     }
 
     @RequestMapping("/findAll")
-    public List<Bar> findAll() {
-        return barRepository.findAll();
+    public List<User> findAll() {
+        return participantRepository.findAll();
     }
 
     @RequestMapping("/find")
-    public Bar find(String id) {
-        return barRepository.findOne(id);
+    public User find(String id) {
+        return participantRepository.findOne(id);
     }
 
     @RequestMapping("/delete")
-    public void delete(@RequestBody Bar bar) {
-        barRepository.delete(bar);
+    public void delete(@RequestBody User user) {
+        participantRepository.delete(user);
+
     }
 
 }

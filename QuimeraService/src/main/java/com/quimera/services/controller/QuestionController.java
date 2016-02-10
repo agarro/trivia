@@ -2,10 +2,13 @@ package com.quimera.services.controller;
 
 import com.quimera.services.model.Question;
 import com.quimera.services.repositories.QuestionRepository;
+import com.quimera.services.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -15,11 +18,16 @@ import java.util.List;
 @RequestMapping("/questions")
 public class QuestionController {
 
+    @PostConstruct
+    public void init(){
+        questionRepository.save(DataGenerator.questionsExamples());
+    }
+
     @Autowired
     private QuestionRepository questionRepository;
 
     @RequestMapping("/insertOrUpdate")
-    public void insert(Question question) {
+    public void insert(@RequestBody Question question) {
         questionRepository.save(question);
     }
 
@@ -35,7 +43,7 @@ public class QuestionController {
     }
 
     @RequestMapping("/delete")
-    public void delete(Question question) {
+    public void delete(@RequestBody Question question) {
         questionRepository.delete(question);
     }
 

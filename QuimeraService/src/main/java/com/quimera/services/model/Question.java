@@ -5,10 +5,12 @@ import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Created by Manu on 31/1/16.
  */
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Question {
 
     @Id

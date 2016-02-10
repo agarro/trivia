@@ -1,23 +1,26 @@
 package com.quimera.services.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
 /**
  * Created by Manu on 31/1/16.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Answer {
 
-    private Participant participant;
+    private User user;
     private Bar bar;
     private Question question;
     private String answer;
 
-    public Participant getParticipant() {
-        return participant;
+    public User getUser() {
+        return user;
     }
 
-    public void setParticipant(Participant participant) {
-        this.participant = participant;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Bar getBar() {
@@ -57,14 +60,23 @@ public class Answer {
         if (this == o) return true;
         if (!(o instanceof Answer)) return false;
         Answer answer = (Answer) o;
-        return Objects.equals(participant, answer.participant) &&
+        return Objects.equals(user, answer.user) &&
                 Objects.equals(bar, answer.bar) &&
                 Objects.equals(question, answer.question);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(participant, bar, question);
+        return Objects.hash(user, bar, question);
     }
 
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "user=" + user +
+                ", bar=" + bar +
+                ", question=" + question +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
 }
