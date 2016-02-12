@@ -1,4 +1,4 @@
-package com.quimera.services.model;
+package com.quimera.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

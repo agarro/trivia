@@ -1,8 +1,9 @@
-package com.quimera.services.controller;
+package com.quimera.controller;
 
-import com.quimera.services.QuimeraMainConfiguration;
-import com.quimera.services.model.*;
-import com.quimera.services.util.DataGenerator;
+import com.quimera.QuimeraMainConfiguration;
+import com.quimera.model.*;
+import com.quimera.services.TriviaService;
+import com.quimera.util.DataGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -45,7 +46,7 @@ public class TriviaIntegrationTest {
 
         assertThat(answer1.isCorrectAnswer(), equalTo(Boolean.FALSE));
 
-        TriviaController.activeQuestion = activeQuestion;
+        TriviaService.activeQuestion = activeQuestion;
 
         restTemplate.postForObject(URL_QUIMERA_SERVICES + "/trivia/pushAnswer", answer1, Answer.class);
 
@@ -61,7 +62,7 @@ public class TriviaIntegrationTest {
 
 
         activeQuestion = questionsList.get(1);
-        TriviaController.activeQuestion = activeQuestion;
+        TriviaService.activeQuestion = activeQuestion;
 
         answer1.setQuestion(activeQuestion);
         answer1.setAnswer(activeQuestion.getCorrectAnswer());

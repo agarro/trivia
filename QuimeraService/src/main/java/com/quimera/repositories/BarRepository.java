@@ -1,6 +1,6 @@
-package com.quimera.services.repositories;
+package com.quimera.repositories;
 
-import com.quimera.services.model.Bar;
+import com.quimera.model.Bar;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

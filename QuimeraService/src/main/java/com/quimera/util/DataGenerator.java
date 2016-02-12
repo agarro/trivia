@@ -1,8 +1,8 @@
-package com.quimera.services.util;
+package com.quimera.util;
 
-import com.quimera.services.model.Bar;
-import com.quimera.services.model.User;
-import com.quimera.services.model.Question;
+import com.quimera.model.Bar;
+import com.quimera.model.Question;
+import com.quimera.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

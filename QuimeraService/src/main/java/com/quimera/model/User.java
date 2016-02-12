@@ -1,5 +1,6 @@
-package com.quimera.services.model;
+package com.quimera.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 
@@ -17,6 +18,7 @@ public class User {
     private String name;
     private String lastName;
     private String email;
+    @JsonIgnore
     private char[] password;
 
     public User() {

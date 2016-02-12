@@ -1,14 +1,12 @@
-package com.quimera.services.controller;
+package com.quimera.controller;
 
-import com.quimera.services.model.User;
-import com.quimera.services.repositories.ParticipantRepository;
-import com.quimera.services.util.DataGenerator;
+import com.quimera.model.User;
+import com.quimera.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -18,33 +16,27 @@ import java.util.List;
 @RequestMapping("/participant")
 public class UserController {
 
-    @PostConstruct
-    public void init(){
-        participantRepository.save(DataGenerator.usersExamples());
-    }
-
     @Autowired
-    private ParticipantRepository participantRepository;
+    UserService userService;
 
     @RequestMapping("/insertOrUpdate")
     public void insert(@RequestBody User user) {
-        participantRepository.save(user);
+        userService.insert(user);
     }
 
     @RequestMapping("/findAll")
     public List<User> findAll() {
-        return participantRepository.findAll();
+        return userService.findAll();
     }
 
     @RequestMapping("/find")
     public User find(String id) {
-        return participantRepository.findOne(id);
+        return userService.find(id);
     }
 
     @RequestMapping("/delete")
     public void delete(@RequestBody User user) {
-        participantRepository.delete(user);
-
+        userService.delete(user);
     }
 
 }

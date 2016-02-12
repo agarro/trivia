@@ -1,11 +1,11 @@
-package com.quimera.services.model;
+package com.quimera.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Created by Manu on 31/1/16.
  */

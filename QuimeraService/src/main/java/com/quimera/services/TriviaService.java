@@ -1,24 +1,20 @@
-package com.quimera.services.controller;
+package com.quimera.services;
 
-import com.quimera.services.repositories.UserRepository;
-import com.quimera.services.util.DataGenerator;
-import com.quimera.services.util.QuestionGenerator;
-import com.quimera.services.model.*;
-import com.quimera.services.repositories.QuestionRepository;
+import com.quimera.model.*;
+import com.quimera.repositories.QuestionRepository;
+import com.quimera.repositories.UserRepository;
+import com.quimera.util.QuestionGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
- * Created by Manu on 31/1/16.
+ * Created by Manu on 12/2/16.
  */
-@RestController
-@RequestMapping("/trivia")
-public class TriviaController {
+@Component
+public class TriviaService {
 
     private static List<Question> questionsList;
     public static Trivia trivia;
@@ -35,17 +31,13 @@ public class TriviaController {
     public void init() {
         trivia = generateTrivia();
         new Thread(new QuestionGenerator()).start();
-
     }
 
-    @RequestMapping("getQuestion")
     public Question getQuestion() {
-
         return activeQuestion;
     }
 
-    @RequestMapping("pushAnswer")
-    public Answer pushAnswer(@RequestBody Answer answer) {
+    public Answer pushAnswer(Answer answer) {
 
         User user = userRepository.findOne(answer.getQuestion().getIdQuestion()); //User validation
         if (user!= null && !answerSet.contains(answer) && answer.getQuestion().getIdQuestion().equals(activeQuestion.getIdQuestion())) {
@@ -54,8 +46,7 @@ public class TriviaController {
         return answer;
     }
 
-    @RequestMapping("getScore")
-    public List<Score> getScore(@RequestBody Bar bar) {
+    public List<Score> getScore(Bar bar) {
 
         HashMap<String, Score> scoreHashMap = new HashMap<>();
 

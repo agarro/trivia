@@ -1,8 +1,9 @@
-package com.quimera.services.util;
+package com.quimera.util;
 
-import com.quimera.services.controller.TriviaController;
-import com.quimera.services.model.Constant;
-import com.quimera.services.model.Question;
+import com.quimera.controller.TriviaController;
+import com.quimera.model.Constant;
+import com.quimera.model.Question;
+import com.quimera.services.TriviaService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,16 +13,16 @@ import java.util.concurrent.TimeUnit;
 public class QuestionGenerator implements Runnable {
 
     public void run() {
-        for (Question question : TriviaController.trivia.getQuestionList()) {
+        for (Question question : TriviaService.trivia.getQuestionList()) {
 
-            TriviaController.activeQuestion = question;
+            TriviaService.activeQuestion = question;
             try {
                 TimeUnit.SECONDS.sleep(Constant.TIME_TO_RESPONSE_EACH_QUESTION);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        TriviaController.activeQuestion = null;
+        TriviaService.activeQuestion = null;
 
     }
 }
