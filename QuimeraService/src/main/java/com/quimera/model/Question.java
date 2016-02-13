@@ -16,7 +16,7 @@ public class Question {
     @Id
     private String idQuestion;
     private String question;
-    private List<String> options = new ArrayList<>();
+    private final List<String> options = new ArrayList<>();
     private String correctAnswer;
 
     public String getQuestion() {

@@ -11,7 +11,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Trivia {
 
-    private List<Question> questionList = new ArrayList<>();
+    private final List<Question> questionList = new ArrayList<>();
 
     public List<Question> getQuestionList() {
         return questionList;

@@ -20,6 +20,7 @@ public class QuestionService {
         questionRepository.save(DataGenerator.questionsExamples());
     }
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private QuestionRepository questionRepository;
 

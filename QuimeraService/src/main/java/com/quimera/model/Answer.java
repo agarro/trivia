@@ -48,11 +48,7 @@ public class Answer {
     }
 
     public boolean isCorrectAnswer() {
-        if (question != null) {
-            return question.getCorrectAnswer().equals(this.answer);
-        } else {
-            return false;
-        }
+        return question != null && question.getCorrectAnswer().equals(this.answer);
     }
 
     @Override

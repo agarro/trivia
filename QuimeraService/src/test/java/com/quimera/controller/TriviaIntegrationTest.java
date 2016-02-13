@@ -12,6 +12,7 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -77,7 +78,7 @@ public class TriviaIntegrationTest {
 
         Score[] scores = restTemplate.postForObject(URL_QUIMERA_SERVICES + "/trivia/getScore", bar, Score[].class);
 
-        System.out.print(scores);
+        System.out.print(Arrays.toString(scores));
     }
 
 }

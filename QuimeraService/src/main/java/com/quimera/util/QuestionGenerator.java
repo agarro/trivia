@@ -1,6 +1,5 @@
 package com.quimera.util;
 
-import com.quimera.controller.TriviaController;
 import com.quimera.model.Constant;
 import com.quimera.model.Question;
 import com.quimera.services.TriviaService;

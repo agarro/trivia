@@ -20,11 +20,12 @@ public class BarService {
         barRepository.save(DataGenerator.barsExamples());
     }
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private BarRepository barRepository;
 
-    public Bar insert(Bar bar) {
-        return barRepository.save(bar);
+    public void insert(Bar bar) {
+        barRepository.save(bar);
     }
 
     public List<Bar> findAll() {

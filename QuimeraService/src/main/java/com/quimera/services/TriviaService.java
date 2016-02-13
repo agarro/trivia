@@ -16,14 +16,15 @@ import java.util.*;
 @Component
 public class TriviaService {
 
-    private static List<Question> questionsList;
     public static Trivia trivia;
     public static Question activeQuestion;
     private static Set<Answer> answerSet = new HashSet<>();
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private QuestionRepository questionRepository;
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private UserRepository userRepository;
 
@@ -74,7 +75,7 @@ public class TriviaService {
 
         Trivia trivia = new Trivia();
 
-        questionsList = questionRepository.findAll();
+        List<Question> questionsList = questionRepository.findAll();
         Collections.shuffle(questionsList);
         trivia.getQuestionList().addAll(questionsList.subList(0, Constant.QUANTITY_OF_QUESTIONS));
 
