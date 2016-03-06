@@ -1,0 +1,12 @@
+<h1>Hi {{vm.user.firstName}}!</h1>
+<p>You're logged in!!</p>
+<h3>All registered questions:</h3>
+<ul>
+    <li ng-repeat="question in vm.allQuestions">
+        {{question.idQuestion}} ({{question.question}} {{question.options}}  {{question.correctAnswer}})
+        - <a href="#" ng-click="vm.deleteQuestion(question.id)">Delete</a>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p><a href="#/login" class="btn btn-primary">Logout</a></p>
+<p><a href="#/" class="btn btn-primary">Home</a></p>

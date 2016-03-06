@@ -15,11 +15,11 @@ public class User {
 
     @Id
     private String idUser;
-    private String name;
+    private String firstName;
     private String lastName;
     private String email;
-    @JsonIgnore
-    private char[] password;
+    private String username;
+    private String password;
 
     public User() {
     }
@@ -36,12 +36,12 @@ public class User {
         this.idUser = idUser;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -60,13 +60,22 @@ public class User {
         this.email = email;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -74,14 +83,14 @@ public class User {
         if (!(o instanceof User)) return false;
         User that = (User) o;
         return Objects.equals(idUser, that.idUser) &&
-                Objects.equals(name, that.name) &&
+                Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
                 Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUser, name, lastName, email);
+        return Objects.hash(idUser, firstName, lastName, email);
     }
 
     @Override
@@ -89,7 +98,7 @@ public class User {
         return "User{" +
                 "email='" + email + '\'' +
                 ", idUser='" + idUser + '\'' +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }

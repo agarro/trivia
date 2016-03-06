@@ -150,30 +150,34 @@ public class DataGenerator {
         User user1 = new User();
         user1.setIdUser("1");
         user1.setEmail("juan@yahoo.com");
-        user1.setName("Juan");
+        user1.setFirstName("Juan");
         user1.setLastName("Riquelme");
-        user1.setPassword("juanri".toCharArray());
+        user1.setUsername("juanriquelme");
+        user1.setPassword("juanri");
 
         User user2 = new User();
         user2.setIdUser("2");
         user2.setEmail("oscar@gmail.com");
-        user2.setName("Oscar");
+        user2.setFirstName("Oscar");
         user2.setLastName("Caceres");
-        user2.setPassword("caceosca".toCharArray());
+        user2.setUsername("oscarcaceres");
+        user2.setPassword("caceosca");
 
         User user3 = new User();
         user3.setIdUser("3");
         user3.setEmail("pedro@hotmail.com");
-        user3.setName("Pedro");
+        user3.setFirstName("Pedro");
         user3.setLastName("Bogado");
-        user3.setPassword("bopedro".toCharArray());
+        user3.setUsername("bogadopedro");
+        user3.setPassword("bopedro");
 
         User user4 = new User();
         user4.setIdUser("4");
         user4.setEmail("alejandro@outlook.com");
-        user4.setName("Alejandro");
+        user4.setFirstName("Alejandro");
         user4.setLastName("Garro");
-        user4.setPassword("gale".toCharArray());
+        user4.setUsername("garroalejandro");
+        user4.setPassword("gale");
 
 
         userList.add(user1);

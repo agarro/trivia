@@ -24,13 +24,13 @@ public class BarController {
         barService.insert(bar);
     }
 
-    @RequestMapping("/findAll")
-    public List<Bar> findAll() {
+    @RequestMapping("/getAll")
+    public List<Bar> getAll() {
         return barService.findAll();
     }
 
-    @RequestMapping("/find")
-    public Bar find(String id) {
+    @RequestMapping("/getById")
+    public Bar get(String id) {
         return barService.find(id);
     }
 

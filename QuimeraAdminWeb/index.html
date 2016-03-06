@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8"/>
+    <title>Quimera Web Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">Quimera bar</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#/">Home</a></li>
+                <li><a href="#/users">Usuarios</a></li>
+                <li><a href="#/questions">Preguntas</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/"><span class="glyphicon glyphicon-user"></span> {{globals.currentUser.username}}</a></li>
+                <li ><a href="#/login" data-toggle="tooltip" title="Cerrar sesión"><span class="glyphicon glyphicon-log-in" ></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
+     ng-if="flash" ng-bind="flash.message"></div>
+<div ng-view></div>
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//code.angularjs.org/1.5.0/angular.js"></script>
+<script src="//code.angularjs.org/1.5.0/angular-route.js"></script>
+<script src="//code.angularjs.org/1.5.0/angular-cookies.js"></script>
+
+<script src="app.js"></script>
+<script src="app-services/authentication.service.js"></script>
+<script src="app-services/flash.service.js"></script>
+<script src="app-services/question.service.js"></script>
+<script src="app-services/user.service.js"></script>
+
+<!-- Real user service that uses an api -->
+<script src="app-services/user.service.js"></script>
+
+<script src="home/home.controller.js"></script>
+<script src="question/question.controller.js"></script>
+<script src="user/user.controller.js"></script>
+<script src="login/login.controller.js"></script>
+<script src="register/register.controller.js"></script>
+
+
+</body>
+</html>
+

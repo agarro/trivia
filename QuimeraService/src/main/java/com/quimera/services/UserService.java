@@ -39,4 +39,17 @@ public class UserService {
         userService.delete(user);
     }
 
+    public void deleteAll(){
+        userService.deleteAll();
+    }
+
+    public User getByUsername(String username){
+        return userService.findByUsername(username);
+    }
+
+    public User authenticate(String username, String password) {
+
+        return userService.findByUsernameAndPassword(username, password);
+
+    }
 }
