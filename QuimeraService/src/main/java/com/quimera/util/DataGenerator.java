@@ -2,9 +2,12 @@ package com.quimera.util;
 
 import com.quimera.model.Bar;
 import com.quimera.model.Question;
+import com.quimera.model.Trivia;
 import com.quimera.model.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -188,4 +191,28 @@ public class DataGenerator {
         return userList;
     }
 
+    public static List<Trivia> triviaExamples() {
+
+        List<Trivia> trivias = new ArrayList<>();
+        List<Question> questions = questionsExamples();
+
+        Trivia trivia1 = new Trivia();
+        trivia1.setIdTrivia("0");
+        trivia1.setName("trivia 1");
+
+        Collections.shuffle(questions);
+        trivia1.setQuestions(questions.subList(0,5));
+
+        Trivia trivia2 = new Trivia();
+        trivia2.setIdTrivia("1");
+        trivia2.setName("trivia 2");
+
+        Collections.shuffle(questions);
+        trivia2.setQuestions(questions.subList(0,5));
+
+        trivias.add(trivia1);
+        trivias.add(trivia2);
+
+        return trivias;
+    }
 }

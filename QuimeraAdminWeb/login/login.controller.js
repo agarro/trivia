@@ -14,6 +14,7 @@
         (function initController() {
             // reset login status
             AuthenticationService.ClearCredentials();
+            document.getElementById("myBtn").click();
         })();
 
         function login() {
@@ -21,13 +22,20 @@
             AuthenticationService.Login(vm.username, vm.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(vm.username, vm.password);
+                    $('.modal-backdrop').remove();
                     $location.path('/');
                 } else {
                     FlashService.Error(response.message);
                     vm.dataLoading = false;
                 }
             });
-        };
+        }
+
     }
+
+    $(".nav a").on("click", function(){
+        $(".nav").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+    });
 
 })();

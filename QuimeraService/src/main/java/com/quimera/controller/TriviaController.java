@@ -1,14 +1,9 @@
 package com.quimera.controller;
 
-import com.quimera.model.Answer;
-import com.quimera.model.Bar;
-import com.quimera.model.Question;
-import com.quimera.model.Score;
+import com.quimera.model.*;
 import com.quimera.services.TriviaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,15 +11,42 @@ import java.util.List;
  * Created by Manu on 31/1/16.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/trivia")
 public class TriviaController {
 
     @Autowired
     private TriviaService triviaService;
 
-    @RequestMapping("getQuestion")
-    public Question getQuestion() {
-        return triviaService.getQuestion();
+
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    public void insert(@RequestBody Trivia trivia) {
+        triviaService.insert(trivia);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void update(@RequestBody Trivia trivia) {
+        triviaService.update(trivia);
+    }
+
+    @RequestMapping("/getAll")
+    public List<Trivia> getAll() {
+        return triviaService.findAll();
+    }
+
+    @RequestMapping(value = "/getById", method = RequestMethod.POST)
+    public Trivia get(@RequestBody String id) {
+        return triviaService.find(id);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public void delete(@RequestBody Trivia trivia) {
+        triviaService.delete(trivia);
+    }
+
+    @RequestMapping("getCurrentQuestion")
+    public Question getCurrentQuestion() {
+        return triviaService.getCurrentQuestion();
     }
 
     @RequestMapping("pushAnswer")
@@ -36,6 +58,32 @@ public class TriviaController {
     public List<Score> getScore(@RequestBody Bar bar) {
        return triviaService.getScore(bar);
     }
+
+    @RequestMapping("start")
+    public Message startTrivia() {
+        return triviaService.startTrivia();
+    }
+
+    @RequestMapping("stop")
+    public Message stopTrivia() {
+        return triviaService.stopTrivia();
+    }
+
+//    @RequestMapping("pause")
+//    public boolean pauseTrivia() {
+//        return triviaService.pauseTrivia();
+//    }
+//
+//    @RequestMapping("resume")
+//    public boolean resumeTrivia() {
+//        return triviaService.resumeTrivia();
+//    }
+
+    @RequestMapping("getStatus")
+    public Message statusTrivia() {
+        return triviaService.statusTrivia();
+    }
+
 
 
 }

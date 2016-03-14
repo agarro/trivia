@@ -5,26 +5,17 @@
         .module('app')
         .controller('QuestionController', QuestionController);
 
-    QuestionController.$inject = ['UserService', 'QuestionService', '$rootScope'];
-    function QuestionController(UserService, QuestionService, $rootScope) {
+    QuestionController.$inject = ['QuestionService', '$location', 'FlashService'];
+    function QuestionController(QuestionService, $location, FlashService) {
         var vm = this;
 
-        vm.user = null;
         vm.allQuestions = [];
         vm.deleteQuestion = deleteQuestion;
 
         initController();
 
         function initController() {
-            loadCurrentUser();
             loadAllQuestions();
-        }
-
-        function loadCurrentUser() {
-            UserService.GetByUsername($rootScope.globals.currentUser.username)
-                .then(function (user) {
-                    vm.user = user;
-                });
         }
 
         function loadAllQuestions() {
@@ -34,10 +25,17 @@
                 });
         }
 
-        function deleteQuestion(id) {
-            QuestionService.Delete(id)
-                .then(function () {
-                    loadAllQuestions();
+        function deleteQuestion(question) {
+            QuestionService.Delete(question)
+                .then(function (response) {
+                    if (response==="") {
+                        FlashService.Success('Pregunta eliminada.', true);
+                        loadAllQuestions();
+                        $location.path('/questions');
+                    } else {
+                        FlashService.Error(response.message);
+                        vm.dataLoading = false;
+                    }
                 });
         }
     }

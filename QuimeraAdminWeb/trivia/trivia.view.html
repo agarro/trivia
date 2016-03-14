@@ -1,8 +1,8 @@
 <style>
+
     #plus-container {
         padding: 25px;
     }
-
     tr, th {
         vertical-align: middle;
         text-align: center;
@@ -13,19 +13,17 @@
     }
 </style>
 
-
 <div class="container-fluid">
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3>Administrar preguntas</h3>
+            <h3>Administrar trivia</h3>
         </div>
         <div class="panel-content">
-
             <div class="container">
                 <div id="plus-container">
-                    <a href="#question/register" class="btn btn-success btn-lg">
-                        <span class="glyphicon glyphicon-plus"></span> Agregar pregunta
+                    <a href="#trivia/register" class="btn btn-success btn-lg">
+                        <span class="glyphicon glyphicon-plus"></span> Agregar trivia
                     </a>
                 </div>
                 <div class="panel panel-primary">
@@ -39,24 +37,26 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Id pregunta</th>
-                                <th>Pregunta</th>
-                                <th>Opciones</th>
-                                <th>Respuesta correcta</th>
-                                <th>Acción</th>
+                                <th width="5%">Id trivia</th>
+                                <th width="20%">Nombre</th>
+                                <th width="5%">Rondas</th>
+                                <th width="60%">Preguntas</th>
+                                <th width="10%">Acción</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="question in vm.allQuestions | filter: search">
-                                <td>{{question.idQuestion}}</td>
-                                <td>{{question.question}}</td>
-                                <td>{{question.options}}</td>
-                                <td>{{question.correctAnswer}}</td>
-                                <td>
-                                    <a href="#question/modify/{{question.idQuestion}}">Editar</a>
-                                    - <a href="#question" ng-click="vm.deleteQuestion(question)">Eliminar</a>
+                            <tr ng-repeat="trivia in vm.allTrivias | filter: search">
+                                <td width="5%">{{trivia.idTrivia}}</td>
+                                <td width="20%">{{trivia.name}}</td>
+                                <td width="5%">{{trivia.rounds}}</td>
+                                <td width="60%" ng-bind="vm.questions(trivia.questions)">{{trivia.questions}}</td>
+                                <td width="10%">
+                                    <a href="#trivia/modify/{{trivia.idTrivia}}">Editar</a>
+                                    - <a href="#trivia" ng-click="vm.deleteTrivia(trivia)">Eliminar</a>
                                 </td>
+
                             </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -65,3 +65,4 @@
         </div>
     </div>
 </div>
+

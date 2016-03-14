@@ -7,9 +7,15 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-
-
+<style>
+    .glyphicon{
+        font-size: 17px;
+        padding: 0px;
+    }
+    .glyphicon-user:before {
+        padding-right: 5px;
+    }
+</style>
 </head>
 <body>
 
@@ -25,13 +31,16 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#/">Home</a></li>
+                <li id="home" class="active"><a href="#/">Home</a></li>
                 <li><a href="#/users">Usuarios</a></li>
                 <li><a href="#/questions">Preguntas</a></li>
+                <li><a href="#/trivia">Trivia</a></li>
+                <li><a href="#/">Publicidad</a></li>
+                <li><a href="#/settings">Panel de control</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/"><span class="glyphicon glyphicon-user"></span> {{globals.currentUser.username}}</a></li>
-                <li ><a href="#/login" data-toggle="tooltip" title="Cerrar sesión"><span class="glyphicon glyphicon-log-in" ></span></a></li>
+                <li ><a href="#/"><span class="glyphicon glyphicon-user" ng-bind="globals.currentUser.username"></span></a></li>
+                <li ><a href="#/login" data-toggle="tooltip" title="Cerrar sesión"><span class="glyphicon glyphicon-log-out" ></span></a></li>
             </ul>
         </div>
     </div>
@@ -41,7 +50,7 @@
      ng-if="flash" ng-bind="flash.message"></div>
 <div ng-view></div>
 
-<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
 <script src="//code.angularjs.org/1.5.0/angular.js"></script>
 <script src="//code.angularjs.org/1.5.0/angular-route.js"></script>
 <script src="//code.angularjs.org/1.5.0/angular-cookies.js"></script>
@@ -49,17 +58,22 @@
 <script src="app.js"></script>
 <script src="app-services/authentication.service.js"></script>
 <script src="app-services/flash.service.js"></script>
+<script src="app-services/trivia.service.js"></script>
 <script src="app-services/question.service.js"></script>
-<script src="app-services/user.service.js"></script>
-
-<!-- Real user service that uses an api -->
 <script src="app-services/user.service.js"></script>
 
 <script src="home/home.controller.js"></script>
 <script src="question/question.controller.js"></script>
 <script src="user/user.controller.js"></script>
+<script src="user/modify/modify.user.controller.js"></script>
+<script src="user/register/register.user.controller.js"></script>
+<script src="question/register/register.question.controller.js"></script>
+<script src="question/modify/modify.question.controller.js"></script>
+<script src="trivia/trivia.controller.js"></script>
+<script src="trivia/register/register.trivia.controller.js"></script>
+<script src="trivia/modify/modify.trivia.controller.js"></script>
+<script src="control-panel/control-panel.controller.js"></script>
 <script src="login/login.controller.js"></script>
-<script src="register/register.controller.js"></script>
 
 
 </body>

@@ -3,10 +3,7 @@ package com.quimera.controller;
 import com.quimera.model.Question;
 import com.quimera.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,9 +18,14 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-    @RequestMapping("/insertOrUpdate")
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(@RequestBody Question question) {
         questionService.insert(question);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void update(@RequestBody Question question) {
+        questionService.update(question);
     }
 
     @RequestMapping("/getAll")
@@ -31,12 +33,12 @@ public class QuestionController {
         return questionService.findAll();
     }
 
-    @RequestMapping("/getById")
-    public Question get(String id) {
+    @RequestMapping(value = "/getById", method = RequestMethod.POST)
+    public Question get(@RequestBody String id) {
         return questionService.find(id);
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestBody Question question) {
         questionService.delete(question);
     }

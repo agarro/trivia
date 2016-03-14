@@ -27,6 +27,10 @@ public class UserService {
         userService.insert(user);
     }
 
+    public void update(User user) {
+        userService.save(user);
+    }
+
     public List<User> findAll() {
         return userService.findAll();
     }

@@ -23,7 +23,7 @@
         }
 
         function GetById(id) {
-            return $http.get('http://localhost:8080/users/getById', id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.post('http://localhost:8080/users/getById', id).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {
@@ -31,15 +31,15 @@
         }
 
         function Create(user) {
-            return $http.post('http://localhost:8080/users/insertOrUpdate', user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post('http://localhost:8080/users/insert', user).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Update(user) {
-            return $http.post('http://localhost:8080/users/insertOrUpdate', user).then(handleSuccess, handleError('Error updating user'));
+            return $http.post('http://localhost:8080/users/update', user).then(handleSuccess, handleError('Error updating user'));
         }
 
-        function Delete(id) {
-            return $http.delete('http://localhost:8080/users/delete', { id: id }).then(handleSuccess, handleError('Error deleting user'));
+        function Delete(user) {
+            return $http.post('http://localhost:8080/users/delete', user).then(handleSuccess, handleError('Error deleting user'));
         }
 
         // private functions

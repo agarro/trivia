@@ -22,19 +22,19 @@
         }
 
         function GetById(id) {
-            return $http.get('http://localhost:8080/questions/getById', id).then(handleSuccess, handleError('Error getting question by id'));
+            return $http.post('http://localhost:8080/questions/getById', id).then(handleSuccess, handleError('Error getting question by id'));
         }
 
         function Create(question) {
-            return $http.post('http://localhost:8080/questions/insertOrUpdate', question).then(handleSuccess, handleError('Error creating question'));
+            return $http.post('http://localhost:8080/questions/insert', question).then(handleSuccess, handleError('Error creating question'));
         }
 
         function Update(question) {
-            return $http.post('http://localhost:8080/questions/insertOrUpdate', question).then(handleSuccess, handleError('Error updating question'));
+            return $http.post('http://localhost:8080/questions/update', question).then(handleSuccess, handleError('Error updating question'));
         }
 
-        function Delete(id) {
-            return $http.delete('http://localhost:8080/questions/delete', { id: id }).then(handleSuccess, handleError('Error deleting question'));
+        function Delete(question) {
+            return $http.post('http://localhost:8080/questions/delete', question).then(handleSuccess, handleError('Error deleting question'));
         }
 
         // private functions

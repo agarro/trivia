@@ -18,9 +18,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/insertOrUpdate")
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(@RequestBody User user) {
         userService.insert(user);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void update(@RequestBody User user) {
+        userService.update(user);
     }
 
     @RequestMapping("/getAll")
@@ -28,12 +33,12 @@ public class UserController {
         return userService.findAll();
     }
 
-    @RequestMapping("/getById")
-    public User get(String id) {
+    @RequestMapping(value = "/getById", method = RequestMethod.POST)
+    public User get(@RequestBody String id) {
         return userService.find(id);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestBody User user) {
         userService.delete(user);
     }

@@ -27,15 +27,57 @@
                 controllerAs: 'vm'
             })
 
-            .when('/register', {
-                controller: 'RegisterController',
-                templateUrl: 'register/register.view.html',
+            .when('/user/modify/:id', {
+                controller: 'ModifyUserController',
+                templateUrl: 'user/modify/modify.user.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/user/register', {
+                controller: 'UserRegisterController',
+                templateUrl: 'user/register/register.user.view.html',
                 controllerAs: 'vm'
             })
 
             .when('/questions', {
                 controller: 'QuestionController',
                 templateUrl: 'question/question.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/question/modify/:id', {
+                controller: 'ModifyQuestionController',
+                templateUrl: 'question/modify/modify.question.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/question/register', {
+                controller: 'QuestionRegisterController',
+                templateUrl: 'question/register/register.question.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/trivia', {
+                controller: 'TriviaController',
+                templateUrl: 'trivia/trivia.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/trivia/register', {
+                controller: 'RegisterTriviaController',
+                templateUrl: 'trivia/register/register.trivia.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/trivia/modify/:id', {
+                controller: 'ModifyTriviaController',
+                templateUrl: 'trivia/modify/modify.trivia.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/settings', {
+                controller: 'ControlPanelController',
+                templateUrl: 'control-panel/control-panel.view.html',
                 controllerAs: 'vm'
             })
 

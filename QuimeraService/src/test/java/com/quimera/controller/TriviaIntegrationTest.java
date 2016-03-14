@@ -47,7 +47,7 @@ public class TriviaIntegrationTest {
 
         assertThat(answer1.isCorrectAnswer(), equalTo(Boolean.FALSE));
 
-        TriviaService.activeQuestion = activeQuestion;
+        TriviaService.currentQuestion = activeQuestion;
 
         restTemplate.postForObject(URL_QUIMERA_SERVICES + "/trivia/pushAnswer", answer1, Answer.class);
 
@@ -63,7 +63,7 @@ public class TriviaIntegrationTest {
 
 
         activeQuestion = questionsList.get(1);
-        TriviaService.activeQuestion = activeQuestion;
+        TriviaService.currentQuestion = activeQuestion;
 
         answer1.setQuestion(activeQuestion);
         answer1.setAnswer(activeQuestion.getCorrectAnswer());

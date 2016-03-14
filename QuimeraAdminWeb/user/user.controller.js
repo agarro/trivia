@@ -5,8 +5,8 @@
         .module('app')
         .controller('UserController', UserController);
 
-    UserController.$inject = ['UserService'];
-    function UserController(UserService) {
+    UserController.$inject = ['UserService', '$location', 'FlashService'];
+    function UserController(UserService, $location, FlashService) {
         var vm = this;
 
         vm.allUsers = [];
@@ -25,12 +25,20 @@
                 });
         }
 
-        function deleteUser(id) {
-            UserService.Delete(id)
-                .then(function () {
-                    loadAllUsers();
+        function deleteUser(user) {
+            UserService.Delete(user)
+                .then(function (response) {
+                    if (response==="") {
+                        FlashService.Success('Usuario eliminado.', true);
+                        loadAllUsers();
+                        $location.path('/users');
+                    } else {
+                        FlashService.Error(response.message);
+                        vm.dataLoading = false;
+                    }
                 });
         }
+
     }
 
 })();

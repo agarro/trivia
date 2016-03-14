@@ -25,6 +25,10 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     public void insert(Question question) {
+        questionRepository.insert(question);
+    }
+
+    public void update(Question question) {
         questionRepository.save(question);
     }
 
