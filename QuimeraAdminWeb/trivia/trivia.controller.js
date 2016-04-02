@@ -29,7 +29,7 @@
             TriviaService.Delete(trivia)
                 .then(function (response) {
                     if (response === "") {
-                        FlashService.Success('Trivia eliminada.', true);
+                        FlashService.Success('Trivia eliminada.', false);
                         loadAllTrivias();
                         $location.path('/trivia');
                     } else {

@@ -6,7 +6,10 @@ import com.quimera.repositories.TriviaRepository;
 import com.quimera.repositories.UserRepository;
 import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -16,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Manu on 12/2/16.
  */
 @Component
+@SuppressWarnings("SpringJavaAutowiringInspection")
 public class TriviaService {
 
     public static Trivia trivia;
@@ -23,8 +27,6 @@ public class TriviaService {
     private static Set<Answer> answerSet = new HashSet<>();
 
     private static TriviaStatus triviaStatus = TriviaStatus.READY;
-
-    @SuppressWarnings("SpringJavaAutowiringInspection")
 
     @Autowired
     private TriviaRepository triviaRepository;
@@ -41,7 +43,6 @@ public class TriviaService {
     private void init(){
         triviaRepository.save(DataGenerator.triviaExamples());
     }
-
 
     public Question getCurrentQuestion() {
         return currentQuestion;
@@ -123,8 +124,12 @@ public class TriviaService {
             currentTrivia = new Thread(new TriviaRunnable());
         }
 
-        if (currentTrivia.getState().equals(Thread.State.NEW)) {
+        if (trivia == null){
             trivia = generateTrivia();
+            message.setMessage("Trivia aleatoria generada.");
+        }
+
+        if (currentTrivia.getState().equals(Thread.State.NEW)) {
             currentTrivia.start();
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -170,4 +175,34 @@ public class TriviaService {
     public void delete(Trivia trivia) {
         triviaRepository.delete(trivia);
     }
+
+
+    public void setCurrentTrivia(String idTrivia) {
+
+        if (TriviaService.getTriviaStatus().equals(TriviaStatus.RUNNABLE)) {
+            throw new TriviaAlreadyStarted();
+        } else {
+            Trivia trivia = triviaRepository.findOne(idTrivia);
+            if (trivia == null) {
+                throw new TriviaNotFound();
+            } else {
+                TriviaService.trivia = trivia;
+            }
+        }
+    }
+
+    public Trivia getCurrentTrivia() {
+        return trivia;
+    }
+
+    @ResponseStatus(value=HttpStatus.ACCEPTED, reason="La trivia ya esta iniciada. Finalice la trivia antes de seleccionar otra.")  // 202
+    public class TriviaAlreadyStarted extends RuntimeException {
+
+    }
+
+    @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Trivia no encontrada.")
+    public class TriviaNotFound extends RuntimeException {
+
+    }
+
 }

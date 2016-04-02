@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Manu on 31/1/16.
@@ -54,4 +55,19 @@ public class Trivia {
         this.rounds = rounds;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Trivia)) return false;
+        Trivia trivia = (Trivia) o;
+        return rounds == trivia.rounds &&
+                Objects.equals(idTrivia, trivia.idTrivia) &&
+                Objects.equals(name, trivia.name) &&
+                Objects.equals(questions, trivia.questions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idTrivia, rounds, name, questions);
+    }
 }

@@ -31,7 +31,11 @@
                           class="glyphicon glyphicon-one-fine-dot"></span>
                 </h4>
 
-                <a href="#trivia/create" class="btn btn-success btn-lg">
+                <h4>Trivia seleccionada:
+                    <div ng-bind="vm.currentTrivia.name"></div>
+                </h4>
+
+                <a href="#setting/trivia/selection" class="btn btn-success btn-lg">
                     <span class="glyphicon glyphicon-list"></span> Seleccionar trivia
                 </a>
 
@@ -73,14 +77,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="panel-footer">
-            <div id="plus-conteiner">
-                <a href="#question/register" class="btn btn-success btn-lg">
-                    <span class="glyphicon glyphicon-plus"></span> Agregar pregunta
-                </a>
-            </div>
-
         </div>
     </div>
 </div>

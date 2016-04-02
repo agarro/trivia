@@ -10,8 +10,8 @@
         var vm = this;
 
         vm.trivia = {
-            rounds: 1,
-        }
+            rounds: 1
+        };
         vm.allQuestions = [];
 
         vm.registerTrivia = registerTrivia;

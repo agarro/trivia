@@ -1,6 +1,7 @@
 package com.quimera.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Bar {
 
+    @Id
     private String idBar;
     private String name;
     private String address;

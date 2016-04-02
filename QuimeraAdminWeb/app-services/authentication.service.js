@@ -8,7 +8,7 @@
     AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
     function AuthenticationService($http, $cookieStore, $rootScope) {
         var service = {};
-
+        var url = 'http://quimera-test-env.us-west-2.elasticbeanstalk.com';
         service.Login = Login;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
@@ -17,7 +17,7 @@
 
         function Login(username, password, callback) {
 
-                $http.post('http://localhost:8080/users/authenticate', { username: username, password: password })
+                $http.post(url + '/users/authenticate', { username: username, password: password })
                 .success(function (response) {
                     if (response.username == username) {
                         response = { success: true };

@@ -43,11 +43,11 @@ public class UserService {
         userService.delete(user);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         userService.deleteAll();
     }
 
-    public User getByUsername(String username){
+    public User getByUsername(String username) {
         return userService.findByUsername(username);
     }
 

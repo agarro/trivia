@@ -18,6 +18,15 @@ public class Question {
     private String question;
     private final List<String> options = new ArrayList<>();
     private String correctAnswer;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getQuestion() {
         return question;

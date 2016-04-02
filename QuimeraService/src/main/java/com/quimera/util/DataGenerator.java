@@ -4,7 +4,13 @@ import com.quimera.model.Bar;
 import com.quimera.model.Question;
 import com.quimera.model.Trivia;
 import com.quimera.model.User;
+import sun.misc.BASE64Encoder;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -197,14 +203,13 @@ public class DataGenerator {
         List<Question> questions = questionsExamples();
 
         Trivia trivia1 = new Trivia();
-        trivia1.setIdTrivia("0");
+
         trivia1.setName("trivia 1");
 
         Collections.shuffle(questions);
         trivia1.setQuestions(questions.subList(0,5));
 
         Trivia trivia2 = new Trivia();
-        trivia2.setIdTrivia("1");
         trivia2.setName("trivia 2");
 
         Collections.shuffle(questions);
@@ -215,4 +220,35 @@ public class DataGenerator {
 
         return trivias;
     }
+
+    public void generatePolicyAndSignature() throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
+
+        String policy_document = "{" +
+                "\"expiration\": \"2020-01-01T00:00:00Z\",\n" +
+                "  \"conditions\": [ \n" +
+                "    {\"bucket\": \"quimera-web-admin-banners\"}, \n" +
+                "    [\"starts-with\", \"$key\", \"uploads/\"],\n" +
+                "    {\"acl\": \"public-read\"},\n" +
+                "    {\"success_action_redirect\": \"/banner/successful-upload\"},\n" +
+                "    [\"starts-with\", \"$Content-Type\", \"\"],\n" +
+                "    [\"content-length-range\", 0, 1048576]\n" +
+                "  ]\n" +
+                "}";
+
+        String aws_secret_key = "6zn0Foc6NWrk0LuKWgwJfYOeNXbpjardkNywjPk4";
+
+        String policy = (new BASE64Encoder()).encode(
+                policy_document.getBytes("UTF-8")).replaceAll("\n", "").replaceAll("\r", "");
+
+        Mac hmac = Mac.getInstance("HmacSHA1");
+        hmac.init(new SecretKeySpec(
+                aws_secret_key.getBytes("UTF-8"), "HmacSHA1"));
+        String signature = (new BASE64Encoder()).encode(
+                hmac.doFinal(policy.getBytes("UTF-8")))
+                .replaceAll("\n", "");
+
+        System.out.println(policy);
+        System.out.println(signature);
+    }
+
 }

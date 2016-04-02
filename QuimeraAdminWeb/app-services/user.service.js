@@ -8,7 +8,7 @@
     UserService.$inject = ['$http'];
     function UserService($http) {
         var service = {};
-
+        var url = 'http://quimera-test-env.us-west-2.elasticbeanstalk.com';
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
@@ -19,27 +19,27 @@
         return service;
 
         function GetAll() {
-            return $http.get('http://localhost:8080/users/getAll').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get(url + '/users/getAll').then(handleSuccess, handleError('Error getting all users'));
         }
 
         function GetById(id) {
-            return $http.post('http://localhost:8080/users/getById', id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.post(url + '/users/getById', id).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {
-            return $http.post('http://localhost:8080/users/getByUsername', username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.post(url + '/users/getByUsername', username).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {
-            return $http.post('http://localhost:8080/users/insert', user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post(url + '/users/insert', user).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Update(user) {
-            return $http.post('http://localhost:8080/users/update', user).then(handleSuccess, handleError('Error updating user'));
+            return $http.post(url + '/users/update', user).then(handleSuccess, handleError('Error updating user'));
         }
 
         function Delete(user) {
-            return $http.post('http://localhost:8080/users/delete', user).then(handleSuccess, handleError('Error deleting user'));
+            return $http.post(url + '/users/delete', user).then(handleSuccess, handleError('Error deleting user'));
         }
 
         // private functions

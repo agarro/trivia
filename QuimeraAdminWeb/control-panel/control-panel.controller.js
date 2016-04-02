@@ -15,6 +15,7 @@
         vm.startTrivia = startTrivia;
         vm.stopTrivia = stopTrivia;
         vm.getStatusTrivia = getStatusTrivia;
+        vm.getCurrentTrivia = getCurrentTrivia;
 
         vm.myColor = 'transparent';
 
@@ -22,6 +23,7 @@
 
         function initController() {
             loadStatusTrivia();
+            getCurrentTrivia();
         }
 
         function loadStatusTrivia() {
@@ -53,7 +55,7 @@
                 .then(function (response) {
                     if (response.message === "READY") {
                         FlashService.Success('Trivia finalizada.', false);
-                        $location.path('/settings');
+
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
@@ -73,6 +75,19 @@
                 });
         }
 
+        function getCurrentTrivia() {
+            TriviaService.GetCurrentTrivia()
+                .then(function (response) {
+                    if (response != "") {
+                        vm.currentTrivia = response.data;
+                    } else {
+                        vm.currentTrivia = {};
+                        FlashService.Error('Ninguna trivia ha sido seleccionada.');
+                        vm.dataLoading = false;
+                    }
+                });
+        }
+
         function getStatusTrivia() {
             TriviaService.GetStatusTrivia()
                 .then(function (response) {
@@ -86,18 +101,18 @@
                 });
         }
 
-        function setStatusColor(){
+        function setStatusColor() {
 
-            if(vm.statusTrivia ==="READY"){
+            if (vm.statusTrivia === "READY") {
                 vm.myColor = 'green';
-            } else if(vm.statusTrivia ==="RUNNABLE") {
+            } else if (vm.statusTrivia === "RUNNABLE") {
                 vm.myColor = '#FFCC00';
-            } else if(vm.statusTrivia ==="STOPPED") {
+            } else if (vm.statusTrivia === "STOPPED") {
                 vm.myColor = 'red';
             }
         }
 
-        $(function(){
+        $(function () {
 
             interval = $interval(function () {
                 getStatusTrivia();
@@ -105,7 +120,7 @@
             }, 1000);
 
         });
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             $interval.cancel(interval);
         });
     }

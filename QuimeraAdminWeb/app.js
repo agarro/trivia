@@ -75,9 +75,27 @@
                 controllerAs: 'vm'
             })
 
+            .when('/setting/trivia/selection', {
+                controller: 'SelectionTriviaController',
+                templateUrl: 'control-panel/selection/selection.trivia.view.html',
+                controllerAs: 'vm'
+            })
+
             .when('/settings', {
                 controller: 'ControlPanelController',
                 templateUrl: 'control-panel/control-panel.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/banner/register', {
+                controller: 'RegisterBannerController',
+                templateUrl: 'banner/register/register.banner.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/banners', {
+                controller: 'BannerController',
+                templateUrl: 'banner/banner.view.html',
                 controllerAs: 'vm'
             })
 

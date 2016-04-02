@@ -5,8 +5,8 @@
         .module('app')
         .controller('ModifyTriviaController', ModifyTriviaController);
 
-    ModifyTriviaController.$inject = ['TriviaService', 'QuestionService', '$location', '$routeParams', 'FlashService', '$scope'];
-    function ModifyTriviaController(TriviaService, QuestionService, $location, $routeParams, FlashService, $scope) {
+    ModifyTriviaController.$inject = ['TriviaService', 'QuestionService', '$location', '$routeParams', 'FlashService'];
+    function ModifyTriviaController(TriviaService, QuestionService, $location, $routeParams, FlashService) {
         var vm = this;
         vm.trivia = null;
 
@@ -40,7 +40,7 @@
             TriviaService.Update(vm.trivia)
                 .then(function (response) {
                     if (response === "") {
-                        FlashService.Success('Trivia modificada.', true);
+                        FlashService.Success('Trivia modificada.', false);
                         $location.path('/trivia');
                     } else {
                         FlashService.Error(response.message);
