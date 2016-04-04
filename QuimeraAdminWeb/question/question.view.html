@@ -43,6 +43,7 @@
                                 <th>Pregunta</th>
                                 <th>Opciones</th>
                                 <th>Respuesta correcta</th>
+                                <th>Descripción</th>
                                 <th>Acción</th>
                             </tr>
                             </thead>
@@ -52,6 +53,7 @@
                                 <td>{{question.question}}</td>
                                 <td>{{question.options}}</td>
                                 <td>{{question.correctAnswer}}</td>
+                                <td>{{question.description}}</td>
                                 <td>
                                     <a href="#question/modify/{{question.idQuestion}}">Editar</a>
                                     - <a href="#question" ng-click="vm.deleteQuestion(question)">Eliminar</a>

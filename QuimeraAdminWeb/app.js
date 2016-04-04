@@ -99,6 +99,18 @@
                 controllerAs: 'vm'
             })
 
+            .when('/bars', {
+                controller: 'BarController',
+                templateUrl: 'bar/bar.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/bar/register', {
+                controller: 'RegisterBarController',
+                templateUrl: 'bar/register/register.bar.view.html',
+                controllerAs: 'vm'
+            })
+
             .otherwise({ redirectTo: '/' });
     }
 

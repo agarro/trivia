@@ -12,16 +12,12 @@ import java.util.List;
 /**
  * Created by Manu on 12/2/16.
  */
+@SuppressWarnings("SpringJavaAutowiringInspection")
 @Component
 public class UserService {
 
     @Autowired
     private UserRepository userService;
-
-    @PostConstruct
-    public void init() {
-        userService.save(DataGenerator.usersExamples());
-    }
 
     public void insert(User user) {
         userService.insert(user);

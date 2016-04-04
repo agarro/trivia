@@ -51,6 +51,12 @@
             <span ng-show="form.correctAnswer.$dirty && form.correctAnswer.$error.required" class="help-block">Respuesta correcta es requerida.</span>
         </div>
 
+        <div class="form-group" ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required }">
+            <label for="description">Descripción</label>
+            <input type="text" id="description" class="form-control" ng-model="vm.question.description" required/>
+            <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block">Descripción es requerido</span>
+        </div>
+
         <div>
             <div class="form-actions">
                 <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-success">Agregar

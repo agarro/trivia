@@ -1,7 +1,6 @@
 package com.quimera.services;
 
 import com.quimera.model.Banner;
-import com.quimera.model.Question;
 import com.quimera.repositories.BannerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

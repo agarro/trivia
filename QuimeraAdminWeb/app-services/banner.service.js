@@ -19,23 +19,23 @@
         return service;
 
         function GetAll() {
-            return $http.get(url + '/banner/getAll').then(handleSuccess, handleError('Error getting all banners'));
+            return $http.get(url + '/banners/getAll').then(handleSuccess, handleError('Error getting all banners'));
         }
 
         function GetById(id) {
-            return $http.post(url + '/banner/getById', id).then(handleSuccess, handleError('Error getting banner by id'));
+            return $http.post(url + '/banners/getById', id).then(handleSuccess, handleError('Error getting banner by id'));
         }
 
         function Create(banner) {
-            return $http.post(url + '/banner/insert', banner).then(handleSuccess, handleError('Error creating banner'));
+            return $http.post(url + '/banners/insert', banner).then(handleSuccess, handleError('Error creating banner'));
         }
 
         function Update(banner) {
-            return $http.post(url + '/banner/update', banner).then(handleSuccess, handleError('Error updating banner'));
+            return $http.post(url + '/banners/update', banner).then(handleSuccess, handleError('Error updating banner'));
         }
 
         function Delete(banner) {
-            return $http.post(url + '/banner/delete', banner).then(handleSuccess, handleError('Error deleting banner'));
+            return $http.post(url + '/banners/delete', banner).then(handleSuccess, handleError('Error deleting banner'));
         }
 
         // private functions

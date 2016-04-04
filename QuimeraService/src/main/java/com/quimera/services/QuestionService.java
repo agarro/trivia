@@ -15,11 +15,6 @@ import java.util.List;
 @Component
 public class QuestionService {
 
-    @PostConstruct
-    public void init() {
-        questionRepository.save(DataGenerator.questionsExamples());
-    }
-
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private QuestionRepository questionRepository;

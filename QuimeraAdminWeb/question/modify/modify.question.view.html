@@ -39,7 +39,7 @@
         <div class="form-group"
              ng-class="{ 'has-error': form.correctAnswer.$dirty && form.correctAnswer.$error.required }">
 
-            <label for="questionOptionsSelect">Make a choice:</label>
+            <label for="questionOptionsSelect">Elije una pregunta:</label>
             <select class="form-control" id="questionOptionsSelect"
                     ng-model="vm.question.correctAnswer">
                 <option ng-repeat="(index, option) in vm.question.options track by $index">{{option}}</option>
@@ -49,8 +49,14 @@
         <div class="form-group"
              ng-class="{ 'has-error': form.correctAnswer.$dirty && form.correctAnswer.$error.required }">
             <label for="correctAnswer">Respuesta correcta</label>
-            <input type="text" id="correctAnswer" class="form-control" ng-model="vm.question.correctAnswer" DISABLED/>
+            <input type="text" id="correctAnswer" class="form-control" ng-model="vm.question.correctAnswer" readonly/>
             <span ng-show="form.correctAnswer.$dirty && form.correctAnswer.$error.required" class="help-block">Respuesta correcta es requerida.</span>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required }">
+            <label for="description">Descripción</label>
+            <input type="text" id="description" class="form-control" ng-model="vm.question.description" required/>
+            <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block">Descripción es requerido</span>
         </div>
 
         <div>

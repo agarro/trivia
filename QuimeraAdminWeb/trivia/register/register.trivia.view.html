@@ -1,8 +1,4 @@
 <style>
-    #plus-conteiner {
-        padding: 15px;
-    }
-
     .table-responsive {
         height: 200px;
     }
@@ -21,7 +17,7 @@
             </div>
             <div class="panel-content">
                 <div class="container">
-
+                    <br>
                     <div class="container">
                         <div class="col-md-3 col-md-offset-3">
                             <div class="form-group"
@@ -40,6 +36,7 @@
                             </div>
                         </div>
                     </div>
+                    <br>
                     <div class="container">
 
                         <label>Seleccione las preguntas que desea agregar a la trivia</label>
@@ -56,27 +53,17 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th width="5%">
-                                            <span><i class="glyphicon glyphicon-check"></i></span>
-                                        </th>
-                                        <th width="5%">
-                                            Id
-                                        </th>
-                                        <th width="30%">
-                                            Pregunta
-                                        </th>
-                                        <th width="40%">
-                                            Opciones
-                                        </th>
-                                        <th width="20%">
-                                            Respuesta correcta
-                                        </th>
+                                        <th width="5%"><span><i class="glyphicon glyphicon-check"></i></span></th>
+                                        <th width="5%">Id</th>
+                                        <th width="30%">Pregunta</th>
+                                        <th width="40%">Opciones</th>
+                                        <th width="20%">Respuesta correcta</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
 
-                                    <tr ng-repeat="question in vm.allQuestions track by question.idQuestion | filter: search">
+                                    <tr ng-repeat="question in vm.allQuestions | filter: search track by question.idQuestion">
                                         <td width="5%">
                                             <div><input type="checkbox" ng-click="vm.checkedQuestions()"
                                                         class="questionSelected" value="{{question}}"></div>
@@ -94,9 +81,9 @@
                         </div>
                     </div>
 
-                    <div class="container form-group">
+                    <div class="container">
 
-                        <label>Preguntas seleccionadas</label>
+                        <label>Preguntas seleccionadas: {{vm.trivia.questions.length}}</label>
 
                         <div class="panel panel-primary">
                             <div class="table-responsive table-container">

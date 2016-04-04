@@ -1,7 +1,6 @@
 package com.quimera.repositories;
 
 import com.quimera.model.Banner;
-import com.quimera.model.Bar;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

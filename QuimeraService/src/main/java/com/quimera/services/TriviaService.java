@@ -7,7 +7,6 @@ import com.quimera.repositories.UserRepository;
 import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -38,11 +37,6 @@ public class TriviaService {
     @Autowired
     private UserRepository userRepository;
     private Thread currentTrivia = new Thread(new TriviaRunnable());
-
-    @PostConstruct
-    private void init(){
-        triviaRepository.save(DataGenerator.triviaExamples());
-    }
 
     public Question getCurrentQuestion() {
         return currentQuestion;

@@ -82,7 +82,7 @@
 
                                     <tbody>
 
-                                    <tr ng-repeat="question in vm.allQuestions track by question.idQuestion | filter: search">
+                                    <tr ng-repeat="question in vm.allQuestions | filter: search track by question.idQuestion">
                                         <td width="5%">
                                             <div><input type="checkbox" ng-click="vm.checkedQuestions()"
                                                         class="questionSelected" value="{{question}}" ng-checked="vm.containsQuestions(question)"></div>

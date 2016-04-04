@@ -1,8 +1,6 @@
 package com.quimera.controller;
 
 import com.quimera.model.Banner;
-import com.quimera.model.Question;
-import com.quimera.model.User;
 import com.quimera.services.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/banner")
+@RequestMapping("/banners")
 public class BannerController {
 
     @Autowired

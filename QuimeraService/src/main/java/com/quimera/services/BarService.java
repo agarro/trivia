@@ -15,16 +15,15 @@ import java.util.List;
 @Component
 public class BarService {
 
-    @PostConstruct
-    public void init() {
-        barRepository.save(DataGenerator.barsExamples());
-    }
-
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private BarRepository barRepository;
 
     public void insert(Bar bar) {
+        barRepository.insert(bar);
+    }
+
+    public void update(Bar bar) {
         barRepository.save(bar);
     }
 
@@ -39,4 +38,9 @@ public class BarService {
     public void delete(Bar bar) {
         barRepository.delete(bar);
     }
+
+    public void deleteAll() {
+        barRepository.deleteAll();
+    }
+
 }

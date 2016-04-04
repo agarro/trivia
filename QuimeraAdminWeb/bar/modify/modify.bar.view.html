@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <form class="form-horizontal" ng-submit="vm.modifyBar()">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">
+                <h3>Modificar bar</h3>
+            </div>
+            <br>
+            <div class="panel-content">
+
+                <div class="container">
+                    <div class="col-md-3 col-md-offset-3">
+
+                        <div class="form-group"
+                             ng-class="{ 'has-error': form.idBar.$dirty && form.idBar.$error.required }">
+                            <label for="idBar">Identificación</label>
+                            <input type="text" id="idBar" class="form-control" ng-model="vm.bar.idBar" readonly/>
+                        </div>
+
+                        <div class="form-group"
+                             ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                            <label for="name">Nombre del bar</label>
+                            <input type="text" id="name" class="form-control" ng-model="vm.bar.name"
+                                   required/>
+                                <span ng-show="form.name.$dirty && form.name.$error.required"
+                                      class="help-block">Nombre de bar es requerido</span>
+                        </div>
+
+                        <div class="form-group"
+                             ng-class="{ 'has-error': form.address.$dirty && form.address.$error.required }">
+                            <label for="address">Dirección</label>
+                            <input type="text" id="address" class="form-control" ng-model="vm.bar.address"
+                                   required/>
+                                <span ng-show="form.address.$dirty && form.address.$error.required"
+                                      class="help-block">Dirección es requerido.</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="form-actions">
+                        <button type="submit" ng-disabled="form.$invalid || vm.dataLoading"
+                                class="btn btn-success">
+                            Modificar
+                        </button>
+                        <a href="#/bars" class="btn btn-link">Volver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
