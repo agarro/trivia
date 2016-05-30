@@ -5,9 +5,9 @@
         .module('app')
         .factory('QuestionService', QuestionService);
 
-    QuestionService.$inject = ['$http'];
-    function QuestionService($http) {
-        var url = 'http://quimera-test-env.us-west-2.elasticbeanstalk.com';
+    QuestionService.$inject = ['$http', '$rootScope'];
+    function QuestionService($http, $rootScope) {
+        var url = $rootScope.url;
         var service = {};
 
         service.GetAll = GetAll;

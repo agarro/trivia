@@ -40,7 +40,7 @@
                              ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
                             <label for="username"><span class="glyphicon glyphicon-user"></span> Nombre de
                                 usuario</label>
-                            <input type="text" name="username" id="username" autofocus placeholder="Enter email"
+                            <input type="text" name="username" id="username" autofocus placeholder="Ingrese el nombre de usuario"
                                    class="form-control" ng-model="vm.username"
                                    required/>
                             <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Nombre de usuario requerido</span>
@@ -48,15 +48,11 @@
                         <div class="form-group"
                              ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
                             <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Contraseña</label>
-                            <input type="password" name="password" id="password" placeholder="Enter password"
+                            <input type="password" name="password" id="password" placeholder="Ingrese la contraseña"
                                    class="form-control"
                                    ng-model="vm.password" required/>
                             <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerida</span>
                         </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="">Recordar</label>
-                        </div>
-
                         <div class="form-actions">
                             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading"
                                     class="btn btn-md btn-success btn-block"><span

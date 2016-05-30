@@ -27,6 +27,8 @@ public class TriviaService {
 
     private static TriviaStatus triviaStatus = TriviaStatus.READY;
 
+    public static int currentQuestionPosition;
+
     @Autowired
     private TriviaRepository triviaRepository;
 
@@ -37,6 +39,10 @@ public class TriviaService {
     @Autowired
     private UserRepository userRepository;
     private Thread currentTrivia = new Thread(new TriviaRunnable());
+
+    public void insertAll(List<Trivia> trivias){
+        triviaRepository.insert(trivias);
+    }
 
     public Question getCurrentQuestion() {
         return currentQuestion;
@@ -94,16 +100,17 @@ public class TriviaService {
     public Message stopTrivia() {
 
         Message message = new Message();
-        if (getTriviaStatus().equals(TriviaStatus.RUNNABLE)) {
-            setTriviaStatus(TriviaStatus.STOP);
+        if (!getTriviaStatus().equals(TriviaStatus.READY)) {
+
             currentTrivia.interrupt();
             try {
                 currentTrivia.join();
+                resetTrivia();
             } catch (InterruptedException e) {
                 //TODO - logger
             }
             message.setMessage(getTriviaStatus().name());
-        } else if (getTriviaStatus().equals(TriviaStatus.STOPPED) || getTriviaStatus().equals(TriviaStatus.READY)) {
+        } else if (getTriviaStatus().equals(TriviaStatus.TERMINATED) || getTriviaStatus().equals(TriviaStatus.READY)) {
             message.setMessage("No hay trivia ejecutándose.");
         }
 
@@ -115,7 +122,7 @@ public class TriviaService {
         Message message = new Message();
 
         if (currentTrivia.getState().equals(Thread.State.TERMINATED)) {
-            currentTrivia = new Thread(new TriviaRunnable());
+            resetTrivia();
         }
 
         if (trivia == null){
@@ -124,14 +131,14 @@ public class TriviaService {
         }
 
         if (currentTrivia.getState().equals(Thread.State.NEW)) {
-            currentTrivia.start();
             try {
+                currentTrivia.start();
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 //TODO - logger
             }
             message.setMessage(getTriviaStatus().name());
-        } else if (TriviaService.getTriviaStatus().equals(TriviaStatus.RUNNABLE)) {
+        } else if (!TriviaService.getTriviaStatus().equals(TriviaStatus.READY)) {
             message.setMessage("La trivia ya esta iniciada. Finalice la trivia para volver a empezar otra.");
         }
 
@@ -180,6 +187,7 @@ public class TriviaService {
             if (trivia == null) {
                 throw new TriviaNotFound();
             } else {
+                TriviaService.currentQuestionPosition = 0;
                 TriviaService.trivia = trivia;
             }
         }
@@ -194,9 +202,29 @@ public class TriviaService {
 
     }
 
-    @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Trivia no encontrada.")
+    @ResponseStatus(value=HttpStatus.ACCEPTED, reason="Banner publicado.")  // 202
+    public class BannerPublished extends RuntimeException {
+
+    }
+
+    @ResponseStatus(value=HttpStatus.ACCEPTED, reason="Trivia no encontrada.")
     public class TriviaNotFound extends RuntimeException {
 
+    }
+
+    public List<Banner> getCurrentBanners(){
+        return this.getCurrentTrivia().getBanners();
+    }
+
+    public int getCurrentQuestionPosition(){
+        return TriviaService.currentQuestionPosition;
+    }
+
+    public void resetTrivia() {
+        TriviaService.currentQuestion = null;
+        TriviaService.currentQuestionPosition = 0;
+        currentTrivia = new Thread(new TriviaRunnable());
+        TriviaService.setTriviaStatus(TriviaStatus.READY);
     }
 
 }

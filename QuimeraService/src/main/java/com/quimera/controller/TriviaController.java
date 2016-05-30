@@ -2,6 +2,7 @@ package com.quimera.controller;
 
 import com.quimera.model.*;
 import com.quimera.services.TriviaService;
+import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -50,12 +51,12 @@ public class TriviaController {
         return triviaService.getCurrentQuestion();
     }
 
-    @RequestMapping("pushAnswer")
+    @RequestMapping(value = "/pushAnswer", method = RequestMethod.POST)
     public Answer pushAnswer(@RequestBody Answer answer) {
         return triviaService.pushAnswer(answer);
     }
 
-    @RequestMapping("getScore")
+    @RequestMapping(value = "/getScore", method = RequestMethod.POST)
     public List<Score> getScore(@RequestBody Bar bar) {
        return triviaService.getScore(bar);
     }
@@ -94,6 +95,16 @@ public class TriviaController {
     @RequestMapping(value = "/getCurrentTrivia", method = RequestMethod.GET)
     public Trivia getCurrentTrivia(){
         return triviaService.getCurrentTrivia();
+    }
+
+    @RequestMapping(value = "/getCurrentBanners", method = RequestMethod.GET)
+    public List<Banner> getCurrentBanners(){
+        return triviaService.getCurrentBanners();
+    }
+
+    @RequestMapping(value = "/getCurrentQuestionPosition", method = RequestMethod.GET)
+    public int getCurrentQuestionPosition(){
+        return triviaService.getCurrentQuestionPosition();
     }
 
 }

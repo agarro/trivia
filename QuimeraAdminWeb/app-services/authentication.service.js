@@ -8,7 +8,7 @@
     AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
     function AuthenticationService($http, $cookieStore, $rootScope) {
         var service = {};
-        var url = 'http://quimera-test-env.us-west-2.elasticbeanstalk.com';
+        var url = $rootScope.url;
         service.Login = Login;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;

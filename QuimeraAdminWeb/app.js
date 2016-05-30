@@ -6,8 +6,8 @@
         .config(config)
         .run(run);
 
-    config.$inject = ['$routeProvider', '$locationProvider'];
-    function config($routeProvider, $locationProvider) {
+    config.$inject = ['$routeProvider'];
+    function config($routeProvider) {
         $routeProvider
             .when('/', {
                 controller: 'HomeController',
@@ -116,6 +116,8 @@
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
     function run($rootScope, $location, $cookieStore, $http) {
+        $rootScope.url = 'http://quimera-default.us-west-2.elasticbeanstalk.com';
+        //$rootScope.url = 'http://localhost:8080';
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {

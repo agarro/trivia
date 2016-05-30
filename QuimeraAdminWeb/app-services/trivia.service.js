@@ -5,10 +5,10 @@
         .module('app')
         .factory('TriviaService', TriviaService);
 
-    TriviaService.$inject = ['$http'];
-    function TriviaService($http) {
+    TriviaService.$inject = ['$http', '$rootScope'];
+    function TriviaService($http, $rootScope) {
 
-        var url = 'http://quimera-test-env.us-west-2.elasticbeanstalk.com';
+        var url = $rootScope.url;
         var service = {};
 
         service.GetAll = GetAll;
@@ -22,6 +22,8 @@
         service.GetCurrentQuestion = GetCurrentQuestion;
         service.SetCurrentTrivia = SetCurrentTrivia;
         service.GetCurrentTrivia = GetCurrentTrivia;
+        service.GetCurrentBanners = GetCurrentBanners;
+        service.GetCurrentQuestionPosition = GetCurrentQuestionPosition;
 
         return service;
 
@@ -69,6 +71,14 @@
 
         function GetCurrentTrivia() {
             return $http.get(url + '/trivia/getCurrentTrivia').then(successCallback, handleError('Error getting current trivia'));
+        }
+
+        function GetCurrentBanners() {
+            return $http.get(url + '/trivia/getCurrentBanners').then(successCallback, handleError('Error getting current banners'));
+        }
+
+        function GetCurrentQuestionPosition() {
+            return $http.get(url + '/trivia/getCurrentQuestionPosition').then(successCallback, handleError('Error getting current banners'));
         }
 
         // private functions

@@ -55,9 +55,10 @@
                                     <tr>
                                         <th width="5%"><span><i class="glyphicon glyphicon-check"></i></span></th>
                                         <th width="5%">Id</th>
-                                        <th width="30%">Pregunta</th>
+                                        <th width="20%">Pregunta</th>
                                         <th width="40%">Opciones</th>
-                                        <th width="20%">Respuesta correcta</th>
+                                        <th width="10%">Respuesta correcta</th>
+                                        <th width="20%">Descripción</th>
                                     </tr>
                                     </thead>
 
@@ -69,9 +70,10 @@
                                                         class="questionSelected" value="{{question}}"></div>
                                         </td>
                                         <td width="5%">{{question.idQuestion}}</td>
-                                        <td width="30%">{{question.question}}</td>
+                                        <td width="20%">{{question.question}}</td>
                                         <td width="40%">{{question.options}}</td>
-                                        <td width="20%">{{question.correctAnswer}}</td>
+                                        <td width="10%">{{question.correctAnswer}}</td>
+                                        <td width="20%">{{question.description}}</td>
                                     </tr>
 
                                     </tbody>
@@ -91,25 +93,37 @@
                                     <thead>
                                     <tr>
                                         <th width="5%">Id</th>
-                                        <th width="30%">Pregunta</th>
+                                        <th width="20%">Pregunta</th>
                                         <th width="45%">Opciones</th>
-                                        <th width="20%">Respuesta correcta</th>
+                                        <th width="10%">Respuesta correcta</th>
+                                        <th width="20%">Descripción</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
                                     <tr ng-repeat="question in vm.trivia.questions track by question.idQuestion">
                                         <td width="5%">{{question.idQuestion}}</td>
-                                        <td width="30%">{{question.question}}</td>
+                                        <td width="20%">{{question.question}}</td>
                                         <td width="45%">{{question.options}}</td>
-                                        <td width="20%">{{question.correctAnswer}}</td>
+                                        <td width="10%">{{question.correctAnswer}}</td>
+                                        <td width="20%">{{question.description}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <div class="container form-group">
+                        <br>
+                        <label for="banners">Seleccionar los banners para la trivia (mantener presionada la tecla shift
+                            para seleccionar más de uno)</label>
+                        <select multiple class="form-control bannersSelected" id="banners"
+                                ng-model="vm.bannersSelected">
+                            <option ng-repeat="banner in vm.allBanners">{{banner}}</option>
+                        </select>
 
+                    </div>
 
                 </div>
             </div>

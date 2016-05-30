@@ -19,6 +19,10 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
+    public void insertAll(List<Question> questions){
+        questionRepository.insert(questions);
+    }
+
     public void insert(Question question) {
         questionRepository.insert(question);
     }

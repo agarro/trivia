@@ -17,8 +17,19 @@ public class Trivia {
     private String idTrivia;
     private int rounds;
     private String name;
-
+    private List<Banner> banners;
     private List<Question> questions;
+
+    public List<Banner> getBanners() {
+        if (banners == null) {
+            banners = new ArrayList<>();
+        }
+        return banners;
+    }
+
+    public void setBanners(List<Banner> banners) {
+        this.banners = banners;
+    }
 
     public List<Question> getQuestions() {
         if (questions == null) {

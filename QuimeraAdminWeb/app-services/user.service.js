@@ -5,10 +5,10 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$inject = ['$http'];
-    function UserService($http) {
+    UserService.$inject = ['$http', '$rootScope'];
+    function UserService($http, $rootScope) {
         var service = {};
-        var url = 'http://quimera-test-env.us-west-2.elasticbeanstalk.com';
+        var url = $rootScope.url;
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;

@@ -16,31 +16,22 @@
         vm.stopTrivia = stopTrivia;
         vm.getStatusTrivia = getStatusTrivia;
         vm.getCurrentTrivia = getCurrentTrivia;
+        vm.currentQuestionPosition = 0;
 
         vm.myColor = 'transparent';
 
         initController();
 
         function initController() {
-            loadStatusTrivia();
+            getStatusTrivia()
             getCurrentTrivia();
-        }
-
-        function loadStatusTrivia() {
-            TriviaService.GetStatusTrivia()
-                .then(function (response) {
-                    if (response != "") {
-                        vm.statusTrivia = response.message;
-                    } else {
-                        vm.dataLoading = false;
-                    }
-                });
+            getCurrentQuestionPosition();
         }
 
         function startTrivia() {
             TriviaService.StartTrivia()
                 .then(function (response) {
-                    if (response.message === "RUNNABLE") {
+                    if (response.message != null) {
                         FlashService.Success('Trivia iniciada.', false);
                         $location.path('/settings');
                     } else {
@@ -101,14 +92,23 @@
                 });
         }
 
+        function getCurrentQuestionPosition(){
+            TriviaService.GetCurrentQuestionPosition()
+                .then(function(response){
+                   vm.currentQuestionPosition = response.data;
+                });
+        }
+
         function setStatusColor() {
 
             if (vm.statusTrivia === "READY") {
                 vm.myColor = 'green';
-            } else if (vm.statusTrivia === "RUNNABLE") {
-                vm.myColor = '#FFCC00';
-            } else if (vm.statusTrivia === "STOPPED") {
+            } else if (vm.statusTrivia === "ROUNDFINISHED") {
+                vm.myColor = 'blue';
+            } else if (vm.statusTrivia === "TERMINATED") {
                 vm.myColor = 'red';
+            } else {
+                vm.myColor = '#FFCC00';
             }
         }
 
@@ -117,6 +117,7 @@
             interval = $interval(function () {
                 getStatusTrivia();
                 getCurrentQuestion();
+                getCurrentQuestionPosition();
             }, 1000);
 
         });

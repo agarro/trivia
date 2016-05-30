@@ -5,10 +5,10 @@
         .module('app')
         .factory('BarService', BarService);
 
-    BarService.$inject = ['$http'];
-    function BarService($http) {
+    BarService.$inject = ['$http', '$rootScope'];
+    function BarService($http, $rootScope) {
         var service = {};
-        var url = 'http://quimera-test-env.us-west-2.elasticbeanstalk.com';
+        var url = $rootScope.url;
 
         service.GetAll = GetAll;
         service.GetById = GetById;

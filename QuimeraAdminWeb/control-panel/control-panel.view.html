@@ -26,7 +26,7 @@
 
             <div class="container">
 
-                <h4>Estado:
+                <h4>Estado: {{vm.statusTrivia}}
                     <span id="statusColor" ng-style="{color: vm.myColor}"
                           class="glyphicon glyphicon-one-fine-dot"></span>
                 </h4>
@@ -47,7 +47,7 @@
                 <!--<span class="glyphicon glyphicon-pause"></span> Pausar trivia-->
                 <!--</button>-->
                 <button ng-click="vm.stopTrivia()" class="btn btn-danger btn-lg">
-                    <span class="glyphicon glyphicon-stop"></span> Finalizar trivia
+                    <span class="glyphicon glyphicon-stop"></span> Reiniciar trivia
                 </button>
 
             </div>
@@ -55,13 +55,14 @@
                 <div class="panel panel-success">
                     <table class="table table-bordered">
                         <div class="panel-heading">
-                            <h4>Pregunta actual</h4>
+                            <h4>Pregunta actual: {{vm.currentQuestionPosition}}</h4>
                             <thead>
                             <tr>
                                 <th>Id pregunta</th>
                                 <th>Pregunta</th>
                                 <th>Opciones</th>
                                 <th>Respuesta correcta</th>
+                                <th>Descripción</th>
                             </tr>
 
                             </thead>
@@ -72,6 +73,7 @@
                             <td>{{vm.currentQuestion.question}}</td>
                             <td>{{vm.currentQuestion.options}}</td>
                             <td>{{vm.currentQuestion.correctAnswer}}</td>
+                            <td>{{vm.currentQuestion.description}}</td>
                         </tr>
                         </tbody>
                     </table>

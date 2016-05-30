@@ -27,8 +27,10 @@
                             <div class="form-group"
                                  ng-class="{ 'has-error': form.idTrivia.$dirty && form.idTrivia.$error.required }">
                                 <label for="idTrivia">Identificación</label>
-                                <input type="text" id="idTrivia" class="form-control" ng-model="vm.trivia.idTrivia" DISABLED/>
-                                <span ng-show="form.idTrivia.$dirty && form.idTrivia.$error.required" class="help-block">Identificación de trivia es requerido.</span>
+                                <input type="text" id="idTrivia" class="form-control" ng-model="vm.trivia.idTrivia"
+                                       DISABLED/>
+                                <span ng-show="form.idTrivia.$dirty && form.idTrivia.$error.required"
+                                      class="help-block">Identificación de trivia es requerido.</span>
                             </div>
                             <div class="form-group"
                                  ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
@@ -85,7 +87,8 @@
                                     <tr ng-repeat="question in vm.allQuestions | filter: search track by question.idQuestion">
                                         <td width="5%">
                                             <div><input type="checkbox" ng-click="vm.checkedQuestions()"
-                                                        class="questionSelected" value="{{question}}" ng-checked="vm.containsQuestions(question)"></div>
+                                                        class="questionSelected" value="{{question}}"
+                                                        ng-checked="vm.containsQuestions(question)"></div>
                                         </td>
                                         <td width="5%">{{question.idQuestion}}</td>
                                         <td width="30%">{{question.question}}</td>
@@ -127,6 +130,19 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                    <br>
+                    <div class="container form-group">
+                        <br>
+                        <!--<label for="banners">Seleccionar los banners para la trivia (mantener presionada la tecla shift-->
+                            <!--para seleccionar más de uno)</label>-->
+                        <!--<select multiple class="form-control bannersSelected" id="banners"-->
+                                <!--ng-model="vm.bannersSelected">-->
+                            <!--<option ng-repeat="banner in vm.allBanners">{{banner}}</option>-->
+                        <!--</select>-->
+                        <!--<select multiple="true" ng-model="bannersSelected"-->
+                                <!--ng-options="banner.name for banner in vm.allBanners"></select>-->
+                        <select id="myselection" multiple="true" ng-model="vm.bannersSelected" ng-options="c.name for c in vm.allBanners"></select>
                     </div>
                 </div>
             </div>

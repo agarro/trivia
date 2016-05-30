@@ -2,11 +2,9 @@ package com.quimera.services;
 
 import com.quimera.model.User;
 import com.quimera.repositories.UserRepository;
-import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -17,39 +15,43 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UserRepository userService;
+    private UserRepository userRepository;
+
+    public void insertAll(List<User> users){
+        userRepository.insert(users);
+    }
 
     public void insert(User user) {
-        userService.insert(user);
+        userRepository.insert(user);
     }
 
     public void update(User user) {
-        userService.save(user);
+        userRepository.save(user);
     }
 
     public List<User> findAll() {
-        return userService.findAll();
+        return userRepository.findAll();
     }
 
     public User find(String id) {
-        return userService.findOne(id);
+        return userRepository.findOne(id);
     }
 
     public void delete(User user) {
-        userService.delete(user);
+        userRepository.delete(user);
     }
 
     public void deleteAll() {
-        userService.deleteAll();
+        userRepository.deleteAll();
     }
 
     public User getByUsername(String username) {
-        return userService.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     public User authenticate(String username, String password) {
 
-        return userService.findByUsernameAndPassword(username, password);
+        return userRepository.findByUsernameAndPassword(username, password);
 
     }
 }

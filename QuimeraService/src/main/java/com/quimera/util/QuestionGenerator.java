@@ -17,7 +17,7 @@ public class QuestionGenerator implements Runnable {
 
             TriviaService.currentQuestion = question;
             try {
-                TimeUnit.SECONDS.sleep(Constant.TIME_TO_RESPONSE_EACH_QUESTION);
+                TimeUnit.SECONDS.sleep(Constant.TIME_TO_SHOW_QUESTIONS_IN_SECONDS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

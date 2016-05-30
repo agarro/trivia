@@ -5,8 +5,8 @@
         .module('app')
         .controller('ModifyTriviaController', ModifyTriviaController);
 
-    ModifyTriviaController.$inject = ['TriviaService', 'QuestionService', '$location', '$routeParams', 'FlashService'];
-    function ModifyTriviaController(TriviaService, QuestionService, $location, $routeParams, FlashService) {
+    ModifyTriviaController.$inject = ['TriviaService', 'QuestionService', 'BannerService', '$location', '$routeParams', 'FlashService', '$scope'];
+    function ModifyTriviaController(TriviaService, QuestionService, BannerService, $location, $routeParams, FlashService, $scope) {
         var vm = this;
         vm.trivia = null;
 
@@ -14,9 +14,11 @@
         vm.checkedQuestions = checkedQuestions;
         vm.containsQuestions = containsQuestions;
         vm.allQuestions = [];
+        vm.bannersSelected = [];
         initController();
 
         function initController() {
+            loadAllBanners();
             loadCurrentQuestion();
             loadAllQuestions();
         }
@@ -28,10 +30,25 @@
                 });
         }
 
+        function loadAllBanners(){
+            BannerService.GetAll()
+                .then(function (banners) {
+                    vm.allBanners = banners;
+                });
+        }
+
         function loadCurrentQuestion() {
             TriviaService.GetById($routeParams.id)
                 .then(function (trivia) {
                     vm.trivia = trivia;
+
+                    vm.trivia.banners.forEach(function (outerBanner) {
+                        vm.allBanners.forEach(function (innerBanner) {
+                            if(outerBanner.idBanner === innerBanner.idBanner){
+                                vm.bannersSelected.push(innerBanner);
+                            }
+                        });
+                    });
                 });
         }
 

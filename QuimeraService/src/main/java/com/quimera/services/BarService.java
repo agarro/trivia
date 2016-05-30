@@ -19,6 +19,10 @@ public class BarService {
     @Autowired
     private BarRepository barRepository;
 
+    public void insertAll(List<Bar> bars){
+        barRepository.insert(bars);
+    }
+
     public void insert(Bar bar) {
         barRepository.insert(bar);
     }
