@@ -124,24 +124,30 @@ public class DataGenerator {
         bar1.setAddress("Cordoba");
         bar1.setIdBar("1");
         bar1.setName("Johnny B Good");
+        bar1.setUsername("jbg");
+        bar1.setUsername("jbg");
 
 
         Bar bar2 = new Bar();
         bar2.setAddress("Cordoba");
         bar2.setIdBar("2");
         bar2.setName("Il Gato Tratorias");
-
+        bar2.setUsername("igt");
+        bar2.setUsername("igt");
 
         Bar bar3 = new Bar();
         bar3.setAddress("Cordoba");
         bar3.setIdBar("3");
         bar3.setName("María María");
-
+        bar3.setUsername("igt");
+        bar3.setUsername("igt");
 
         Bar bar4 = new Bar();
         bar4.setAddress("Cordoba");
         bar4.setIdBar("4");
         bar4.setName("La Colmena");
+        bar4.setUsername("lacolmena");
+        bar4.setUsername("lacolmena");
 
         barList.add(bar1);
         barList.add(bar2);

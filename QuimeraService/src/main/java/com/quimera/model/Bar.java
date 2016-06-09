@@ -15,6 +15,8 @@ public class Bar {
     private String idBar;
     private String name;
     private String address;
+    private String username;
+    private String password;
 
     public String getIdBar() {
         return idBar;
@@ -50,17 +52,20 @@ public class Bar {
                 Objects.equals(address, bar.address);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idBar, name, address);
+    public String getUsername() {
+        return username;
     }
 
-    @Override
-    public String toString() {
-        return "Bar{" +
-                "idBar='" + idBar + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

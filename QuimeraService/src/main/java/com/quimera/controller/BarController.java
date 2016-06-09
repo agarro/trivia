@@ -1,6 +1,7 @@
 package com.quimera.controller;
 
 import com.quimera.model.Bar;
+import com.quimera.model.User;
 import com.quimera.services.BarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,4 +49,8 @@ public class BarController {
         barService.deleteAll();
     }
 
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    public Bar authenticate(@RequestBody Bar userBar) {
+        return barService.authenticate(userBar.getUsername(), userBar.getPassword());
+    }
 }

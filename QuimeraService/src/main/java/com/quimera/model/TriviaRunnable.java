@@ -21,25 +21,27 @@ public class TriviaRunnable implements Runnable {
                     int currentQuestionPosition = ++TriviaService.currentQuestionPosition;
                     TriviaService.currentQuestion = question;
                     TriviaService.setTriviaStatus(TriviaStatus.SHOWING_QUESTION);
-                    TimeUnit.SECONDS.sleep(Constant.TIME_TO_SHOW_QUESTIONS_IN_SECONDS);
+
+                    sleep(Constant.TIME_TO_SHOW_QUESTIONS_IN_SECONDS);
 
                     TriviaService.setTriviaStatus(TriviaStatus.SHOWING_OPTIONS);
-                    TimeUnit.SECONDS.sleep(Constant.TIME_TO_SHOW_OPTIONS_IN_SECONDS);
+                    sleep(Constant.TIME_TO_SHOW_OPTIONS_IN_SECONDS);
+                    TimeUnit.SECONDS.sleep(1);
 
                     TriviaService.setTriviaStatus(TriviaStatus.SHOWING_CORRECT_ANSWER);
-                    TimeUnit.SECONDS.sleep(Constant.TIME_TO_SHOW_CORRECT_ANSWER_IN_SECONDS);
+                    sleep(Constant.TIME_TO_SHOW_CORRECT_ANSWER_IN_SECONDS);
 
-                    if(currentQuestionPosition == 5 || currentQuestionPosition == 10 || currentQuestionPosition == 15){
+                    if (currentQuestionPosition == 5 || currentQuestionPosition == 10 || currentQuestionPosition == 15) {
                         TriviaService.setTriviaStatus(TriviaStatus.SHOWING_PARTIAL_WINNERS);
                         TriviaService.currentQuestion = null;
-                        TimeUnit.SECONDS.sleep(Constant.TIME_TO_SHOW_PARTIAL_WINNERS_IN_SECONDS);
+                        sleep(Constant.TIME_TO_SHOW_PARTIAL_WINNERS_IN_SECONDS);
 
                         TriviaService.setTriviaStatus(TriviaStatus.SHOWING_BANNER);
-                        TimeUnit.SECONDS.sleep(Constant.TIME_TO_SHOW_BANNER);
+                        sleep(Constant.TIME_TO_SHOW_BANNER);
                     }
-                    if(currentQuestionPosition == 15){
+                    if (currentQuestionPosition == 15) {
                         TriviaService.setTriviaStatus(TriviaStatus.SHOWING_FINAL_WINNERS);
-                        TimeUnit.SECONDS.sleep(Constant.TIME_TO_SHOW_FINAL_WINNERS_IN_SECONDS);
+                        sleep(Constant.TIME_TO_SHOW_FINAL_WINNERS_IN_SECONDS);
                         break;
                     }
                 } catch (InterruptedException e) {
@@ -57,6 +59,15 @@ public class TriviaRunnable implements Runnable {
 
     }
 
+    private static void sleep(int seconds) throws InterruptedException {
+
+
+        do{
+            TriviaService.elapsedTime = seconds--;
+            TimeUnit.SECONDS.sleep(1);
+        } while(seconds>=0);
+
+    }
 
 
 }

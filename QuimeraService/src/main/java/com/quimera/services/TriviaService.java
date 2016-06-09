@@ -29,6 +29,8 @@ public class TriviaService {
 
     public static int currentQuestionPosition;
 
+    public static int elapsedTime;
+
     @Autowired
     private TriviaRepository triviaRepository;
 
@@ -38,6 +40,7 @@ public class TriviaService {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private UserRepository userRepository;
+    
     private Thread currentTrivia = new Thread(new TriviaRunnable());
 
     public void insertAll(List<Trivia> trivias){
@@ -195,6 +198,10 @@ public class TriviaService {
 
     public Trivia getCurrentTrivia() {
         return trivia;
+    }
+
+    public int getElapsedTime() {
+        return elapsedTime;
     }
 
     @ResponseStatus(value=HttpStatus.ACCEPTED, reason="La trivia ya esta iniciada. Finalice la trivia antes de seleccionar otra.")  // 202

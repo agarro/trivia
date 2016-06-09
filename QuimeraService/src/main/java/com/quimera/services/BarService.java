@@ -1,6 +1,7 @@
 package com.quimera.services;
 
 import com.quimera.model.Bar;
+import com.quimera.model.User;
 import com.quimera.repositories.BarRepository;
 import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,7 @@ public class BarService {
         barRepository.deleteAll();
     }
 
+    public Bar authenticate(String username, String password) {
+        return barRepository.findByUsernameAndPassword(username, password);
+    }
 }

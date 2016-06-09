@@ -107,4 +107,10 @@ public class TriviaController {
         return triviaService.getCurrentQuestionPosition();
     }
 
+    @RequestMapping(value = "/elapsedTime", method = RequestMethod.GET)
+    public int getElapsedTime(){
+        return triviaService.getElapsedTime();
+    }
+
+
 }

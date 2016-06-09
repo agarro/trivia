@@ -8,4 +8,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface BarRepository extends MongoRepository<Bar, String> {
 
+    Bar findByUsernameAndPassword(String username, String password);
+
 }

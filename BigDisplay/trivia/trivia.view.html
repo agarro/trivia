@@ -1,0 +1,117 @@
+<style type="text/css">
+
+    li {
+        list-style: none;
+        font-size: 3em;
+    }
+
+    #waitingTrivia {
+        transition: all linear 0.5s;
+        height: 100px;
+        width: 100%;
+        position: relative;
+        top: 20px;
+        right: 50px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 7em;
+    }
+    .countdown {
+        /*transition: all linear 0.5s;*/
+        height: 100px;
+        width: 100%;
+        position: relative;
+        top: 20px;
+        right: 50px;
+        text-align: right;
+        font-size: 7em;
+    }
+
+    .questiondiv {
+        transition: all linear 0.5s;
+        height: 30%;
+        width: 70%;
+        position: relative;
+        top: 0;
+        left: 15%;
+        text-align: center;
+        font-size: 4em;
+    }
+
+    .optionsli {
+        transition: all linear 0.5s;
+        height: 100px;
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 10px;
+        text-align: left;
+        font-size: 1em;
+    }
+
+    .questionNumber {
+        /*transition: all linear 0.5s;*/
+        height: 100px;
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 10px;
+        text-align: center;
+        font-size: 6em;
+
+    }
+
+    .ng-hide {
+        height: 0;
+        width: 0;
+        background-color: transparent;
+        top: -200px;
+        left: 200px;
+    }
+
+    .ng-enter, .ng-leave {
+        transition: 500ms ease-in all;
+        position: relative;
+        display: block;
+    }
+
+    .ng-enter.ng-enter-active, .ng-leave {
+        left: 0;
+    }
+
+    .ng-leave.ng-leave-active, .ng-enter {
+        left: 500px;
+    }
+
+</style>
+
+<!--<h1>Mostrar pregunta: <input type="checkbox" ng-model="myCheck"></h1>-->
+<!--<h1>Mostrar opciones <input type="checkbox" ng-model="myCheck2"></h1>-->
+
+<div class="countdown" ng-show="vm.showCountdown" ng-bind="vm.elapsedTime"></div>
+
+<div id="waitingTrivia" ng-hide="vm.triviaActive">Esperando trivia</div>
+
+<br>
+<br>
+<div class="questionNumber" ng-show="vm.triviaActive">Pregunta {{vm.currentQuestionPosition}} {{vm.statusTrivia}}</div>
+<br>
+<br>
+<br>
+<br>
+<div class="questiondiv" ng-show="vm.triviaActive" ng-bind="vm.currentQuestion.question"></div>
+<br>
+<br>
+<br>
+<br>
+<!--<div class="optionsdiv" ng-show="myCheck2" ng-bind="vm.currentQuestion.options"></div>-->
+<!--<input type="text" ng-model="search">-->
+<!--<button type="submit">Filter</button>-->
+
+<div>
+    <ul ng-show="true" class="optionsli">
+        <li ng-animate=" 'animate' " ng-repeat="option in vm.options | filter:search">
+            {{option}}
+        </li>
+    </ul>
+</div>

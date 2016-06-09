@@ -41,6 +41,7 @@
                                 <th>Id bar</th>
                                 <th>Nombre</th>
                                 <th>Dirección</th>
+                                <th>Nombre de usuario</th>
                                 <th>Acción</th>
                             </tr>
                             </thead>
@@ -49,9 +50,10 @@
                                 <td>{{bar.idBar}}</td>
                                 <td>{{bar.name}}</td>
                                 <td>{{bar.address}}</td>
+                                <td>{{bar.username}}</td>
                                 <td>
                                     <a href="#bar/modify/{{bar.idBar}}">Editar</a>
-                                    - <a href="#bars" ng-click="vm.deleteBar(bar)">Eliminar</a>
+                                    - <a href="#bar" ng-click="vm.deleteBar(bar)">Eliminar</a>
                                 </td>
 
                             </tr>
