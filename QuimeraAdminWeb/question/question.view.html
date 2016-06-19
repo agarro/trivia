@@ -41,6 +41,8 @@
                             <tr>
                                 <th>Id pregunta</th>
                                 <th>Pregunta</th>
+                                <th>Categoría</th>
+                                <th>Subcategoría</th>
                                 <th>Opciones</th>
                                 <th>Respuesta correcta</th>
                                 <th>Descripción</th>
@@ -51,6 +53,8 @@
                             <tr ng-repeat="question in vm.allQuestions | filter: search">
                                 <td>{{question.idQuestion}}</td>
                                 <td>{{question.question}}</td>
+                                <th>{{question.category.name}}</th>
+                                <th>{{question.subcategory.name}}</th>
                                 <td>{{question.options}}</td>
                                 <td>{{question.correctAnswer}}</td>
                                 <td>{{question.description}}</td>

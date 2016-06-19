@@ -2,7 +2,6 @@ package com.quimera.controller;
 
 import com.quimera.model.*;
 import com.quimera.services.TriviaService;
-import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +57,7 @@ public class TriviaController {
 
     @RequestMapping(value = "/getScore", method = RequestMethod.POST)
     public List<Score> getScore(@RequestBody Bar bar) {
-       return triviaService.getScore(bar);
+        return triviaService.getScore(bar);
     }
 
     @RequestMapping("start")
@@ -86,29 +85,29 @@ public class TriviaController {
         return triviaService.statusTrivia();
     }
 
-    @ResponseStatus(value= HttpStatus.OK, reason="Trivia asignada satisfactoriamente.")  // 200
+    @ResponseStatus(value = HttpStatus.OK, reason = "Trivia asignada satisfactoriamente.")  // 200
     @RequestMapping(value = "/setCurrentTrivia", method = RequestMethod.POST)
-    public void setCurrentTrivia(@RequestBody String idTrivia){
+    public void setCurrentTrivia(@RequestBody String idTrivia) {
         triviaService.setCurrentTrivia(idTrivia);
     }
 
     @RequestMapping(value = "/getCurrentTrivia", method = RequestMethod.GET)
-    public Trivia getCurrentTrivia(){
+    public Trivia getCurrentTrivia() {
         return triviaService.getCurrentTrivia();
     }
 
     @RequestMapping(value = "/getCurrentBanners", method = RequestMethod.GET)
-    public List<Banner> getCurrentBanners(){
+    public List<Banner> getCurrentBanners() {
         return triviaService.getCurrentBanners();
     }
 
     @RequestMapping(value = "/getCurrentQuestionPosition", method = RequestMethod.GET)
-    public int getCurrentQuestionPosition(){
+    public int getCurrentQuestionPosition() {
         return triviaService.getCurrentQuestionPosition();
     }
 
     @RequestMapping(value = "/elapsedTime", method = RequestMethod.GET)
-    public int getElapsedTime(){
+    public int getElapsedTime() {
         return triviaService.getElapsedTime();
     }
 

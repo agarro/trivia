@@ -17,7 +17,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void insertAll(List<User> users){
+    public void insertAll(List<User> users) {
         userRepository.insert(users);
     }
 

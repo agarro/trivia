@@ -5,8 +5,8 @@
         .module('app')
         .controller('ModifyQuestionController', ModifyQuestionController);
 
-    ModifyQuestionController.$inject = ['QuestionService', '$location', '$routeParams', 'FlashService', '$scope'];
-    function ModifyQuestionController(QuestionService, $location, $routeParams, FlashService, $scope) {
+    ModifyQuestionController.$inject = ['QuestionService', '$location', '$routeParams', 'FlashService', '$scope', 'SubcategoryService', 'CategoryService'];
+    function ModifyQuestionController(QuestionService, $location, $routeParams, FlashService, $scope, SubcategoryService, CategoryService) {
         var vm = this;
         vm.question = null;
 
@@ -16,6 +16,8 @@
 
         function initController() {
             loadCurrentQuestion();
+            loadAllCategories();
+            loadAllSubcategories();
         }
 
         function loadCurrentQuestion() {
@@ -42,6 +44,20 @@
         $scope.addItem = function(item){
             $scope.vm.question.options.push(item);
             $scope.newItem = null;
+        };
+
+        function loadAllCategories() {
+            CategoryService.GetAll()
+                .then(function (categories) {
+                    vm.allCategories = categories;
+                });
+        }
+
+        function loadAllSubcategories() {
+            SubcategoryService.GetAll()
+                .then(function (subcategories) {
+                    vm.allSubcategories = subcategories;
+                });
         }
 
     }

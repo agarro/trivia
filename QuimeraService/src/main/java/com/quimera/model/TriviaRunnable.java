@@ -31,11 +31,14 @@ public class TriviaRunnable implements Runnable {
                     TriviaService.setTriviaStatus(TriviaStatus.SHOWING_CORRECT_ANSWER);
                     sleep(Constant.TIME_TO_SHOW_CORRECT_ANSWER_IN_SECONDS);
 
-                    if (currentQuestionPosition == 5 || currentQuestionPosition == 10 || currentQuestionPosition == 15) {
-                        TriviaService.setTriviaStatus(TriviaStatus.SHOWING_PARTIAL_WINNERS);
-                        TriviaService.currentQuestion = null;
-                        sleep(Constant.TIME_TO_SHOW_PARTIAL_WINNERS_IN_SECONDS);
+                    TriviaService.setTriviaStatus(TriviaStatus.SHOWING_DESCRIPTION);
+                    sleep(Constant.TIME_TO_SHOW_DESCRIPTION_IN_SECONDS);
 
+                    TriviaService.setTriviaStatus(TriviaStatus.SHOWING_PARTIAL_WINNERS);
+                    TriviaService.currentQuestion = null;
+                    sleep(Constant.TIME_TO_SHOW_PARTIAL_WINNERS_IN_SECONDS);
+
+                    if (currentQuestionPosition == 5 || currentQuestionPosition == 10 || currentQuestionPosition == 15) {
                         TriviaService.setTriviaStatus(TriviaStatus.SHOWING_BANNER);
                         sleep(Constant.TIME_TO_SHOW_BANNER);
                     }
@@ -62,10 +65,10 @@ public class TriviaRunnable implements Runnable {
     private static void sleep(int seconds) throws InterruptedException {
 
 
-        do{
+        do {
             TriviaService.elapsedTime = seconds--;
             TimeUnit.SECONDS.sleep(1);
-        } while(seconds>=0);
+        } while (seconds >= 0);
 
     }
 

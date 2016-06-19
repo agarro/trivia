@@ -32,7 +32,7 @@ public class AdminController {
     private UserService userService;
 
     @RequestMapping(value = "/initialData", method = RequestMethod.GET)
-    public void initialData(){
+    public void initialData() {
 
         barService.insertAll(DataGenerator.barsExamples());
         questionService.insertAll(DataGenerator.questionsExamples());

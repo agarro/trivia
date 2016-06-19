@@ -13,6 +13,26 @@
             <span ng-show="form.question.$dirty && form.question.$error.required" class="help-block">Pregunta es requerida</span>
         </div>
 
+        <div class="form-group">
+            <br>
+            <label for="category">Seleccionar la categoría</label>
+            <select class="form-control" ng-model="vm.question.category"
+                    ng-options="category.name for category in vm.allCategories track by category.idCategory"
+                    id="category">
+                <option></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <br>
+            <label for="subcategory">Seleccionar la subcategoría</label>
+            <select class="form-control" ng-model="vm.question.subcategory"
+                    ng-options="subcategory.name for subcategory in vm.allSubcategories | filter:{category : vm.question.category} track by subcategory "
+                    id="subcategory">
+                <option></option>
+            </select>
+        </div>
+
         <div class="form-group form-inline"
              ng-class="{ 'has-error': form.options.$dirty && form.options.$error.required }">
             <label for="options">Opciones</label>

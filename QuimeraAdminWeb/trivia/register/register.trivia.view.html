@@ -53,10 +53,12 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th width="5%"><span><i class="glyphicon glyphicon-check"></i></span></th>
+                                        <th width="3%"><span><i class="glyphicon glyphicon-check"></i></span></th>
                                         <th width="5%">Id</th>
-                                        <th width="20%">Pregunta</th>
-                                        <th width="40%">Opciones</th>
+                                        <th width="10%">Categoría</th>
+                                        <th width="10%">Subcategoría</th>
+                                        <th width="15%">Pregunta</th>
+                                        <th width="27%">Opciones</th>
                                         <th width="10%">Respuesta correcta</th>
                                         <th width="20%">Descripción</th>
                                     </tr>
@@ -70,6 +72,8 @@
                                                         class="questionSelected" value="{{question}}"></div>
                                         </td>
                                         <td width="5%">{{question.idQuestion}}</td>
+                                        <th width="10%">{{question.category}}</th>
+                                        <th width="10%">{{question.subCategory}}</th>
                                         <td width="20%">{{question.question}}</td>
                                         <td width="40%">{{question.options}}</td>
                                         <td width="10%">{{question.correctAnswer}}</td>
@@ -93,8 +97,10 @@
                                     <thead>
                                     <tr>
                                         <th width="5%">Id</th>
-                                        <th width="20%">Pregunta</th>
-                                        <th width="45%">Opciones</th>
+                                        <th width="10%">Categoría</th>
+                                        <th width="10%">Subcategoría</th>
+                                        <th width="15%">Pregunta</th>
+                                        <th width="30%">Opciones</th>
                                         <th width="10%">Respuesta correcta</th>
                                         <th width="20%">Descripción</th>
                                     </tr>
@@ -103,8 +109,10 @@
 
                                     <tr ng-repeat="question in vm.trivia.questions track by question.idQuestion">
                                         <td width="5%">{{question.idQuestion}}</td>
-                                        <td width="20%">{{question.question}}</td>
-                                        <td width="45%">{{question.options}}</td>
+                                        <td width="10%">{{question.category}}</td>
+                                        <td width="10%">{{question.subCategory}}</td>
+                                        <td width="15%">{{question.question}}</td>
+                                        <td width="30%">{{question.options}}</td>
                                         <td width="10%">{{question.correctAnswer}}</td>
                                         <td width="20%">{{question.description}}</td>
                                     </tr>
@@ -123,6 +131,26 @@
                             <option ng-repeat="banner in vm.allBanners">{{banner}}</option>
                         </select>
 
+                    </div>
+
+                    <div class="form-group">
+                        <br>
+                        <label for="category">Seleccionar la categoría</label>
+                        <select class="form-control" ng-model="vm.trivia.category"
+                                ng-options="category.name for category in vm.allCategories track by category.idCategory"
+                                id="category">
+                            <option></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <br>
+                        <label for="subcategory">Seleccionar la subcategoría</label>
+                        <select class="form-control" ng-model="vm.trivia.subcategory"
+                                ng-options="subcategory.name for subcategory in vm.allSubcategories | filter:{category : vm.trivia.category} track by subcategory "
+                                id="subcategory">
+                            <option></option>
+                        </select>
                     </div>
 
                 </div>

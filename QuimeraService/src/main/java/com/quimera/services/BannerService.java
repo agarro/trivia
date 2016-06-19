@@ -17,7 +17,7 @@ public class BannerService {
     @Autowired
     private BannerRepository bannerRepository;
 
-    public void insertAll(List<Banner> banners){
+    public void insertAll(List<Banner> banners) {
         bannerRepository.insert(banners);
     }
 

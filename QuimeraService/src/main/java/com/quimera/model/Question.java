@@ -2,15 +2,19 @@ package com.quimera.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 /**
  * Created by Manu on 31/1/16.
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Document
 public class Question {
 
     @Id
@@ -19,6 +23,27 @@ public class Question {
     private final List<String> options = new ArrayList<>();
     private String correctAnswer;
     private String description;
+    @DBRef
+    private Category category;
+
+    @DBRef
+    private Subcategory subcategory;
+
+    public Subcategory getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(Subcategory subcategory) {
+        this.subcategory = subcategory;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public String getDescription() {
         return description;

@@ -12,7 +12,9 @@
 
         vm.triviaActive = false;
 
-        //var INTERVAL_QUESTION = 15;
+        var INTERVAL_QUESTION = 100/20;
+
+        vm.progressBarValue = 0;
 
         vm.currentQuestionPosition = 0;
 
@@ -32,6 +34,8 @@
         vm.options = null;
 
         vm.currentQuestionPosition = 0;
+
+        vm.showDescription = false;
 
         vm.getCurrentQuestion = getCurrentQuestion;
         vm.getStatusTrivia = getStatusTrivia;
@@ -64,6 +68,7 @@
             TriviaService.GetElapsedTime()
                 .then(function (response) {
                     vm.elapsedTime = response;
+                    vm.progressBarValue = response*INTERVAL_QUESTION;
                 });
         }
 
@@ -118,17 +123,13 @@
             interval = $interval(function () {
                 getStatusTrivia();
 
-
                 if (vm.triviaActive == false) {
                     getCurrentTrivia();
                 } else {
                     getElapsedTime();
-
                     getCurrentQuestionPosition();
 
-                    //if (vm.countdown > 0) {
-                    //    vm.countdown--;
-                    //}
+                    vm.showDescription = vm.statusTrivia == 'SHOWING_DESCRIPTION';
 
                     if (vm.statusTrivia == 'SHOWING_OPTIONS') {
                         vm.options = vm.currentQuestion.options;

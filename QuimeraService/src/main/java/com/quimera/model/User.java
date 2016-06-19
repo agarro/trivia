@@ -2,6 +2,8 @@ package com.quimera.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
 
@@ -10,6 +12,7 @@ import java.util.Objects;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Document
 public class User {
 
     @Id
@@ -17,6 +20,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    @Indexed
     private String username;
     private String password;
 

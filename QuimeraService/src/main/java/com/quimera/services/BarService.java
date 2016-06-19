@@ -1,13 +1,10 @@
 package com.quimera.services;
 
 import com.quimera.model.Bar;
-import com.quimera.model.User;
 import com.quimera.repositories.BarRepository;
-import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -20,7 +17,7 @@ public class BarService {
     @Autowired
     private BarRepository barRepository;
 
-    public void insertAll(List<Bar> bars){
+    public void insertAll(List<Bar> bars) {
         barRepository.insert(bars);
     }
 

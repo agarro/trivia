@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Score implements Comparable<Score>{
+public class Score implements Comparable<Score> {
 
     private User user;
     private int score;

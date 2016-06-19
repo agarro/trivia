@@ -5,12 +5,19 @@
         .module('app')
         .controller('QuestionRegisterController', QuestionRegisterController);
 
-    QuestionRegisterController.$inject = ['QuestionService', '$location', 'FlashService', '$scope'];
-    function QuestionRegisterController(QuestionService, $location, FlashService, $scope) {
+    QuestionRegisterController.$inject = ['QuestionService', '$location', 'FlashService', '$scope', 'SubcategoryService', 'CategoryService'];
+    function QuestionRegisterController(QuestionService, $location, FlashService, $scope, SubcategoryService, CategoryService) {
         var vm = this;
         vm.question = {};
         vm.question.options = [];
         vm.registerQuestion = registerQuestion;
+
+        initController();
+
+        function initController() {
+            loadAllCategories();
+            loadAllSubcategories();
+        }
 
         function registerQuestion() {
             vm.dataLoading = true;
@@ -29,7 +36,22 @@
         $scope.addItem = function(item){
             $scope.vm.question.options.push(item);
             $scope.newItem = null;
+        };
+
+        function loadAllCategories() {
+            CategoryService.GetAll()
+                .then(function (categories) {
+                    vm.allCategories = categories;
+                });
         }
+
+        function loadAllSubcategories() {
+            SubcategoryService.GetAll()
+                .then(function (subcategories) {
+                    vm.allSubcategories = subcategories;
+                });
+        }
+
     }
 
 })();

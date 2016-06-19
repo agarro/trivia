@@ -1,7 +1,6 @@
 package com.quimera.controller;
 
 import com.quimera.model.Bar;
-import com.quimera.model.User;
 import com.quimera.services.BarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +42,7 @@ public class BarController {
     public void delete(@RequestBody Bar bar) {
         barService.delete(bar);
     }
+
     @RequestMapping("/deleteAll")
 
     public void deleteAll() {

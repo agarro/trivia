@@ -34,6 +34,7 @@ public class DataGenerator {
         question1.addOption("Bogotá");
         question1.addOption("Córdoba");
         question1.setCorrectAnswer("Buenos Aires");
+        question1.setDescription("Desc 1");
 
         Question question2 = new Question();
         question2.setIdQuestion("2");
@@ -44,6 +45,7 @@ public class DataGenerator {
         question2.addOption("Calamuchita");
         question2.addOption("Asunción");
         question2.setCorrectAnswer("Rosario");
+        question2.setDescription("Desc 2");
 
         Question question3 = new Question();
         question3.setIdQuestion("3");
@@ -54,6 +56,7 @@ public class DataGenerator {
         question3.addOption("Time Berners-Lee");
         question3.addOption("Laurence Ellison");
         question3.setCorrectAnswer("Bill Gates");
+        question3.setDescription("Desc 3");
 
         Question question4 = new Question();
         question4.setIdQuestion("4");
@@ -64,6 +67,7 @@ public class DataGenerator {
         question4.addOption("1983");
         question4.addOption("1974");
         question4.setCorrectAnswer("1974");
+        question4.setDescription("Desc 4");
 
         Question question5 = new Question();
         question5.setIdQuestion("5");
@@ -74,6 +78,7 @@ public class DataGenerator {
         question5.addOption("1481");
         question5.addOption("1560");
         question5.setCorrectAnswer("1573");
+        question5.setDescription("Desc 5");
 
         Question question6 = new Question();
         question6.setIdQuestion("6");
@@ -84,6 +89,7 @@ public class DataGenerator {
         question6.addOption("2002");
         question6.addOption("1929");
         question6.setCorrectAnswer("1974");
+        question6.setDescription("Desc");
 
         Question question7 = new Question();
         question7.setIdQuestion("7");
@@ -94,6 +100,29 @@ public class DataGenerator {
         question7.addOption("400");
         question7.addOption("450");
         question7.setCorrectAnswer("300");
+        question7.setDescription("Desc");
+
+        Question question8 = new Question();
+        question8.setIdQuestion("8");
+        question8.setQuestion("¿Pregunta R?");
+        question8.addOption("A");
+        question8.addOption("B");
+        question8.addOption("C");
+        question8.addOption("D");
+        question8.addOption("E");
+        question8.setCorrectAnswer("A");
+        question8.setDescription("Desc");
+
+        Question question9 = new Question();
+        question9.setIdQuestion("9");
+        question9.setQuestion("¿Pregunta W?");
+        question9.addOption("A");
+        question9.addOption("B");
+        question9.addOption("C");
+        question9.addOption("D");
+        question9.addOption("E");
+        question9.setCorrectAnswer("E");
+        question9.setDescription("Desc");
 
         Question question15 = new Question();
         question15.setIdQuestion("15");
@@ -104,6 +133,74 @@ public class DataGenerator {
         question15.addOption("San Juan");
         question15.addOption("Formosa");
         question15.setCorrectAnswer("San Juan");
+        question15.setDescription("Desc");
+
+        Question question16 = new Question();
+        question16.setIdQuestion("16");
+        question16.setQuestion("¿Pregunta M?");
+        question16.addOption("A");
+        question16.addOption("B");
+        question16.addOption("C");
+        question16.addOption("D");
+        question16.addOption("E");
+        question16.setCorrectAnswer("B");
+        question16.setDescription("Desc");
+
+        Question question17 = new Question();
+        question17.setIdQuestion("17");
+        question17.setQuestion("¿Pregunta N?");
+        question17.addOption("A");
+        question17.addOption("B");
+        question17.addOption("C");
+        question17.addOption("D");
+        question17.addOption("E");
+        question17.setCorrectAnswer("B");
+        question17.setDescription("Desc");
+
+        Question question18 = new Question();
+        question18.setIdQuestion("18");
+        question18.setQuestion("¿Pregunta H?");
+        question18.addOption("A");
+        question18.addOption("B");
+        question18.addOption("C");
+        question18.addOption("D");
+        question18.addOption("E");
+        question18.setCorrectAnswer("B");
+        question18.setDescription("Desc");
+
+        Question question19 = new Question();
+        question19.setIdQuestion("19");
+        question19.setQuestion("¿Pregunta M?");
+        question19.addOption("A");
+        question19.addOption("B");
+        question19.addOption("C");
+        question19.addOption("D");
+        question19.addOption("E");
+        question19.setCorrectAnswer("A");
+        question19.setDescription("Desc");
+
+        Question question20 = new Question();
+        question20.setIdQuestion("20");
+        question20.setQuestion("¿Pregunta L?");
+        question20.addOption("A");
+        question20.addOption("B");
+        question20.addOption("C");
+        question20.addOption("D");
+        question20.addOption("E");
+        question20.setCorrectAnswer("D");
+        question20.setDescription("Desc");
+
+        Question question21 = new Question();
+        question21.setIdQuestion("21");
+        question21.setQuestion("¿Pregunta Q?");
+        question21.addOption("A");
+        question21.addOption("B");
+        question21.addOption("C");
+        question21.addOption("D");
+        question21.addOption("E");
+        question21.setCorrectAnswer("C");
+        question21.setDescription("Desc");
+
 
         questionSet.add(question1);
         questionSet.add(question2);
@@ -112,7 +209,16 @@ public class DataGenerator {
         questionSet.add(question5);
         questionSet.add(question6);
         questionSet.add(question7);
+        questionSet.add(question8);
+        questionSet.add(question9);
         questionSet.add(question15);
+        questionSet.add(question16);
+        questionSet.add(question17);
+        questionSet.add(question18);
+        questionSet.add(question19);
+        questionSet.add(question20);
+        questionSet.add(question21);
+
         return questionSet;
 
     }
@@ -125,7 +231,7 @@ public class DataGenerator {
         bar1.setIdBar("1");
         bar1.setName("Johnny B Good");
         bar1.setUsername("jbg");
-        bar1.setUsername("jbg");
+        bar1.setPassword("jbg");
 
 
         Bar bar2 = new Bar();
@@ -133,21 +239,21 @@ public class DataGenerator {
         bar2.setIdBar("2");
         bar2.setName("Il Gato Tratorias");
         bar2.setUsername("igt");
-        bar2.setUsername("igt");
+        bar2.setPassword("igt");
 
         Bar bar3 = new Bar();
         bar3.setAddress("Cordoba");
         bar3.setIdBar("3");
         bar3.setName("María María");
-        bar3.setUsername("igt");
-        bar3.setUsername("igt");
+        bar3.setUsername("mm");
+        bar3.setPassword("mm");
 
         Bar bar4 = new Bar();
         bar4.setAddress("Cordoba");
         bar4.setIdBar("4");
         bar4.setName("La Colmena");
         bar4.setUsername("lacolmena");
-        bar4.setUsername("lacolmena");
+        bar4.setPassword("lacolmena");
 
         barList.add(bar1);
         barList.add(bar2);
@@ -212,13 +318,13 @@ public class DataGenerator {
         trivia1.setName("trivia 1");
 
         Collections.shuffle(questions);
-        trivia1.setQuestions(questions.subList(0,5));
+        trivia1.setQuestions(questions.subList(0, 5));
 
         Trivia trivia2 = new Trivia();
         trivia2.setName("trivia 2");
 
         Collections.shuffle(questions);
-        trivia2.setQuestions(questions.subList(0,5));
+        trivia2.setQuestions(questions.subList(0, 5));
 
         trivias.add(trivia1);
         trivias.add(trivia2);

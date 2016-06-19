@@ -1,10 +1,12 @@
 package com.quimera.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by Manu on 28/3/16.
  */
+@Document
 public class Banner {
 
     @Id

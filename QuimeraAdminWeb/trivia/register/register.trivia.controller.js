@@ -5,8 +5,8 @@
         .module('app')
         .controller('RegisterTriviaController', RegisterTriviaController);
 
-    RegisterTriviaController.$inject = ['QuestionService', 'TriviaService', 'BannerService', '$location', 'FlashService', '$scope'];
-    function RegisterTriviaController(QuestionService, TriviaService, BannerService, $location, FlashService) {
+    RegisterTriviaController.$inject = ['QuestionService', 'TriviaService', 'BannerService', '$location', 'FlashService', 'SubcategoryService', 'CategoryService'];
+    function RegisterTriviaController(QuestionService, TriviaService, BannerService, $location, FlashService, SubcategoryService, CategoryService) {
         var vm = this;
 
         vm.trivia = {
@@ -17,12 +17,15 @@
         vm.bannersSelected = [];
         vm.registerTrivia = registerTrivia;
         vm.checkedQuestions = checkedQuestions;
-
+        vm.loadAllCategories = loadAllCategories;
+        vm.loadAllSubcategories = loadAllSubcategories;
         initController();
 
         function initController() {
             loadAllQuestions();
             loadAllBanners();
+            loadAllCategories();
+            loadAllSubcategories();
         }
 
         function loadAllQuestions() {
@@ -68,6 +71,21 @@
             });
 
         }
+        function loadAllCategories() {
+            CategoryService.GetAll()
+                .then(function (categories) {
+                    vm.allCategories = categories;
+                });
+        }
+
+        function loadAllSubcategories() {
+            SubcategoryService.GetAll()
+                .then(function (subcategories) {
+                    vm.allSubcategories = subcategories;
+                });
+        }
+
+
 
     }
 

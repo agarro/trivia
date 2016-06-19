@@ -42,6 +42,7 @@ public class BannerController {
     public void delete(@RequestBody Banner banner) {
         bannerService.delete(banner);
     }
+
     @RequestMapping("/deleteAll")
     public void deleteAll() {
         bannerService.deleteAll();

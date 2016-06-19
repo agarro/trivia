@@ -2,11 +2,9 @@ package com.quimera.services;
 
 import com.quimera.model.Question;
 import com.quimera.repositories.QuestionRepository;
-import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -19,7 +17,7 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public void insertAll(List<Question> questions){
+    public void insertAll(List<Question> questions) {
         questionRepository.insert(questions);
     }
 

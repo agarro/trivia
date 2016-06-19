@@ -4,13 +4,11 @@ import com.quimera.model.*;
 import com.quimera.repositories.QuestionRepository;
 import com.quimera.repositories.TriviaRepository;
 import com.quimera.repositories.UserRepository;
-import com.quimera.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -40,10 +38,10 @@ public class TriviaService {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private UserRepository userRepository;
-    
+
     private Thread currentTrivia = new Thread(new TriviaRunnable());
 
-    public void insertAll(List<Trivia> trivias){
+    public void insertAll(List<Trivia> trivias) {
         triviaRepository.insert(trivias);
     }
 
@@ -128,7 +126,7 @@ public class TriviaService {
             resetTrivia();
         }
 
-        if (trivia == null){
+        if (trivia == null) {
             trivia = generateTrivia();
             message.setMessage("Trivia aleatoria generada.");
         }
@@ -204,26 +202,27 @@ public class TriviaService {
         return elapsedTime;
     }
 
-    @ResponseStatus(value=HttpStatus.ACCEPTED, reason="La trivia ya esta iniciada. Finalice la trivia antes de seleccionar otra.")  // 202
+    @ResponseStatus(value = HttpStatus.ACCEPTED, reason = "La trivia ya esta iniciada. Finalice la trivia antes de seleccionar otra.")
+    // 202
     public class TriviaAlreadyStarted extends RuntimeException {
 
     }
 
-    @ResponseStatus(value=HttpStatus.ACCEPTED, reason="Banner publicado.")  // 202
+    @ResponseStatus(value = HttpStatus.ACCEPTED, reason = "Banner publicado.")  // 202
     public class BannerPublished extends RuntimeException {
 
     }
 
-    @ResponseStatus(value=HttpStatus.ACCEPTED, reason="Trivia no encontrada.")
+    @ResponseStatus(value = HttpStatus.ACCEPTED, reason = "Trivia no encontrada.")
     public class TriviaNotFound extends RuntimeException {
 
     }
 
-    public List<Banner> getCurrentBanners(){
+    public List<Banner> getCurrentBanners() {
         return this.getCurrentTrivia().getBanners();
     }
 
-    public int getCurrentQuestionPosition(){
+    public int getCurrentQuestionPosition() {
         return TriviaService.currentQuestionPosition;
     }
 

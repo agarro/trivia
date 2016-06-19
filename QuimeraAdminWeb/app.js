@@ -27,6 +27,7 @@
                 controllerAs: 'vm'
             })
 
+
             .when('/user/modify/:id', {
                 controller: 'ModifyUserController',
                 templateUrl: 'user/modify/modify.user.view.html',
@@ -36,6 +37,42 @@
             .when('/user/register', {
                 controller: 'UserRegisterController',
                 templateUrl: 'user/register/register.user.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/categories', {
+                controller: 'CategoryController',
+                templateUrl: 'category/category.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/category/register', {
+                controller: 'CategoryRegisterController',
+                templateUrl: 'category/register/register.category.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/category/modify/:id', {
+                controller: 'ModifyCategoryController',
+                templateUrl: 'category/modify/modify.category.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/subcategories', {
+                controller: 'SubcategoryController',
+                templateUrl: 'subcategory/subcategory.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/subcategory/register', {
+                controller: 'SubcategoryRegisterController',
+                templateUrl: 'subcategory/register/register.subcategory.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/subcategory/modify/:id', {
+                controller: 'ModifySubcategoryController',
+                templateUrl: 'subcategory/modify/modify.subcategory.view.html',
                 controllerAs: 'vm'
             })
 

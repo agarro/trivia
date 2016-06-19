@@ -5,22 +5,26 @@
         .module('app')
         .controller('ModifyTriviaController', ModifyTriviaController);
 
-    ModifyTriviaController.$inject = ['TriviaService', 'QuestionService', 'BannerService', '$location', '$routeParams', 'FlashService', '$scope'];
-    function ModifyTriviaController(TriviaService, QuestionService, BannerService, $location, $routeParams, FlashService, $scope) {
+    ModifyTriviaController.$inject = ['TriviaService', 'QuestionService', 'BannerService', '$location', '$routeParams', 'FlashService', 'SubcategoryService', 'CategoryService'];
+    function ModifyTriviaController(TriviaService, QuestionService, BannerService, $location, $routeParams, FlashService, SubcategoryService, CategoryService) {
         var vm = this;
         vm.trivia = null;
-
+        vm.subcategorySelected = [];
         vm.modifyTrivia = modifyTrivia;
         vm.checkedQuestions = checkedQuestions;
         vm.containsQuestions = containsQuestions;
         vm.allQuestions = [];
         vm.bannersSelected = [];
+        vm.loadAllCategories = loadAllCategories;
+        vm.loadAllSubcategories = loadAllSubcategories;
         initController();
 
         function initController() {
             loadAllBanners();
             loadCurrentQuestion();
             loadAllQuestions();
+            loadAllSubcategories();
+            loadAllCategories();
         }
 
         function loadAllQuestions() {
@@ -30,7 +34,7 @@
                 });
         }
 
-        function loadAllBanners(){
+        function loadAllBanners() {
             BannerService.GetAll()
                 .then(function (banners) {
                     vm.allBanners = banners;
@@ -44,7 +48,7 @@
 
                     vm.trivia.banners.forEach(function (outerBanner) {
                         vm.allBanners.forEach(function (innerBanner) {
-                            if(outerBanner.idBanner === innerBanner.idBanner){
+                            if (outerBanner.idBanner === innerBanner.idBanner) {
                                 vm.bannersSelected.push(innerBanner);
                             }
                         });
@@ -79,14 +83,28 @@
         }
 
         function containsQuestions(question) {
-            var i;
-            for (i = 0; i < vm.trivia.questions.length; i++) {
-                if (angular.equals(vm.trivia.questions[i], question)) {
-                    return true;
+            if (vm.trivia != null && vm.trivia.questions != null) {
+                for (var i = 0; i < vm.trivia.questions.length; i++) {
+                    if (angular.equals(vm.trivia.questions[i], question)) {
+                        return true;
+                    }
                 }
             }
-
             return false;
+        }
+
+        function loadAllCategories() {
+            CategoryService.GetAll()
+                .then(function (categories) {
+                    vm.allCategories = categories;
+                });
+        }
+
+        function loadAllSubcategories() {
+            SubcategoryService.GetAll()
+                .then(function (subcategories) {
+                    vm.allSubcategories = subcategories;
+                });
         }
 
     }
