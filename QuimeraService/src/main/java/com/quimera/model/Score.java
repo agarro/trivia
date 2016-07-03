@@ -9,15 +9,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Score implements Comparable<Score> {
 
-    private User user;
+    private Player player;
     private int score;
 
-    public User getUser() {
-        return user;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public int getScore() {

@@ -19,7 +19,6 @@ public class TriviaController {
     @Autowired
     private TriviaService triviaService;
 
-
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(@RequestBody Trivia trivia) {
         triviaService.insert(trivia);
@@ -69,16 +68,6 @@ public class TriviaController {
     public Message stopTrivia() {
         return triviaService.stopTrivia();
     }
-
-//    @RequestMapping("pause")
-//    public boolean pauseTrivia() {
-//        return triviaService.pauseTrivia();
-//    }
-//
-//    @RequestMapping("resume")
-//    public boolean resumeTrivia() {
-//        return triviaService.resumeTrivia();
-//    }
 
     @RequestMapping("getStatus")
     public Message statusTrivia() {

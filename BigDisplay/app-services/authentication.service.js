@@ -5,7 +5,7 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'BarService'];
+    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope'];
     function AuthenticationService($http, $cookieStore, $rootScope) {
         var service = {};
         var url = $rootScope.url;
@@ -17,24 +17,35 @@
 
         function Login(username, password, callback) {
 
-                $http.post(url + '/bars/authenticate', { username: username, password: password })
-                .success(function (response) {
-                    if (response.username == username) {
-                        response = { success: true };
-                    } else {
-                        response = { success: false, message: 'Username or password is incorrect' };
-                    }
-                    callback(response);
-                });
+            $http.post(url + '/bars/authenticate', {
+                username: username,
+                password: password
+            }).success(function (response) {
+                callback(response);
+            });
+
+
+
 
         }
 
-        function SetCredentials(username, password) {
-            var authdata = Base64.encode(username + ':' + password);
+        function handleSuccess(response) {
+            return response;
+        }
+
+        function handleError(error) {
+            return function () {
+                return {success: false, message: error};
+            };
+        }
+
+        function SetCredentials(currentUser) {
+            var authdata = Base64.encode(currentUser.username + ':' + currentUser.password + ':' + currentUser.idBar);
 
             $rootScope.globals = {
                 currentUser: {
-                    username: username,
+                    username: currentUser.username,
+                    idBar: currentUser.idBar,
                     authdata: authdata
                 }
             };

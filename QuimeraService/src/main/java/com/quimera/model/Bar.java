@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Objects;
-
 /**
  * Created by Manu on 31/1/16.
  */
@@ -45,16 +43,6 @@ public class Bar {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Bar)) return false;
-        Bar bar = (Bar) o;
-        return Objects.equals(idBar, bar.idBar) &&
-                Objects.equals(name, bar.name) &&
-                Objects.equals(address, bar.address);
     }
 
     public String getUsername() {

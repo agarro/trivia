@@ -42,7 +42,7 @@ public class TriviaIntegrationTest {
         Answer answer1 = new Answer();
         answer1.setBar(bar);
         answer1.setQuestion(activeQuestion);
-        answer1.setUser(userList.get(0));
+        answer1.setPlayer(userList.get(0));
         answer1.setAnswer("wrong answer");
 
         assertThat(answer1.isCorrectAnswer(), equalTo(Boolean.FALSE));
@@ -54,7 +54,7 @@ public class TriviaIntegrationTest {
         Answer answer2 = new Answer();
         answer2.setBar(bar);
         answer2.setQuestion(activeQuestion);
-        answer2.setUser(userList.get(1));
+        answer2.setPlayer(userList.get(1));
         answer2.setAnswer(activeQuestion.getCorrectAnswer());
 
         restTemplate.postForObject(URL_QUIMERA_SERVICES + "/trivia/pushAnswer", answer2, Answer.class);

@@ -23,7 +23,7 @@ public class TriviaService {
     public static Question currentQuestion;
     private static Set<Answer> answerSet = new HashSet<>();
 
-    private static TriviaStatus triviaStatus = TriviaStatus.READY;
+    private static GameStatus gameStatus = GameStatus.READY;
 
     public static int currentQuestionPosition;
 
@@ -64,13 +64,13 @@ public class TriviaService {
 
         for (Answer answer : answerSet) {
             if (answer.getBar().equals(bar)) {
-                String idParticipant = answer.getUser().getIdUser();
+                String idParticipant = answer.getPlayer().getIdUser();
                 Score score;
                 if (scoreHashMap.containsKey(idParticipant)) {
                     score = scoreHashMap.get(idParticipant);
                 } else {
                     score = new Score();
-                    score.setUser(answer.getUser());
+                    score.setUser(answer.getPlayer());
                 }
                 score.setScore(score.getScore() + (answer.isCorrectAnswer() ? Constant.POINTS_CORRECT_ANSWER : Constant.POINTS_WRONG_ANSWER));
                 scoreHashMap.put(idParticipant, score);
@@ -82,7 +82,7 @@ public class TriviaService {
         return scoresList;
     }
 
-    public Trivia generateTrivia() {
+    private Trivia generateTrivia() {
 
         Trivia trivia = new Trivia();
 
@@ -101,7 +101,7 @@ public class TriviaService {
     public Message stopTrivia() {
 
         Message message = new Message();
-        if (!getTriviaStatus().equals(TriviaStatus.READY)) {
+        if (!getGameStatus().equals(GameStatus.READY)) {
 
             currentTrivia.interrupt();
             try {
@@ -110,8 +110,8 @@ public class TriviaService {
             } catch (InterruptedException e) {
                 //TODO - logger
             }
-            message.setMessage(getTriviaStatus().name());
-        } else if (getTriviaStatus().equals(TriviaStatus.TERMINATED) || getTriviaStatus().equals(TriviaStatus.READY)) {
+            message.setMessage(getGameStatus().name());
+        } else if (getGameStatus().equals(GameStatus.TERMINATED) || getGameStatus().equals(GameStatus.READY)) {
             message.setMessage("No hay trivia ejecutándose.");
         }
 
@@ -138,8 +138,8 @@ public class TriviaService {
             } catch (InterruptedException e) {
                 //TODO - logger
             }
-            message.setMessage(getTriviaStatus().name());
-        } else if (!TriviaService.getTriviaStatus().equals(TriviaStatus.READY)) {
+            message.setMessage(getGameStatus().name());
+        } else if (!TriviaService.getGameStatus().equals(GameStatus.READY)) {
             message.setMessage("La trivia ya esta iniciada. Finalice la trivia para volver a empezar otra.");
         }
 
@@ -147,15 +147,15 @@ public class TriviaService {
     }
 
     public Message statusTrivia() {
-        return new Message(getTriviaStatus().name());
+        return new Message(getGameStatus().name());
     }
 
-    public static TriviaStatus getTriviaStatus() {
-        return triviaStatus;
+    public static GameStatus getGameStatus() {
+        return gameStatus;
     }
 
-    public static void setTriviaStatus(TriviaStatus triviaStatus) {
-        TriviaService.triviaStatus = triviaStatus;
+    public static void setGameStatus(GameStatus gameStatus) {
+        TriviaService.gameStatus = gameStatus;
     }
 
     public void insert(Trivia trivia) {
@@ -181,7 +181,7 @@ public class TriviaService {
 
     public void setCurrentTrivia(String idTrivia) {
 
-        if (TriviaService.getTriviaStatus().equals(TriviaStatus.RUNNABLE)) {
+        if (TriviaService.getGameStatus().equals(GameStatus.RUNNABLE)) {
             throw new TriviaAlreadyStarted();
         } else {
             Trivia trivia = triviaRepository.findOne(idTrivia);
@@ -204,7 +204,7 @@ public class TriviaService {
 
     @ResponseStatus(value = HttpStatus.ACCEPTED, reason = "La trivia ya esta iniciada. Finalice la trivia antes de seleccionar otra.")
     // 202
-    public class TriviaAlreadyStarted extends RuntimeException {
+    private class TriviaAlreadyStarted extends RuntimeException {
 
     }
 
@@ -214,7 +214,7 @@ public class TriviaService {
     }
 
     @ResponseStatus(value = HttpStatus.ACCEPTED, reason = "Trivia no encontrada.")
-    public class TriviaNotFound extends RuntimeException {
+    private class TriviaNotFound extends RuntimeException {
 
     }
 
@@ -230,7 +230,7 @@ public class TriviaService {
         TriviaService.currentQuestion = null;
         TriviaService.currentQuestionPosition = 0;
         currentTrivia = new Thread(new TriviaRunnable());
-        TriviaService.setTriviaStatus(TriviaStatus.READY);
+        TriviaService.setGameStatus(GameStatus.READY);
     }
 
 }

@@ -20,8 +20,8 @@
         function login() {
             vm.dataLoading = true;
             AuthenticationService.Login(vm.username, vm.password, function (response) {
-                if (response.success) {
-                    AuthenticationService.SetCredentials(vm.username, vm.password);
+                if (response!= "") {
+                    AuthenticationService.SetCredentials(response);
                     $('.modal-backdrop').remove();
                     $location.path('/');
                 } else {

@@ -22,7 +22,7 @@
                     if (response.username == username) {
                         response = { success: true };
                     } else {
-                        response = { success: false, message: 'Username or password is incorrect' };
+                        response = { success: false, message: 'Nombre de usuario o contraseña incorrecta' };
                     }
                     callback(response);
                 });

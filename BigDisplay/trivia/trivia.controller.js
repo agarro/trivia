@@ -5,165 +5,159 @@
         .module('app')
         .controller('TriviaController', TriviaController);
 
-    TriviaController.$inject = ['TriviaService', '$location', '$interval', '$scope'];
-    function TriviaController(TriviaService, $location, $interval, $scope) {
+    TriviaController.$inject = ['TriviaService', '$interval', '$scope', 'GameManagerService', '$rootScope'];
+    function TriviaController(TriviaService, $interval, $scope, GameManagerService, $rootScope) {
+
         var vm = this;
-        var interval = null;
+        var elapsedTimeInterval = null;
 
-        vm.triviaActive = false;
+        var checkingTrivia = null;
 
-        var INTERVAL_QUESTION = 100/20;
+        vm.progressBarValue = 100;
 
-        vm.progressBarValue = 0;
+        vm.questionPosition = 0;
 
-        vm.currentQuestionPosition = 0;
+        var triviaStarted = false;
 
-        vm.elapsedTime = 0;
+        var MAX_ELAPSED_TIME = 5;
 
-        vm.showCountdown = false;
-
-        vm.showQuestionLabel = false;
+        vm.elapsedTime = MAX_ELAPSED_TIME;
 
         vm.correctAnswer = null;
 
-        vm.trivia = {};
+        vm.trivia = null;
         vm.statusTrivia = null;
 
         vm.currentQuestion = null;
 
         vm.options = null;
 
-        vm.currentQuestionPosition = 0;
+        vm.questionPosition = 0;
 
-        vm.showDescription = false;
+        vm.description = null;
 
-        vm.getCurrentQuestion = getCurrentQuestion;
-        vm.getStatusTrivia = getStatusTrivia;
-        vm.getCurrentTrivia = getCurrentTrivia;
-        vm.getElapsedTime = getElapsedTime;
-
-        initController();
-
-        function initController() {
-            vm.triviaActive = false;
-            getStatusTrivia()
-            getCurrentTrivia();
-            getCurrentQuestionPosition();
-            getElapsedTime();
-        }
-
-        function getCurrentQuestion() {
-            TriviaService.GetCurrentQuestion()
-                .then(function (response) {
-                    if (response != "") {
-                        vm.currentQuestion = response;
-                    } else {
-                        vm.currentQuestion = {};
-                        vm.dataLoading = false;
-                    }
-                });
-        }
-
-        function getElapsedTime() {
-            TriviaService.GetElapsedTime()
-                .then(function (response) {
-                    vm.elapsedTime = response;
-                    vm.progressBarValue = response*INTERVAL_QUESTION;
-                });
-        }
-
-        function getCurrentTrivia() {
+        function getTrivia() {
             TriviaService.GetCurrentTrivia()
                 .then(function (response) {
-                    if (response.data != "" && vm.statusTrivia != 'READY' && vm.statusTrivia != 'TERMINATED') {
-                        vm.currentTrivia = response.data;
-                        vm.triviaActive = true;
+                    if (response.data != "") {
+                        vm.dataLoading = true;
+                        vm.trivia = response.data;
                     } else {
-                        vm.currentTrivia = {};
-                        vm.dataLoading = false;
-                        vm.triviaActive = false;
-
-                    }
-                });
-        }
-
-        function getStatusTrivia() {
-            TriviaService.GetStatusTrivia()
-                .then(function (response) {
-                    if (response != "") {
-                        vm.statusTrivia = response.message;
-
-                        if (vm.statusTrivia == 'SHOWING_OPTIONS') {
-                            vm.showCountdown = true;
-                        } else {
-                            vm.showCountdown = false;
-                        }
-
-                        if (vm.statusTrivia == 'SHOWING_OPTIONS' || vm.statusTrivia == 'SHOWING_QUESTION' || vm.statusTrivia == 'SHOWING_ANSWER') {
-                            vm.showQuestionLabel = true;
-                        } else {
-                            vm.showQuestionLabel = false;
-                        }
-
-                    } else {
+                        vm.trivia = null;
                         vm.dataLoading = false;
                     }
                 });
         }
 
-        function getCurrentQuestionPosition() {
-            TriviaService.GetCurrentQuestionPosition()
-                .then(function (response) {
-                    vm.currentQuestionPosition = response.data;
-                });
+        function triviaStart() {
+            triviaStarted = true;
+            vm.statusTrivia = 'STARTING_TRIVIA';
+            setTimeout(nextQuestion, 500);
         }
 
+        function nextQuestion() {
+            vm.statusTrivia = 'SHOWING_QUESTION';
+            vm.questionPosition++;
+            vm.currentQuestion = vm.trivia.questions[vm.questionPosition - 1];
+            vm.currentQuestion.currentQuestionPosition = vm.questionPosition;
+            GameManagerService.SetCurrentQuestion(vm.currentQuestion);
+            GameManagerService.SetStatus(vm.statusTrivia);
+            setTimeout(showingOptions, 5000);
+        }
+
+        function showingOptions() {
+            vm.statusTrivia = 'SHOWING_OPTIONS';
+            GameManagerService.SetStatus(vm.statusTrivia);
+            vm.progressBarValue = 100;
+
+            vm.options = vm.currentQuestion.options;
+
+            setTimeout(countdown, 1000);
+        }
+
+        function countdown() {
+            elapsedTimeInterval = $interval(function () {
+                GameManagerService.SetElapsedTime(vm.elapsedTime);
+                if (vm.elapsedTime > 0) {
+                    vm.elapsedTime = vm.elapsedTime - 1;
+                    vm.progressBarValue = (vm.elapsedTime/MAX_ELAPSED_TIME)*100;
+                } else {
+                    $interval.cancel(elapsedTimeInterval);
+                }
+            }, 1000);
+
+            setTimeout(showingCorrectAnswer, MAX_ELAPSED_TIME*1000 + 1000);
+        }
+
+        function showingCorrectAnswer() {
+            vm.elapsedTime = MAX_ELAPSED_TIME;
+            vm.progressBarValue = 100;
+            vm.statusTrivia = 'SHOWING_CORRECT_ANSWER';
+            GameManagerService.SetStatus(vm.statusTrivia);
+            vm.options = [];
+            vm.options.push(vm.currentQuestion.correctAnswer);
+            setTimeout(showingDescription, 5000);
+        }
+
+        function showingDescription() {
+            vm.statusTrivia = 'SHOWING_DESCRIPTION';
+            GameManagerService.SetStatus(vm.statusTrivia);
+            setTimeout(showingPartialWinners, 5000);
+        }
+
+        function showingPartialWinners() {
+            vm.options = null;
+            vm.statusTrivia = 'SHOWING_PARTIAL_WINNERS';
+            GameManagerService.SetStatus(vm.statusTrivia);
+            if (vm.questionPosition == 5 || vm.questionPosition == 10 || vm.questionPosition == 15) {
+                setTimeout(showingBanners, 5000);
+            } else {
+                setTimeout(nextQuestion, 5000);
+            }
+        }
+
+        function showingBanners() {
+
+            vm.statusTrivia = 'SHOWING_BANNER';
+            GameManagerService.SetStatus(vm.statusTrivia);
+            if (vm.questionPosition == 5) {
+                vm.urlBanner = vm.trivia.banners[0].url;
+                setTimeout(nextQuestion, 5000);
+            } else if (vm.questionPosition == 10) {
+                vm.urlBanner = vm.trivia.banners[1].url;
+                setTimeout(nextQuestion, 5000);
+            } else if (vm.questionPosition == 15) {
+                vm.urlBanner = vm.trivia.banners[2].url;
+                setTimeout(showingFinalWinners, 5000);
+            }
+        }
+
+        function showingFinalWinners() {
+            vm.questionPosition = 0;
+            vm.currentQuestion = null;
+            vm.statusTrivia = 'SHOWING_FINAL_WINNERS';
+            GameManagerService.SetStatus(vm.statusTrivia);
+            setTimeout(finishTrivia, 5000);
+        }
+
+        function finishTrivia() {
+
+            triviaStarted = false;
+        }
 
         $(function () {
-            interval = $interval(function () {
-                getStatusTrivia();
-
-                if (vm.triviaActive == false) {
-                    getCurrentTrivia();
-                } else {
-                    getElapsedTime();
-                    getCurrentQuestionPosition();
-
-                    vm.showDescription = vm.statusTrivia == 'SHOWING_DESCRIPTION';
-
-                    if (vm.statusTrivia == 'SHOWING_OPTIONS') {
-                        vm.options = vm.currentQuestion.options;
-                    } else if (vm.statusTrivia == 'SHOWING_CORRECT_ANSWER') {
-                        vm.options = [];
-                        vm.options.push(vm.currentQuestion.correctAnswer);
-                    } else {
-                        vm.options = null;
-                        getCurrentQuestion();
-                    }
-
-                    if (vm.statusTrivia == 'SHOWING_BANNER') {
-
-                        if (vm.currentQuestionPosition == 5) {
-                            $location.path('/banner/0');
-                        } else if (vm.currentQuestionPosition == 10) {
-                            $location.path('/banner/1');
-                        } else if (vm.currentQuestionPosition == 15) {
-                            $location.path('/banner/2');
-                        }
-                    }
-
-
+            checkingTrivia = $interval(function () {
+                if (vm.trivia == null) {
+                    vm.statusTrivia = 'WAITING_TRIVIA';
+                    getTrivia();
+                } else if(!triviaStarted){
+                    triviaStart();
                 }
-
-
-                if (vm.statusTrivia == 'TERMINATED') {
-                    vm.triviaActive = false;
-                }
-            }, 500);
-
+            }, 1000);
         });
+
         $scope.$on('$destroy', function () {
-            $interval.cancel(interval);
+            $interval.cancel(checkingTrivia);
         });
 
 

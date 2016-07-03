@@ -2,6 +2,7 @@ package com.quimera.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,6 +29,17 @@ public class Question {
 
     @DBRef
     private Subcategory subcategory;
+
+    @Transient
+    private int currentQuestionPosition;
+
+    public int getCurrentQuestionPosition() {
+        return currentQuestionPosition;
+    }
+
+    public void setCurrentQuestionPosition(int currentQuestionPosition) {
+        this.currentQuestionPosition = currentQuestionPosition;
+    }
 
     public Subcategory getSubcategory() {
         return subcategory;
