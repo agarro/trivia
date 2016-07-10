@@ -16,6 +16,22 @@ public class Game {
     private List<Score> scoreList = new ArrayList<>();
     private int elapsedTime;
 
+    public Set<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(Set<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    public Set<Answer> getAnswerHashSet() {
+        return answerHashSet;
+    }
+
+    public void setAnswerHashSet(Set<Answer> answerHashSet) {
+        this.answerHashSet = answerHashSet;
+    }
+
     public List<Score> getScoreList() {
         return scoreList;
     }
@@ -30,22 +46,6 @@ public class Game {
 
     public void setElapsedTime(int elapsedTime) {
         this.elapsedTime = elapsedTime;
-    }
-
-    public List<Answer> getAnswerList() {
-        return answerList;
-    }
-
-    public void setAnswerList(List<Answer> answerList) {
-        this.answerList = answerList;
-    }
-
-    public List<Player> getPlayerList() {
-        return playerList;
-    }
-
-    public void setPlayerList(List<Player> playerList) {
-        this.playerList = playerList;
     }
 
     public Trivia getTrivia() {
@@ -80,7 +80,4 @@ public class Game {
         this.gameStatus = gameStatus;
     }
 
-    public List<Player> getScores() {
-        return playerList;
-    }
 }

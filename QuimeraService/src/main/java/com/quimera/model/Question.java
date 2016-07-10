@@ -31,14 +31,14 @@ public class Question {
     private Subcategory subcategory;
 
     @Transient
-    private int currentQuestionPosition;
+    private int currentPosition;
 
-    public int getCurrentQuestionPosition() {
-        return currentQuestionPosition;
+    public int getCurrentPosition() {
+        return currentPosition;
     }
 
-    public void setCurrentQuestionPosition(int currentQuestionPosition) {
-        this.currentQuestionPosition = currentQuestionPosition;
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
     }
 
     public Subcategory getSubcategory() {

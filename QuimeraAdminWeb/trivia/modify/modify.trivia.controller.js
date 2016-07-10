@@ -5,26 +5,31 @@
         .module('app')
         .controller('ModifyTriviaController', ModifyTriviaController);
 
-    ModifyTriviaController.$inject = ['TriviaService', 'QuestionService', 'BannerService', '$location', '$routeParams', 'FlashService', 'SubcategoryService', 'CategoryService'];
-    function ModifyTriviaController(TriviaService, QuestionService, BannerService, $location, $routeParams, FlashService, SubcategoryService, CategoryService) {
+    ModifyTriviaController.$inject = ['TriviaService', 'QuestionService', '$location', '$routeParams', 'FlashService', 'SubcategoryService', 'CategoryService', 'BarService'];
+    function ModifyTriviaController(TriviaService, QuestionService, $location, $routeParams, FlashService, SubcategoryService, CategoryService, BarService) {
         var vm = this;
         vm.trivia = null;
+
+        vm.allBars = [];
         vm.subcategorySelected = [];
         vm.modifyTrivia = modifyTrivia;
         vm.checkedQuestions = checkedQuestions;
         vm.containsQuestions = containsQuestions;
         vm.allQuestions = [];
-        vm.bannersSelected = [];
+
         vm.loadAllCategories = loadAllCategories;
         vm.loadAllSubcategories = loadAllSubcategories;
+        vm.loadAllBars = loadAllBars;
         initController();
+        vm.datetime = null;
 
         function initController() {
-            loadAllBanners();
-            loadCurrentQuestion();
+
+            loadCurrentTrivia();
             loadAllQuestions();
             loadAllSubcategories();
             loadAllCategories();
+            loadAllBars();
         }
 
         function loadAllQuestions() {
@@ -34,25 +39,13 @@
                 });
         }
 
-        function loadAllBanners() {
-            BannerService.GetAll()
-                .then(function (banners) {
-                    vm.allBanners = banners;
-                });
-        }
-
-        function loadCurrentQuestion() {
+        function loadCurrentTrivia() {
             TriviaService.GetById($routeParams.id)
                 .then(function (trivia) {
                     vm.trivia = trivia;
 
-                    vm.trivia.banners.forEach(function (outerBanner) {
-                        vm.allBanners.forEach(function (innerBanner) {
-                            if (outerBanner.idBanner === innerBanner.idBanner) {
-                                vm.bannersSelected.push(innerBanner);
-                            }
-                        });
-                    });
+                    vm.trivia.localDateTime = vm.trivia.localDateTime != null ? new Date(vm.trivia.localDateTime) : null;
+
                 });
         }
 
@@ -104,6 +97,13 @@
             SubcategoryService.GetAll()
                 .then(function (subcategories) {
                     vm.allSubcategories = subcategories;
+                });
+        }
+
+        function loadAllBars() {
+            BarService.GetAll()
+                .then(function (bars) {
+                    vm.allBars = bars;
                 });
         }
 

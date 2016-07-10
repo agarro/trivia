@@ -42,6 +42,7 @@
                                 <th>Nombre</th>
                                 <th>Dirección</th>
                                 <th>Nombre de usuario</th>
+                                <th>Banners</th>
                                 <th>Acción</th>
                             </tr>
                             </thead>
@@ -51,6 +52,15 @@
                                 <td>{{bar.name}}</td>
                                 <td>{{bar.address}}</td>
                                 <td>{{bar.username}}</td>
+                                <td>
+                                    <p ng-repeat="banner in bar.banners">
+                                        <lu>
+                                            <!--{{banner.name}}-->
+                                            <img ng-show="banner.url!=null" src="{{banner.url}}" class="img-responsive"
+                                                 width="70" height="70">
+                                        </lu>
+                                    </p>
+                                </td>
                                 <td>
                                     <a href="#bar/modify/{{bar.idBar}}">Editar</a>
                                     - <a href="#bar" ng-click="vm.deleteBar(bar)">Eliminar</a>

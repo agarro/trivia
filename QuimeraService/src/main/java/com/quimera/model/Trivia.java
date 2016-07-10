@@ -1,11 +1,25 @@
 package com.quimera.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase;
+import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,8 +34,7 @@ public class Trivia {
     private String idTrivia;
     private int rounds;
     private String name;
-    @DBRef
-    private List<Banner> banners;
+
     @DBRef
     private List<Question> questions;
     @DBRef
@@ -29,6 +42,39 @@ public class Trivia {
 
     @DBRef
     private Subcategory subcategory;
+
+    @DBRef
+    private Bar bar;
+
+    private Date localDateTime;
+
+    @Indexed
+    private TriviaStatus triviaStatus = TriviaStatus.NEW;
+
+
+    public TriviaStatus getTriviaStatus() {
+        return triviaStatus;
+    }
+
+    public void setTriviaStatus(TriviaStatus triviaStatus) {
+        this.triviaStatus = triviaStatus;
+    }
+
+    public Bar getBar() {
+        return bar;
+    }
+
+    public void setBar(Bar bar) {
+        this.bar = bar;
+    }
+
+    public Date getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(Date localDateTime) {
+        this.localDateTime = localDateTime;
+    }
 
     public Subcategory getSubcategory() {
         return subcategory;
@@ -44,17 +90,6 @@ public class Trivia {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public List<Banner> getBanners() {
-        if (banners == null) {
-            banners = new ArrayList<>();
-        }
-        return banners;
-    }
-
-    public void setBanners(List<Banner> banners) {
-        this.banners = banners;
     }
 
     public List<Question> getQuestions() {

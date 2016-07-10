@@ -42,6 +42,14 @@
                                    required/>
                             <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerido.</span>
                         </div>
+
+                        <div class="form-group">
+                            <br>
+                            <label for="banners">Seleccionar los banners para la trivia (mantener presionada la tecla shift
+                                para seleccionar más de uno)</label>
+                            <select multiple class="form-control"  ng-model="vm.bannersSelected"
+                                    ng-options="banner.name for banner in vm.allBanners" id="banners"></select>
+                        </div>
                     </div>
                 </div>
             </div>

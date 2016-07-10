@@ -16,7 +16,8 @@
         service.SetCurrentQuestion = SetCurrentQuestion;
         service.SetStatus = SetStatus;
         service.SetElapsedTime = SetElapsedTime;
-        //service.Delete = Delete;
+        service.GetCurrentTrivia = GetCurrentTrivia;
+        service.FinishTrivia = FinishTrivia;
 
         return service;
 
@@ -25,27 +26,20 @@
         }
 
         function SetStatus(status) {
-            return $http.put(url + '/game/status?idBar=' + idBar, status).then(handleSuccess, handleError('Error setting status'));
+            return $http.patch(url + '/game/status?idBar=' + idBar, status).then(handleSuccess, handleError('Error setting status'));
         }
 
         function SetElapsedTime(elapsedTime) {
-            return $http.put(url + '/game/elapsedTime?idBar=' + idBar, elapsedTime).then(handleSuccess, handleError('Error setting elapsed time'));
+            return $http.patch(url + '/game/elapsedTime?idBar=' + idBar, elapsedTime).then(handleSuccess, handleError('Error setting elapsed time'));
         }
 
-        //
-        //function Create(banner) {
-        //    return $http.post(url + '/banners/insert', banner).then(handleSuccess, handleError('Error creating banner'));
-        //}
-        //
-        //function Update(banner) {
-        //    return $http.post(url + '/banners/update', banner).then(handleSuccess, handleError('Error updating banner'));
-        //}
-        //
-        //function Delete(banner) {
-        //    return $http.post(url + '/banners/delete', banner).then(handleSuccess, handleError('Error deleting banner'));
-        //}
+        function GetCurrentTrivia() {
+            return $http.get(url + '/game/currentTrivia?idBar=' + idBar).then(handleSuccess, handleError('Error getting current trivia'));
+        }
 
-        // private functions
+        function FinishTrivia() {
+            return $http.patch(url + '/game/finishTrivia?idBar=' + idBar).then(handleSuccess, handleError('Error finishing trivia'));
+        }
 
         function handleSuccess(res) {
             return res.data;

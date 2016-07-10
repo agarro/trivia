@@ -38,8 +38,6 @@
             return $http.post(url + '/questions/delete', question).then(handleSuccess, handleError('Error deleting question'));
         }
 
-        // private functions
-
         function handleSuccess(res) {
             return res.data;
         }

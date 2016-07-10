@@ -24,19 +24,6 @@
                 callback(response);
             });
 
-
-
-
-        }
-
-        function handleSuccess(response) {
-            return response;
-        }
-
-        function handleError(error) {
-            return function () {
-                return {success: false, message: error};
-            };
         }
 
         function SetCredentials(currentUser) {

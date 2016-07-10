@@ -52,7 +52,7 @@
     #bottom {
         position: absolute;
         width: 100%;
-        top:85%;
+        top: 85%;
         height: 15%;
         background-color: #171591;
 
@@ -90,35 +90,35 @@
     }
 
     /*.ng-hide {*/
-        /*height: 0;*/
-        /*width: 0;*/
-        /*background-color: transparent;*/
-        /*top: -200px;*/
-        /*left: 200px;*/
+    /*height: 0;*/
+    /*width: 0;*/
+    /*background-color: transparent;*/
+    /*top: -200px;*/
+    /*left: 200px;*/
     /*}*/
     /*.ng-leave {*/
-        /*transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);*/
-        /*position: relative;*/
-        /*display: block;*/
+    /*transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);*/
+    /*position: relative;*/
+    /*display: block;*/
     /*}*/
     /*.ng-enter {*/
-        /*transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);*/
-        /*position: relative;*/
-        /*display: block;*/
+    /*transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);*/
+    /*position: relative;*/
+    /*display: block;*/
     /*}*/
 
     /*.ng-enter.ng-enter-active, .ng-leave {*/
-        /*left: 5px;*/
+    /*left: 5px;*/
     /*}*/
 
     /*.ng-leave.ng-leave-active, .ng-enter {*/
-        /*left: 200px;*/
+    /*left: 200px;*/
     /*}*/
 
     /*.animate-enter {*/
-        /*-webkit-transition: 1s linear all; !* Chrome *!*/
-        /*transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);*/
-        /*opacity: 0;*/
+    /*-webkit-transition: 1s linear all; !* Chrome *!*/
+    /*transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);*/
+    /*opacity: 0;*/
     /*}*/
 
     .progress {
@@ -134,10 +134,10 @@
     }
 
     .progress-bar {
-        -webkit-transition : width 1s linear;
-        -moz-transition : width 1s linear;
-        -o-transition : width 1s linear;
-        transition : width 1s linear;
+        -webkit-transition: width 1s linear;
+        -moz-transition: width 1s linear;
+        -o-transition: width 1s linear;
+        transition: width 1s linear;
 
         text-align: right;
 
@@ -148,7 +148,7 @@
     .progress-value {
         position: static;
         font-size: 3em;
-        line-height : 40px;
+        line-height: 40px;
         padding-left: 10px;
         padding-right: 10px;
         color: rgba(255, 255, 255, 1);
@@ -188,18 +188,22 @@
 
 </style>
 
-<div id="waitingTrivia" ng-show="vm.statusTrivia == 'TERMINATED' || vm.statusTrivia == 'READY'">Esperando trivia</div>
+<div id="waitingTrivia" ng-show="vm.statusTrivia == 'WAITING_TRIVIA'">Esperando trivia</div>
 
 <div id="top">
-    <span class="questionNumber" ng-hide="vm.questionPosition==0 || vm.statusTrivia == 'TERMINATED' || vm.statusTrivia == 'READY'">Pregunta
-        {{vm.questionPosition}}</span>
+    <span class="questionNumber"
+          ng-show="vm.statusTrivia == 'SHOWING_QUESTION' || vm.statusTrivia == 'SHOWING_OPTIONS' || vm.statusTrivia == 'SHOWING_CORRECT_ANSWER' || vm.statusTrivia == 'SHOWING_DESCRIPTION'"
+          ng-hide="vm.questionPosition==0 || vm.statusTrivia == 'TERMINATED'">Pregunta {{vm.questionPosition}}</span>
 </div>
 <div id="header">
-    <span class="questionlabel" ng-bind="vm.currentQuestion.question"></span>
+    <span class="questionlabel" ng-show="vm.statusTrivia == 'SHOWING_QUESTION' || vm.statusTrivia == 'SHOWING_OPTIONS' || vm.statusTrivia == 'SHOWING_CORRECT_ANSWER' || vm.statusTrivia == 'SHOWING_DESCRIPTION'"
+          ng-bind="vm.currentQuestion.question"></span>
 </div>
 
 <div id="middle">
-    <div id="list">
+    <div id="list" ng-show="vm.statusTrivia == 'SHOWING_OPTIONS' || vm.statusTrivia == 'SHOWING_CORRECT_ANSWER'"
+         ng-hide="vm.statusTrivia == 'TERMINATED'"
+    >
         <ul class="optionsli">
             <li ng-repeat="option in vm.options">
                 {{option}}
@@ -222,5 +226,4 @@
 <div>
     <img id="imageBanner" ng-show="vm.statusTrivia == 'SHOWING_BANNER'" src="{{vm.urlBanner}}">
 </div>
-<!--<div class="countdown fade"  ng-bind="vm.elapsedTime"></div>-->
 

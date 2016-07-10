@@ -6,4 +6,5 @@
 classes
 build
 .idea
-../.idea
+/.idea
+*.iml

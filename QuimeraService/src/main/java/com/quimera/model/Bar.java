@@ -3,7 +3,11 @@ package com.quimera.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Manu on 31/1/16.
@@ -20,6 +24,20 @@ public class Bar {
     @Indexed
     private String username;
     private String password;
+
+    @DBRef
+    private List<Banner> banners;
+
+    public List<Banner> getBanners() {
+        if (banners == null) {
+            banners = new ArrayList<>();
+        }
+        return banners;
+    }
+
+    public void setBanners(List<Banner> banners) {
+        this.banners = banners;
+    }
 
     public String getIdBar() {
         return idBar;

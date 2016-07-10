@@ -26,6 +26,7 @@ public class TriviaController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(@RequestBody Trivia trivia) {
+        trivia.setTriviaStatus(TriviaStatus.NEW);
         triviaService.update(trivia);
     }
 
@@ -57,47 +58,6 @@ public class TriviaController {
     @RequestMapping(value = "/getScore", method = RequestMethod.POST)
     public List<Score> getScore(@RequestBody Bar bar) {
         return triviaService.getScore(bar);
-    }
-
-    @RequestMapping("start")
-    public Message startTrivia() {
-        return triviaService.startTrivia();
-    }
-
-    @RequestMapping("stop")
-    public Message stopTrivia() {
-        return triviaService.stopTrivia();
-    }
-
-    @RequestMapping("getStatus")
-    public Message statusTrivia() {
-        return triviaService.statusTrivia();
-    }
-
-    @ResponseStatus(value = HttpStatus.OK, reason = "Trivia asignada satisfactoriamente.")  // 200
-    @RequestMapping(value = "/setCurrentTrivia", method = RequestMethod.POST)
-    public void setCurrentTrivia(@RequestBody String idTrivia) {
-        triviaService.setCurrentTrivia(idTrivia);
-    }
-
-    @RequestMapping(value = "/getCurrentTrivia", method = RequestMethod.GET)
-    public Trivia getCurrentTrivia() {
-        return triviaService.getCurrentTrivia();
-    }
-
-    @RequestMapping(value = "/getCurrentBanners", method = RequestMethod.GET)
-    public List<Banner> getCurrentBanners() {
-        return triviaService.getCurrentBanners();
-    }
-
-    @RequestMapping(value = "/getCurrentQuestionPosition", method = RequestMethod.GET)
-    public int getCurrentQuestionPosition() {
-        return triviaService.getCurrentQuestionPosition();
-    }
-
-    @RequestMapping(value = "/elapsedTime", method = RequestMethod.GET)
-    public int getElapsedTime() {
-        return triviaService.getElapsedTime();
     }
 
 

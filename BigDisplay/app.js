@@ -45,13 +45,6 @@
                 controllerAs: 'vm'
             })
 
-            .when('/banner/:id', {
-                controller: 'BannerController',
-                templateUrl: 'banner/banner.view.html',
-                controllerAs: 'vm'
-            })
-
-
             .otherwise({ redirectTo: '/' });
     }
 

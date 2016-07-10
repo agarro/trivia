@@ -1,13 +1,4 @@
 <style>
-    .glyphicon.glyphicon-one-fine-dot {
-        margin-bottom: -.5em;
-        overflow: hidden;
-    }
-
-    .glyphicon.glyphicon-one-fine-dot:before {
-        content: "\25cf";
-        font-size: 3em;
-    }
 
     tr, th {
         vertical-align: middle;
@@ -20,65 +11,54 @@
     <div class="panel panel-primary">
 
         <div class="panel-heading">
-            <h3>Administrar trivia</h3>
+            <h3>Dashboard trivia</h3>
         </div>
+
         <div class="panel-content">
 
-            <div class="container">
 
-                <h4>Estado: {{vm.statusTrivia}}
-                    <span id="statusColor" ng-style="{color: vm.myColor}"
-                          class="glyphicon glyphicon-one-fine-dot"></span>
-                </h4>
+            <div style="padding: 10px">
 
-                <h4>Trivia seleccionada:
-                    <div ng-bind="vm.currentTrivia.name"></div>
-                </h4>
-
-                <a href="#setting/trivia/selection" class="btn btn-success btn-lg">
-                    <span class="glyphicon glyphicon-list"></span> Seleccionar trivia
-                </a>
-
-                <button ng-click="vm.startTrivia()" class="btn btn-success btn-lg">
-                    <span class="glyphicon glyphicon-play"></span> Empezar trivia
-                </button>
-
-                <!--<button ng-click="vm.pauseTrivia()" class="btn btn-warning btn-lg">-->
-                <!--<span class="glyphicon glyphicon-pause"></span> Pausar trivia-->
-                <!--</button>-->
-                <button ng-click="vm.stopTrivia()" class="btn btn-danger btn-lg">
-                    <span class="glyphicon glyphicon-stop"></span> Reiniciar trivia
-                </button>
-
-            </div>
-            <div class="container">
                 <div class="panel panel-success">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-responsive">
                         <div class="panel-heading">
-                            <h4>Pregunta actual: {{vm.currentQuestionPosition}}</h4>
+                            <h4>Trivias</h4>
                             <thead>
                             <tr>
-                                <th>Id pregunta</th>
-                                <th>Pregunta</th>
-                                <th>Opciones</th>
-                                <th>Respuesta correcta</th>
-                                <th>Descripción</th>
+                                <th width="8%">Bar</th>
+                                <th width="14%">Estado</th>
+                                <th width="3%">N°</th>
+                                <th width="20%">Pregunta</th>
+                                <th width="20%">Opciones</th>
+                                <th width="10%">Respuesta correcta</th>
+                                <th width="20%">Descripción</th>
+                                <th width="5%">Acción</th>
                             </tr>
-
                             </thead>
                         </div>
                         <tbody>
-                        <tr>
-                            <td>{{vm.currentQuestion.idQuestion}}</td>
-                            <td>{{vm.currentQuestion.question}}</td>
-                            <td>{{vm.currentQuestion.options}}</td>
-                            <td>{{vm.currentQuestion.correctAnswer}}</td>
-                            <td>{{vm.currentQuestion.description}}</td>
+                        <tr ng-repeat="game in vm.games">
+                            <td>{{game.trivia.bar.name}}</td>
+                            <td>{{game.gameStatus}}</td>
+                            <td>{{game.currentQuestion.currentPosition}}</td>
+                            <td>{{game.currentQuestion.question}}</td>
+                            <td>{{game.currentQuestion.options}}</td>
+                            <td>{{game.currentQuestion.correctAnswer}}</td>
+                            <td>{{game.currentQuestion.description}}</td>
+                            <td>
+                                <button ng-click="vm.stopTrivia(game.trivia.bar.idBar)" class="btn btn-danger btn-md">
+                                    <span class="glyphicon glyphicon-stop"></span>
+                                </button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+
         </div>
+
+
     </div>
 </div>

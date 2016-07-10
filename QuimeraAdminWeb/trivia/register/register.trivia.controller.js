@@ -5,27 +5,28 @@
         .module('app')
         .controller('RegisterTriviaController', RegisterTriviaController);
 
-    RegisterTriviaController.$inject = ['QuestionService', 'TriviaService', 'BannerService', '$location', 'FlashService', 'SubcategoryService', 'CategoryService'];
-    function RegisterTriviaController(QuestionService, TriviaService, BannerService, $location, FlashService, SubcategoryService, CategoryService) {
+    RegisterTriviaController.$inject = ['QuestionService', 'TriviaService', '$location', 'FlashService', 'SubcategoryService', 'CategoryService', 'BarService'];
+    function RegisterTriviaController(QuestionService, TriviaService, $location, FlashService, SubcategoryService, CategoryService, BarService) {
         var vm = this;
 
         vm.trivia = {
             rounds: 1
         };
+        vm.allBars = [];
         vm.allQuestions = [];
-        vm.allBanners = [];
-        vm.bannersSelected = [];
+
         vm.registerTrivia = registerTrivia;
         vm.checkedQuestions = checkedQuestions;
         vm.loadAllCategories = loadAllCategories;
         vm.loadAllSubcategories = loadAllSubcategories;
+        vm.loadAllBars = loadAllBars;
         initController();
 
         function initController() {
             loadAllQuestions();
-            loadAllBanners();
             loadAllCategories();
             loadAllSubcategories();
+            loadAllBars();
         }
 
         function loadAllQuestions() {
@@ -35,19 +36,9 @@
                 });
         }
 
-        function loadAllBanners(){
-            BannerService.GetAll()
-                .then(function (banners) {
-                    vm.allBanners = banners;
-                });
-        }
-
         function registerTrivia() {
             vm.dataLoading = true;
-            vm.trivia.banners = [];
-            vm.bannersSelected.forEach(function(banner){
-                vm.trivia.banners.push(JSON.parse(banner));
-            });
+
             TriviaService.Create(vm.trivia)
                 .then(function (response) {
                     if (response==="") {
@@ -85,7 +76,12 @@
                 });
         }
 
-
+        function loadAllBars() {
+            BarService.GetAll()
+                .then(function (bars) {
+                    vm.allBars = bars;
+                });
+        }
 
     }
 
