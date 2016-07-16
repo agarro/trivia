@@ -36,6 +36,8 @@
 
         vm.description = null;
 
+        vm.elapsedTimeToShow = MAX_ELAPSED_TIME;
+
         function getTrivia() {
             GameManagerService.GetCurrentTrivia()
                 .then(function (response) {
@@ -80,9 +82,12 @@
             elapsedTimeInterval = $interval(function () {
                 GameManagerService.SetElapsedTime(vm.elapsedTime);
                 if (vm.elapsedTime > 0) {
+                    vm.elapsedTimeToShow = vm.elapsedTime;
                     vm.elapsedTime = vm.elapsedTime - 1;
                     vm.progressBarValue = (vm.elapsedTime/MAX_ELAPSED_TIME)*100;
+
                 } else {
+                    vm.elapsedTimeToShow = MAX_ELAPSED_TIME;
                     $interval.cancel(elapsedTimeInterval);
                 }
             }, 1000);
