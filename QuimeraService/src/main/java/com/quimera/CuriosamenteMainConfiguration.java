@@ -8,15 +8,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class QuimeraMainConfiguration extends SpringBootServletInitializer {
+public class CuriosamenteMainConfiguration extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(QuimeraMainConfiguration.class);
+        return application.sources(CuriosamenteMainConfiguration.class);
     }
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(QuimeraMainConfiguration.class, args);
+        SpringApplication.run(CuriosamenteMainConfiguration.class, args);
     }
 
 }

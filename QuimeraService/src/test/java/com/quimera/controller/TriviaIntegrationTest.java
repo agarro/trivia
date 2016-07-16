@@ -1,8 +1,7 @@
 package com.quimera.controller;
 
-import com.quimera.QuimeraMainConfiguration;
+import com.quimera.CuriosamenteMainConfiguration;
 import com.quimera.model.*;
-import com.quimera.services.TriviaService;
 import com.quimera.util.DataGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,17 +11,15 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 /**
  * Created by Manu on 9/2/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(QuimeraMainConfiguration.class)
+@SpringApplicationConfiguration(CuriosamenteMainConfiguration.class)
 @WebIntegrationTest
 
 public class TriviaIntegrationTest {

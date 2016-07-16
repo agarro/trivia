@@ -19,11 +19,11 @@
         return service;
 
         function GetAll() {
-            return $http.get(url + '/bars/getAll').then(handleSuccess, handleError('Error getting all bars'));
+            return $http.get(url + '/bar').then(handleSuccess, handleError('Error getting all bars'));
         }
 
         function GetById(id) {
-            return $http.post(url + '/bars/getById', id).then(handleSuccess, handleError('Error getting bar by id'));
+            return $http.post(url + '/bar', id).then(handleSuccess, handleError('Error getting bar by id'));
         }
 
         function Create(bars) {

@@ -12,7 +12,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/bars")
+@RequestMapping("/bar")
 public class BarController {
 
     @Autowired
@@ -28,12 +28,12 @@ public class BarController {
         barService.update(bar);
     }
 
-    @RequestMapping("/getAll")
+    @RequestMapping(method = RequestMethod.GET)
     public List<Bar> getAll() {
         return barService.findAll();
     }
 
-    @RequestMapping(value = "/getById", method = RequestMethod.POST)
+    @RequestMapping(params = "id", method = RequestMethod.POST)
     public Bar get(@RequestBody String id) {
         return barService.find(id);
     }
