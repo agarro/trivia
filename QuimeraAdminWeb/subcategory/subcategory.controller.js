@@ -31,11 +31,11 @@
                     if (response==="") {
                         FlashService.Success('Subcategoría eliminada.', true);
                         loadAllSubcategories();
-                        $location.path('/subcategories');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
                     }
+                    $location.path('/subcategory');
                 });
         }
 

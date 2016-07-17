@@ -25,13 +25,13 @@
                 });
         }
 
-        function deleteUser(user) {
-            UserService.Delete(user)
+        function deleteUser(id) {
+            UserService.Delete(id)
                 .then(function (response) {
                     if (response==="") {
                         FlashService.Success('Usuario eliminado.', true);
                         loadAllUsers();
-                        $location.path('/users');
+                        $location.path('/user');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

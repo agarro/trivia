@@ -25,17 +25,17 @@
                 });
         }
 
-        function deleteTrivia(trivia) {
-            TriviaService.Delete(trivia)
+        function deleteTrivia(id) {
+            TriviaService.Delete(id)
                 .then(function (response) {
                     if (response === "") {
                         FlashService.Success('Trivia eliminada.', false);
                         loadAllTrivias();
-                        $location.path('/trivia');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
                     }
+                    $location.path('/trivia');
                 });
         }
 

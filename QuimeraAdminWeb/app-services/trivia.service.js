@@ -20,23 +20,23 @@
         return service;
 
         function GetAll() {
-            return $http.get(url + '/trivia/getAll').then(handleSuccess, handleError('Error getting all trivia'));
+            return $http.get(url + '/trivia').then(handleSuccess, handleError('Error getting all trivia'));
         }
 
         function GetById(id) {
-            return $http.post(url + '/trivia/getById', id).then(handleSuccess, handleError('Error getting trivia by id'));
+            return $http.get(url + '/trivia', {params: {id: id}}).then(handleSuccess, handleError('Error getting trivia by id'));
         }
 
         function Create(trivia) {
-            return $http.post(url + '/trivia/insert', trivia).then(handleSuccess, handleError('Error creating trivia'));
+            return $http.post(url + '/trivia', trivia).then(handleSuccess, handleError('Error creating trivia'));
         }
 
         function Update(trivia) {
-            return $http.post(url + '/trivia/update', trivia).then(handleSuccess, handleError('Error updating trivia'));
+            return $http.put(url + '/trivia', trivia).then(handleSuccess, handleError('Error updating trivia'));
         }
 
-        function Delete(trivia) {
-            return $http.post(url + '/trivia/delete', trivia).then(handleSuccess, handleError('Error deleting trivia'));
+        function Delete(id) {
+            return $http.delete(url + '/trivia', {params: {id: id}}).then(handleSuccess, handleError('Error deleting trivia'));
         }
 
         function handleSuccess(res) {

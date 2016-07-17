@@ -37,8 +37,8 @@ public class BannerService {
         return bannerRepository.findOne(id);
     }
 
-    public void delete(Banner banner) {
-        bannerRepository.delete(banner);
+    public void delete(String id) {
+        bannerRepository.delete(id);
     }
 
     public void deleteAll() {

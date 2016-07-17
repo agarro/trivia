@@ -17,9 +17,11 @@
 
         function Login(username, password, callback) {
 
-            $http.post(url + '/bars/authenticate', {
-                username: username,
-                password: password
+            $http.get(url + '/bar/authenticate', {
+                params: {
+                    username: username,
+                    password: password
+                }
             }).success(function (response) {
                 callback(response);
             });

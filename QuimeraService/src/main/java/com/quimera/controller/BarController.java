@@ -18,12 +18,12 @@ public class BarController {
     @Autowired
     private BarService barService;
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public void insert(@RequestBody Bar bar) {
         barService.insert(bar);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public void update(@RequestBody Bar bar) {
         barService.update(bar);
     }
@@ -33,24 +33,23 @@ public class BarController {
         return barService.findAll();
     }
 
-    @RequestMapping(params = "id", method = RequestMethod.POST)
-    public Bar get(@RequestBody String id) {
+    @RequestMapping(params = "id", method = RequestMethod.GET)
+    public Bar get(@RequestParam String id) {
         return barService.find(id);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody Bar bar) {
-        barService.delete(bar);
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam String id) {
+        barService.delete(id);
     }
 
     @RequestMapping("/deleteAll")
-
     public void deleteAll() {
         barService.deleteAll();
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public Bar authenticate(@RequestBody Bar userBar) {
-        return barService.authenticate(userBar.getUsername(), userBar.getPassword());
+    public Bar authenticate(@RequestParam String username, @RequestParam String password) {
+        return barService.authenticate(username, password);
     }
 }

@@ -18,29 +18,29 @@ public class SubcategoryController {
     @Autowired
     private SubcategoryService subcategoryService;
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public void insert(@RequestBody Subcategory subCategory) {
         subcategoryService.insert(subCategory);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public void update(@RequestBody Subcategory subCategory) {
         subcategoryService.update(subCategory);
     }
 
-    @RequestMapping("/getAll")
+    @RequestMapping(method = RequestMethod.GET)
     public List<Subcategory> getAll() {
         return subcategoryService.findAll();
     }
 
-    @RequestMapping(value = "/getById", method = RequestMethod.POST)
-    public Subcategory get(@RequestBody String id) {
+    @RequestMapping(params = "id", method = RequestMethod.GET)
+    public Subcategory get(@RequestParam String id) {
         return subcategoryService.find(id);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody Subcategory subCategory) {
-        subcategoryService.delete(subCategory);
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam String id) {
+        subcategoryService.delete(id);
     }
 
     @RequestMapping("/deleteAll")

@@ -19,23 +19,23 @@
         return service;
 
         function GetAll() {
-            return $http.get(url + '/questions/getAll').then(handleSuccess, handleError('Error getting all questions'));
+            return $http.get(url + '/question').then(handleSuccess, handleError('Error getting all questions'));
         }
 
         function GetById(id) {
-            return $http.post(url + '/questions/getById', id).then(handleSuccess, handleError('Error getting question by id'));
+            return $http.get(url + '/question', {params: {id: id}}).then(handleSuccess, handleError('Error getting question by id'));
         }
 
         function Create(question) {
-            return $http.post(url + '/questions/insert', question).then(handleSuccess, handleError('Error creating question'));
+            return $http.post(url + '/question', question).then(handleSuccess, handleError('Error creating question'));
         }
 
         function Update(question) {
-            return $http.post(url + '/questions/update', question).then(handleSuccess, handleError('Error updating question'));
+            return $http.put(url + '/question', question).then(handleSuccess, handleError('Error updating question'));
         }
 
-        function Delete(question) {
-            return $http.post(url + '/questions/delete', question).then(handleSuccess, handleError('Error deleting question'));
+        function Delete(id) {
+            return $http.delete(url + '/question', {params: {id: id}}).then(handleSuccess, handleError('Error deleting question'));
         }
 
         function handleSuccess(res) {

@@ -17,12 +17,12 @@
 
         function Login(username, password, callback) {
 
-                $http.post(url + '/users/authenticate', { username: username, password: password })
+            $http.get(url + '/user/authenticate', {params: {username: username, password: password}})
                 .success(function (response) {
                     if (response.username == username) {
-                        response = { success: true };
+                        response = {success: true};
                     } else {
-                        response = { success: false, message: 'Nombre de usuario o contraseña incorrecta' };
+                        response = {success: false, message: 'Nombre de usuario o contraseña incorrecta'};
                     }
                     callback(response);
                 });

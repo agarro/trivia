@@ -25,7 +25,7 @@
                 .then(function (response) {
                     if (response==="") {
                         FlashService.Success('Pregunta registrada.', true);
-                        $location.path('/questions');
+                        $location.path('/question');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

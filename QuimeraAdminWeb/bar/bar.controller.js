@@ -31,11 +31,11 @@
                     if (response==="") {
                         FlashService.Success('Bar eliminado.', true);
                         loadAllBars();
-                        $location.path('/bars');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
                     }
+                    $location.path('/bar');
                 });
         }
 

@@ -31,12 +31,11 @@
                     if (response==="") {
                         FlashService.Success('Banner eliminado.', true);
                         loadAllBanners();
-                        $location.path('/banners');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
-                        $location.path('/banners');
                     }
+                    $location.path('/banner');
                 });
         }
 

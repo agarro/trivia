@@ -37,8 +37,8 @@ public class QuestionService {
         return questionRepository.findOne(id);
     }
 
-    public void delete(Question question) {
-        questionRepository.delete(question);
+    public void delete(String id) {
+        questionRepository.delete(id);
     }
 
 }

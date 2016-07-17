@@ -23,19 +23,19 @@
         }
 
         function GetById(id) {
-            return $http.post(url + '/bar', id).then(handleSuccess, handleError('Error getting bar by id'));
+            return $http.get(url + '/bar', {params: {id: id}}).then(handleSuccess, handleError('Error getting bar by id'));
         }
 
-        function Create(bars) {
-            return $http.post(url + '/bar/insert', bars).then(handleSuccess, handleError('Error creating bar'));
+        function Create(bar) {
+            return $http.post(url + '/bar', bar).then(handleSuccess, handleError('Error creating bar'));
         }
 
-        function Update(bars) {
-            return $http.post(url + '/bar/update', bars).then(handleSuccess, handleError('Error updating bar'));
+        function Update(bar) {
+            return $http.put(url + '/bar', bar).then(handleSuccess, handleError('Error updating bar'));
         }
 
-        function Delete(bars) {
-            return $http.post(url + '/bar/delete', bars).then(handleSuccess, handleError('Error deleting bar'));
+        function Delete(id) {
+            return $http.delete(url + '/bar', {params: {id: id}}).then(handleSuccess, handleError('Error deleting bar'));
         }
 
         // private functions

@@ -54,8 +54,7 @@
                                     <img ng-show="banner.url!=null" src="{{banner.url}}" class="img-responsive" width="100" height="100">
                                 </td>
                                 <td>
-                                    <!--<a href="#banner/modify/{{banner.idBanner}}">Editar</a>-->
-                                     <a href="#banner" ng-click="vm.deleteBanner(banner)">Eliminar</a>
+                                     <a href="#banner" ng-click="vm.deleteBanner(banner.idBanner)">Eliminar</a>
                                 </td>
 
                             </tr>

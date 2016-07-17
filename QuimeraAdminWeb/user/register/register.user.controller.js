@@ -17,7 +17,7 @@
                 .then(function (response) {
                     if (response==="") {
                         FlashService.Success('Usuario registrado.', false);
-                        $location.path('/users');
+                        $location.path('/user');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

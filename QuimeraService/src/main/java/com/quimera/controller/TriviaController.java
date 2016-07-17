@@ -1,9 +1,9 @@
 package com.quimera.controller;
 
-import com.quimera.model.*;
+import com.quimera.model.Trivia;
+import com.quimera.model.TriviaStatus;
 import com.quimera.services.TriviaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,46 +19,30 @@ public class TriviaController {
     @Autowired
     private TriviaService triviaService;
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public void insert(@RequestBody Trivia trivia) {
         triviaService.insert(trivia);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public void update(@RequestBody Trivia trivia) {
         trivia.setTriviaStatus(TriviaStatus.NEW);
         triviaService.update(trivia);
     }
 
-    @RequestMapping("/getAll")
+    @RequestMapping(method = RequestMethod.GET)
     public List<Trivia> getAll() {
         return triviaService.findAll();
     }
 
-    @RequestMapping(value = "/getById", method = RequestMethod.POST)
-    public Trivia get(@RequestBody String id) {
+    @RequestMapping(params = "id", method = RequestMethod.GET)
+    public Trivia get(@RequestParam String id) {
         return triviaService.find(id);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody Trivia trivia) {
-        triviaService.delete(trivia);
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam String id) {
+        triviaService.delete(id);
     }
-
-    @RequestMapping("getCurrentQuestion")
-    public Question getCurrentQuestion() {
-        return triviaService.getCurrentQuestion();
-    }
-
-    @RequestMapping(value = "/pushAnswer", method = RequestMethod.POST)
-    public Answer pushAnswer(@RequestBody Answer answer) {
-        return triviaService.pushAnswer(answer);
-    }
-
-    @RequestMapping(value = "/getScore", method = RequestMethod.POST)
-    public List<Score> getScore(@RequestBody Bar bar) {
-        return triviaService.getScore(bar);
-    }
-
 
 }

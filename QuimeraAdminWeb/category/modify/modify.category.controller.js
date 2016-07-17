@@ -31,7 +31,7 @@
                 .then(function (response) {
                     if (response === "") {
                         FlashService.Success('Categoría modificada.', false);
-                        $location.path('/categories');
+                        $location.path('/category');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

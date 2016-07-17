@@ -18,23 +18,23 @@
         return service;
 
         function GetAll() {
-            return $http.get(url + '/category/getAll').then(handleSuccess, handleError('Error getting all categories'));
+            return $http.get(url + '/category').then(handleSuccess, handleError('Error getting all categories'));
         }
 
         function GetById(id) {
-            return $http.post(url + '/category/getById', id).then(handleSuccess, handleError('Error getting category by id'));
+            return $http.get(url + '/category', {params: {id: id}}).then(handleSuccess, handleError('Error getting category by id'));
         }
 
         function Create(category) {
-            return $http.post(url + '/category/insert', category).then(handleSuccess, handleError('Error creating category'));
+            return $http.post(url + '/category', category).then(handleSuccess, handleError('Error creating category'));
         }
 
         function Update(category) {
-            return $http.post(url + '/category/update', category).then(handleSuccess, handleError('Error updating category'));
+            return $http.put(url + '/category', category).then(handleSuccess, handleError('Error updating category'));
         }
 
-        function Delete(category) {
-            return $http.post(url + '/category/delete', category).then(handleSuccess, handleError('Error deleting category'));
+        function Delete(id) {
+            return $http.delete(url + '/category', {params: {id: id}}).then(handleSuccess, handleError('Error deleting category'));
         }
 
         function handleSuccess(res) {

@@ -40,7 +40,7 @@
                 controllerAs: 'vm'
             })
 
-            .when('/categories', {
+            .when('/category', {
                 controller: 'CategoryController',
                 templateUrl: 'category/category.view.html',
                 controllerAs: 'vm'
@@ -58,7 +58,7 @@
                 controllerAs: 'vm'
             })
 
-            .when('/subcategories', {
+            .when('/subcategory', {
                 controller: 'SubcategoryController',
                 templateUrl: 'subcategory/subcategory.view.html',
                 controllerAs: 'vm'
@@ -76,7 +76,7 @@
                 controllerAs: 'vm'
             })
 
-            .when('/questions', {
+            .when('/question', {
                 controller: 'QuestionController',
                 templateUrl: 'question/question.view.html',
                 controllerAs: 'vm'
@@ -118,7 +118,7 @@
                 controllerAs: 'vm'
             })
 
-            .when('/settings', {
+            .when('/setting', {
                 controller: 'ControlPanelController',
                 templateUrl: 'control-panel/control-panel.view.html',
                 controllerAs: 'vm'
@@ -130,13 +130,13 @@
                 controllerAs: 'vm'
             })
 
-            .when('/banners', {
+            .when('/banner', {
                 controller: 'BannerController',
                 templateUrl: 'banner/banner.view.html',
                 controllerAs: 'vm'
             })
 
-            .when('/bars', {
+            .when('/bar', {
                 controller: 'BarController',
                 templateUrl: 'bar/bar.view.html',
                 controllerAs: 'vm'

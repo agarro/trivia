@@ -37,8 +37,8 @@ public class BarService {
         return barRepository.findOne(id);
     }
 
-    public void delete(Bar bar) {
-        barRepository.delete(bar);
+    public void delete(String id) {
+        barRepository.delete(id);
     }
 
     public void deleteAll() {

@@ -33,11 +33,11 @@
                     if (response==="") {
                         FlashService.Success('Categoría eliminada.', true);
                         loadAllCategories();
-                        $location.path('/categories');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
                     }
+                    $location.path('/category');
                 });
         }
 

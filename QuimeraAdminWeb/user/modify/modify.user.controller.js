@@ -31,7 +31,7 @@
                 .then(function (response) {
                     if (response==="") {
                         FlashService.Success('Usuario modificado.', false);
-                        $location.path('/users');
+                        $location.path('/user');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

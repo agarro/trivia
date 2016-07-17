@@ -18,23 +18,23 @@
         return service;
 
         function GetAll() {
-            return $http.get(url + '/subcategory/getAll').then(handleSuccess, handleError('Error getting all subcategories'));
+            return $http.get(url + '/subcategory').then(handleSuccess, handleError('Error getting all subcategories'));
         }
 
         function GetById(id) {
-            return $http.post(url + '/subcategory/getById', id).then(handleSuccess, handleError('Error getting subcategory by id'));
+            return $http.get(url + '/subcategory', {params: {id: id}}).then(handleSuccess, handleError('Error getting subcategory by id'));
         }
 
         function Create(subcategory) {
-            return $http.post(url + '/subcategory/insert', subcategory).then(handleSuccess, handleError('Error creating subcategory'));
+            return $http.post(url + '/subcategory', subcategory).then(handleSuccess, handleError('Error creating subcategory'));
         }
 
         function Update(subcategory) {
-            return $http.post(url + '/subcategory/update', subcategory).then(handleSuccess, handleError('Error updating subcategory'));
+            return $http.put(url + '/subcategory', subcategory).then(handleSuccess, handleError('Error updating subcategory'));
         }
 
-        function Delete(subcategory) {
-            return $http.post(url + '/subcategory/delete', subcategory).then(handleSuccess, handleError('Error deleting subcategory'));
+        function Delete(id) {
+            return $http.delete(url + '/subcategory', {params: {id: id}}).then(handleSuccess, handleError('Error deleting subcategory'));
         }
 
         function handleSuccess(res) {

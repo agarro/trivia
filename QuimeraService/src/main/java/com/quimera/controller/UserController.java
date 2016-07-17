@@ -12,39 +12,39 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public void insert(@RequestBody User user) {
         userService.insert(user);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public void update(@RequestBody User user) {
         userService.update(user);
     }
 
-    @RequestMapping("/getAll")
+    @RequestMapping(method = RequestMethod.GET)
     public List<User> getAll() {
         return userService.findAll();
     }
 
-    @RequestMapping(value = "/getById", method = RequestMethod.POST)
-    public User get(@RequestBody String id) {
+    @RequestMapping(params = "id", method = RequestMethod.GET)
+    public User get(@RequestParam String id) {
         return userService.find(id);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody User user) {
-        userService.delete(user);
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam String id) {
+        userService.delete(id);
     }
 
-    @RequestMapping(value = "/getByUsername", method = RequestMethod.POST)
-    public User getByUsername(@RequestBody String username) {
+    @RequestMapping(params = {"username"}, method = RequestMethod.GET)
+    public User getByUsername(@RequestParam String username) {
         return userService.getByUsername(username);
     }
 
@@ -53,9 +53,9 @@ public class UserController {
         userService.deleteAll();
     }
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public User authenticate(@RequestBody User user) {
-        return userService.authenticate(user.getUsername(), user.getPassword());
+    @RequestMapping(value = "/authenticate", method = RequestMethod.GET)
+    public User authenticate(@RequestParam String username, @RequestParam String password) {
+        return userService.authenticate(username, password);
     }
 
 }

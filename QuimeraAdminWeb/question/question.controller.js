@@ -25,17 +25,17 @@
                 });
         }
 
-        function deleteQuestion(question) {
-            QuestionService.Delete(question)
+        function deleteQuestion(id) {
+            QuestionService.Delete(id)
                 .then(function (response) {
                     if (response==="") {
                         FlashService.Success('Pregunta eliminada.', true);
                         loadAllQuestions();
-                        $location.path('/questions');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
                     }
+                    $location.path('/question');
                 });
         }
     }

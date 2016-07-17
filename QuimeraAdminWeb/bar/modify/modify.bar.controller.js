@@ -41,7 +41,7 @@
                 .then(function (response) {
                     if (response==="") {
                         FlashService.Success('Bar modificado.', false);
-                        $location.path('/bars');
+                        $location.path('/bar');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

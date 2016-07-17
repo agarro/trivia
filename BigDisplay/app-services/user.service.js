@@ -19,27 +19,27 @@
         return service;
 
         function GetAll() {
-            return $http.get(url + '/users/getAll').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get(url + '/user').then(handleSuccess, handleError('Error getting all users'));
         }
 
         function GetById(id) {
-            return $http.post(url + '/users/getById', id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get(url + '/user', {params: {id: id}}).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {
-            return $http.post(url + '/users/getByUsername', username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.get(url + '/user', {params: {username: username}}).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {
-            return $http.post(url + '/users/insert', user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post(url + '/user', user).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Update(user) {
-            return $http.post(url + '/users/update', user).then(handleSuccess, handleError('Error updating user'));
+            return $http.put(url + '/user', user).then(handleSuccess, handleError('Error updating user'));
         }
 
-        function Delete(user) {
-            return $http.post(url + '/users/delete', user).then(handleSuccess, handleError('Error deleting user'));
+        function Delete(id) {
+            return $http.delete(url + '/user', id).then(handleSuccess, handleError('Error deleting user'));
         }
 
         // private functions

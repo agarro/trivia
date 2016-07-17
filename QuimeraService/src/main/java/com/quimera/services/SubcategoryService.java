@@ -37,8 +37,8 @@ public class SubcategoryService {
         return categoryRepository.findOne(id);
     }
 
-    public void delete(Subcategory subCategory) {
-        categoryRepository.delete(subCategory);
+    public void delete(String id) {
+        categoryRepository.delete(id);
     }
 
     public void deleteAll() {

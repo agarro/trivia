@@ -12,35 +12,35 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/banners")
+@RequestMapping("/banner")
 public class BannerController {
 
     @Autowired
     private BannerService bannerService;
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public void insert(@RequestBody Banner banner) {
         bannerService.insert(banner);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public void update(@RequestBody Banner banner) {
         bannerService.update(banner);
     }
 
-    @RequestMapping("/getAll")
+    @RequestMapping(method = RequestMethod.GET)
     public List<Banner> getAll() {
         return bannerService.findAll();
     }
 
-    @RequestMapping(value = "/getById", method = RequestMethod.POST)
-    public Banner get(@RequestBody String id) {
+    @RequestMapping(params = "id", method = RequestMethod.GET)
+    public Banner get(@RequestParam String id) {
         return bannerService.find(id);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody Banner banner) {
-        bannerService.delete(banner);
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam String id) {
+        bannerService.delete(id);
     }
 
     @RequestMapping("/deleteAll")

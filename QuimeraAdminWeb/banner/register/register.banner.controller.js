@@ -23,7 +23,7 @@
                 .then(function (response) {
                     if (response === "") {
                         FlashService.Success('Banner registrado.', false);
-                        $location.path('/banners');
+                        $location.path('/banner');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
@@ -32,7 +32,6 @@
         }
 
         function uploadFile() {
-
 
             var policy = 'eyJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImJ1Y2tldCI6ICJxdWltZXJhLXdlYi1hZG1pbi1iYW5uZXJzIn0sIAogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgInVwbG9hZHMvIl0sCiAgICB7ImFjbCI6ICJwdWJsaWMtcmVhZCJ9LAogICAgWyJzdGFydHMtd2l0aCIsICIkQ29udGVudC1UeXBlIiwgIiJdLAogICAgWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDAsIDEwNDg1NzZdCiAgXQp9';
             var signature = 'ZuahwGSsbubTpKG3jYVOAEjTZc8=';
@@ -86,7 +85,6 @@
             (function initController() {
                 document.getElementById("myBtn").click();
             })();
-            //alert("Done - " + evt.target.responseText);
 
         }
 

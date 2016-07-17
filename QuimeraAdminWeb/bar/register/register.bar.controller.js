@@ -27,7 +27,7 @@
                 .then(function (response) {
                     if (response==="") {
                         FlashService.Success('Bar registrado.', false);
-                        $location.path('/bars');
+                        $location.path('/bar');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

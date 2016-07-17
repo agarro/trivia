@@ -59,7 +59,7 @@
                                 <th width="5%">{{trivia.localDateTime | date : 'dd/MM/yyyy HH:mm' : '-0300'}}</th>
                                 <td width="10%">
                                     <a href="#trivia/modify/{{trivia.idTrivia}}">Editar</a>
-                                    - <a href="#trivia" ng-click="vm.deleteTrivia(trivia)">Eliminar</a>
+                                    - <a href="#trivia" ng-click="vm.deleteTrivia(trivia.idTrivia)">Eliminar</a>
                                 </td>
 
                             </tr>
