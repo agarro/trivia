@@ -27,15 +27,15 @@
         }
 
         function Create(bars) {
-            return $http.post(url + '/bars/insert', bars).then(handleSuccess, handleError('Error creating bar'));
+            return $http.post(url + '/bar/insert', bars).then(handleSuccess, handleError('Error creating bar'));
         }
 
         function Update(bars) {
-            return $http.post(url + '/bars/update', bars).then(handleSuccess, handleError('Error updating bar'));
+            return $http.post(url + '/bar/update', bars).then(handleSuccess, handleError('Error updating bar'));
         }
 
         function Delete(bars) {
-            return $http.post(url + '/bars/delete', bars).then(handleSuccess, handleError('Error deleting bar'));
+            return $http.post(url + '/bar/delete', bars).then(handleSuccess, handleError('Error deleting bar'));
         }
 
         // private functions
