@@ -30,20 +30,6 @@
             return $http.get(url + '/user', {params: {username: username}}).then(handleSuccess, handleError('Error getting user by username'));
         }
 
-        function Create(user) {
-            return $http.post(url + '/user', user).then(handleSuccess, handleError('Error creating user'));
-        }
-
-        function Update(user) {
-            return $http.put(url + '/user', user).then(handleSuccess, handleError('Error updating user'));
-        }
-
-        function Delete(id) {
-            return $http.delete(url + '/user', id).then(handleSuccess, handleError('Error deleting user'));
-        }
-
-        // private functions
-
         function handleSuccess(res) {
             return res.data;
         }

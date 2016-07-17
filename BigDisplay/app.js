@@ -21,27 +21,9 @@
                 controllerAs: 'vm'
             })
 
-            .when('/users', {
-                controller: 'UserController',
-                templateUrl: 'user/user.view.html',
-                controllerAs: 'vm'
-            })
-
             .when('/trivia', {
                 controller: 'TriviaController',
                 templateUrl: 'trivia/trivia.view.html',
-                controllerAs: 'vm'
-            })
-
-            .when('/setting/trivia/selection', {
-                controller: 'SelectionTriviaController',
-                templateUrl: 'control-panel/selection/selection.trivia.view.html',
-                controllerAs: 'vm'
-            })
-
-            .when('/settings', {
-                controller: 'ControlPanelController',
-                templateUrl: 'control-panel/control-panel.view.html',
                 controllerAs: 'vm'
             })
 
